@@ -11,7 +11,7 @@
 
 @layer components {
   .mb-menu {
-    @apply fixed top-0 bottom-0 md:hidden w-60 bg-gray-50 shadow transition-all z-30;
+    @apply fixed top-0 bottom-0 md:hidden w-60 bg-gray-50 shadow transition-all z-40;
   }
   .mb-menu-not-active {
     @apply -right-60;

@@ -6,7 +6,7 @@ export default function MainHeader() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <>
-      <header className="sticky top-0 left-0 right-0 bg-white shadow z-10">
+      <header className="sticky top-0 left-0 right-0 bg-white shadow z-20">
         <div className="container px-4 pb-2 md:pb-4">
           <div className="flex md:block">
             {/* logo */}
@@ -123,7 +123,7 @@ export default function MainHeader() {
       {isOpen && (
         <div
           onClick={() => setIsOpen(false)}
-          className="fixed inset-0 bg-black/50 z-20 md:hidden transition-all"
+          className="fixed inset-0 bg-black/50 z-30 md:hidden transition-all"
         ></div>
       )}
     </>
