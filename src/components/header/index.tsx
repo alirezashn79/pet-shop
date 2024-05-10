@@ -123,7 +123,7 @@ export default function MainHeader() {
       {isOpen && (
         <div
           onClick={() => setIsOpen(false)}
-          className="fixed inset-0 bg-black/50 z-20 md:hidden"
+          className="fixed inset-0 bg-black/50 z-20 md:hidden transition-all"
         ></div>
       )}
     </>

@@ -11,6 +11,7 @@ export default function Slider() {
   return (
     <div className="h-52 lg:h-[720px]">
       <Swiper
+        loop={true}
         autoplay={{
           delay: 3000,
         }}
