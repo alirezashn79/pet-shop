@@ -1,6 +1,7 @@
 import Benefits from "../../components/benefits";
 import Services from "../../components/services";
 import Slider from "../../components/slider";
+import SpecialProducts from "../../components/special-products";
 
 export default function HomePage() {
   return (
@@ -10,6 +11,8 @@ export default function HomePage() {
         <Services />
       </div>
       <Benefits />
+
+      <SpecialProducts />
     </div>
   );
 }
