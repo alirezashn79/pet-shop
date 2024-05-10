@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    direction: rtl;
+    @apply text-right bg-gray-50;
+  }
+}
+
+@layer components {
+  .mb-menu {
+    @apply fixed top-0 bottom-0 md:hidden w-60 bg-gray-50 shadow transition-all z-30;
+  }
+  .mb-menu-not-active {
+    @apply -right-60;
+  }
+  .mb-menu-active {
+    @apply right-0;
+  }
+}
+
+@layer utilities {
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+}
