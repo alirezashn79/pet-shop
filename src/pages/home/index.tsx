@@ -1,3 +1,9 @@
+import Slider from "../../components/slider";
+
 export default function HomePage() {
-  return <div className="h-[4000px]">HomePage</div>;
+  return (
+    <div>
+      <Slider />
+    </div>
+  );
 }
