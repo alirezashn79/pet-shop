@@ -1,13 +1,12 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import Card from "../card";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 
 // import required modules
 import { Navigation } from "swiper/modules";
-import Card from "../card";
 
 export default function ProductsSlider() {
   return (

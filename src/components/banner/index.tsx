@@ -4,8 +4,8 @@ interface IBanner {
 
 export default function Banner({ image }: IBanner) {
   return (
-    <div className="w-screen lg:h-[152px] md:h-[468px] mb-20">
-      <img src={image} alt="banner" />
+    <div className="w-screen lg:min-h-[152px] md:min-h-[468px] my-20">
+      <img src={image} alt="banner" className="mx-auto" />
     </div>
   );
 }
