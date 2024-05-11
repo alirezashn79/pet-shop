@@ -1,5 +1,6 @@
 import Banner from "../../components/banner";
 import Benefits from "../../components/benefits";
+import Brands from "../../components/brands";
 import CareProducts from "../../components/care-products";
 import FoodProducts from "../../components/food-products";
 import Services from "../../components/services";
@@ -22,6 +23,8 @@ export default function HomePage() {
       <Banner image="https://theme51.mywebzi.ir/uploads/ebf29fca307747b7a5980e96a207a0b1.w_1168,h_399,r_k.jpg" />
 
       <CareProducts />
+
+      <Brands />
     </>
   );
 }
