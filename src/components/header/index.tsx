@@ -10,12 +10,15 @@ export default function MainHeader() {
         <div className="container px-4 pb-2 md:pb-4">
           <div className="flex md:block">
             {/* logo */}
-            <div className="bg-yellow md:absolute h-20 w-20 md:w-28 md:h-28 lg:h-36 lg:w-36 flex-center flex-col rounded-b-3xl">
+            <div
+              data-aos="fade-down"
+              className="bg-yellow md:absolute h-20 w-20 md:w-28 md:h-28 lg:h-36 lg:w-36 flex-center flex-col rounded-b-3xl"
+            >
               <Feather className="w-8 h-8 lg:h-14 lg:w-14" />
               <h1 className="font-bold text-base lg:text-xl">پت شاپ</h1>
             </div>
             {/* left */}
-            <div className="flex-1">
+            <div data-aos="fade-left" className="flex-1">
               <div className="flex-1 p-2">
                 <div className="space-y-2 md:flex md:flex-row-reverse md:items-center md:gap-x-8">
                   {/* icons */}
@@ -72,6 +75,9 @@ export default function MainHeader() {
                   <li>
                     <Link to="/">ارتباط با ما</Link>
                   </li>
+                  <li>
+                    <Link to="/">باشگاه مشتریان</Link>
+                  </li>
                 </ul>
               </nav>
             </div>
@@ -80,6 +86,7 @@ export default function MainHeader() {
       </header>
 
       {/* moile menu */}
+
       <div
         className={`mb-menu ${
           isOpen ? "mb-menu-active" : "mb-menu-not-active"
@@ -118,7 +125,6 @@ export default function MainHeader() {
           </ul>
         </div>
       </div>
-
       {/* overlay */}
       {isOpen && (
         <div

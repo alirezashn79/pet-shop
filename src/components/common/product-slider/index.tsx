@@ -11,7 +11,7 @@ import { Navigation } from "swiper/modules";
 export default function ProductsSlider() {
   return (
     <div className="container px-8 md:px-0">
-      <div className="min-h-96">
+      <div data-aos="fade-up" className="min-h-96">
         <Swiper
           slidesPerView={1}
           loop={true}

@@ -11,7 +11,7 @@ import { FreeMode, Autoplay, Navigation } from "swiper/modules";
 
 export default function Brands() {
   return (
-    <div className="container">
+    <div data-aos="zoom-in-up" className="container">
       <div className="my-20 lg:mt-40 md:h-[70px]">
         <TitleBar
           title="برند ها"

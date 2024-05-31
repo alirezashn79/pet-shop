@@ -12,7 +12,11 @@ export default function Benefits() {
 
         {/* items */}
 
-        <div className="w-[500px] my-20 h-[500px] rounded-full border border-gray-400 bg-white mx-auto hidden lg:flex-center relative">
+        <div
+          data-aos="flip-left"
+          data-aos-duration="1000"
+          className="w-[500px] my-20 h-[500px] rounded-full border border-gray-400 bg-white mx-auto hidden lg:flex-center relative"
+        >
           <img
             src="https://theme51.mywebzi.ir/uploads/6e9adb121af34d7c83e95964e47ba7c5.w_204,h_274,r_k.jpg"
             alt="item-image"
@@ -91,7 +95,7 @@ export default function Benefits() {
             </div>
 
             <div className="w-[200px]">
-              <h4 className="font-bold text-xl mb-2">بررسی های مثبت​​​​​​​</h4>
+              <h4 className="font-bold text-xl mb-2">بررسی های مثبت</h4>
               <span className="text-gray-500 text-sm">
                 لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
               </span>
@@ -117,7 +121,7 @@ export default function Benefits() {
 
         {/* mobile items */}
         <div className="lg:hidden my-20 grid grid-cols-1 gap-12 px-8 sm:px-4">
-          <div className="flex-center gap-x-8">
+          <div data-aos="flip-right" className="flex-center gap-x-8">
             <div className="h-20 w-20 rounded-full flex-center bg-yellow shrink-0">
               <img
                 src="https://theme51.mywebzi.ir/uploads/09dbfd563527437c8cb302c428345db9.w_34,h_34,r_k.png"
@@ -132,7 +136,10 @@ export default function Benefits() {
             </div>
           </div>
 
-          <div className="flex-center flex-row-reverse text-left gap-x-8">
+          <div
+            data-aos="flip-left"
+            className="flex-center flex-row-reverse text-left gap-x-8"
+          >
             <div className="h-20 w-20 rounded-full flex-center bg-yellow shrink-0">
               <img
                 src="https://theme51.mywebzi.ir/uploads/09dbfd563527437c8cb302c428345db9.w_34,h_34,r_k.png"
@@ -147,7 +154,7 @@ export default function Benefits() {
             </div>
           </div>
 
-          <div className="flex-center gap-x-8">
+          <div data-aos="flip-right" className="flex-center gap-x-8">
             <div className="h-20 w-20 rounded-full flex-center bg-yellow shrink-0">
               <img
                 src="https://theme51.mywebzi.ir/uploads/09dbfd563527437c8cb302c428345db9.w_34,h_34,r_k.png"
@@ -162,7 +169,10 @@ export default function Benefits() {
             </div>
           </div>
 
-          <div className="flex-center flex-row-reverse text-left gap-x-8">
+          <div
+            data-aos="flip-left"
+            className="flex-center flex-row-reverse text-left gap-x-8"
+          >
             <div className="h-20 w-20 rounded-full flex-center bg-yellow shrink-0">
               <img
                 src="https://theme51.mywebzi.ir/uploads/09dbfd563527437c8cb302c428345db9.w_34,h_34,r_k.png"
@@ -177,7 +187,7 @@ export default function Benefits() {
             </div>
           </div>
 
-          <div className="flex-center gap-x-8">
+          <div data-aos="flip-right" className="flex-center gap-x-8">
             <div className="h-20 w-20 rounded-full flex-center bg-yellow shrink-0">
               <img
                 src="https://theme51.mywebzi.ir/uploads/09dbfd563527437c8cb302c428345db9.w_34,h_34,r_k.png"
@@ -192,7 +202,10 @@ export default function Benefits() {
             </div>
           </div>
 
-          <div className="flex-center flex-row-reverse text-left gap-x-8">
+          <div
+            data-aos="flip-left"
+            className="flex-center flex-row-reverse text-left gap-x-8"
+          >
             <div className="h-20 w-20 rounded-full flex-center bg-yellow shrink-0">
               <img
                 src="https://theme51.mywebzi.ir/uploads/09dbfd563527437c8cb302c428345db9.w_34,h_34,r_k.png"
