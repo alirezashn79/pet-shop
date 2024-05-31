@@ -10,6 +10,9 @@ export default {
       colors: {
         yellow: "#facc15",
       },
+      screens: {
+        "2xl": "1512px",
+      },
     },
   },
   plugins: [
