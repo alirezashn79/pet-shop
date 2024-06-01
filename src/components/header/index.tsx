@@ -24,7 +24,7 @@ export default function MainHeader() {
                   {/* icons */}
                   <div className="flex items-center gap-4 justify-end">
                     <div className="">
-                      <ShoppingCart className="h-6 w-6 lg:h-8 lg:w-8" />
+                      <ShoppingCart className="h-4 w-4 lg:h-6 lg:w-6" />
                     </div>
 
                     <button
@@ -35,7 +35,7 @@ export default function MainHeader() {
                     </button>
                   </div>
                   <span className="hidden md:block w-0.5 h-7 bg-gray-300"></span>
-                  <div className="flex justify-end">
+                  <div className="flex justify-end text-xs">
                     <input
                       className="flex-1 px-2 lg:py-2 py-1 rounded-r-sm border border-l-0 outline-none max-w-sm lg:w-72"
                       type="text"
@@ -56,7 +56,7 @@ export default function MainHeader() {
           <div className="container">
             <div className="flex md:mr-28 lg:mr-60 py-4">
               <nav>
-                <ul className="flex items-center lg:text-مل md:text-base md:gap-x-8 lg:gap-x-16">
+                <ul className="flex items-center text-xs md:gap-x-8 lg:gap-x-16">
                   <li>
                     <NavLink
                       className={({ isActive }) =>
