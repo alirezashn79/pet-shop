@@ -56,7 +56,7 @@ export default function MainHeader() {
           <div className="container">
             <div className="flex md:mr-28 lg:mr-60 py-4">
               <nav>
-                <ul className="flex items-center lg:text-xl md:text-base md:gap-x-8 lg:gap-x-16">
+                <ul className="flex items-center lg:text-مل md:text-base md:gap-x-8 lg:gap-x-16">
                   <li className="border-b-4 border-b-yellow">
                     <Link to="/">خانه</Link>
                   </li>
