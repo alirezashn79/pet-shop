@@ -1,6 +1,6 @@
 import { Feather, MenuIcon, ShoppingCart, X } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export default function MainHeader() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -12,7 +12,7 @@ export default function MainHeader() {
             {/* logo */}
             <div
               data-aos="fade-down"
-              className="bg-yellow md:absolute h-20 w-20 md:w-28 md:h-28 lg:h-36 lg:w-36 flex-center flex-col rounded-b-3xl"
+              className="bg-yellow md:absolute h-20 w-20 md:w-28 md:h-28 lg:h-32 lg:w-36 flex-center flex-col rounded-b-full"
             >
               <Feather className="w-8 h-8 lg:h-14 lg:w-14" />
               <h1 className="font-bold text-base lg:text-xl">پت شاپ</h1>
@@ -57,8 +57,15 @@ export default function MainHeader() {
             <div className="flex md:mr-28 lg:mr-60 py-4">
               <nav>
                 <ul className="flex items-center lg:text-مل md:text-base md:gap-x-8 lg:gap-x-16">
-                  <li className="border-b-4 border-b-yellow">
-                    <Link to="/">خانه</Link>
+                  <li>
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive ? "active-link" : ""
+                      }
+                      to="/"
+                    >
+                      خانه
+                    </NavLink>
                   </li>
                   <li>
                     <Link to="/">محصولات ویژه</Link>
@@ -76,7 +83,14 @@ export default function MainHeader() {
                     <Link to="/">ارتباط با ما</Link>
                   </li>
                   <li>
-                    <Link to="/">باشگاه مشتریان</Link>
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive ? "active-link" : ""
+                      }
+                      to="/lig"
+                    >
+                      باشگاه مشتریان
+                    </NavLink>
                   </li>
                 </ul>
               </nav>

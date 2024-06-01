@@ -23,6 +23,9 @@
 }
 
 @layer components {
+  .page {
+    @apply container py-8;
+  }
   .mb-menu {
     @apply fixed top-0 bottom-0 md:hidden w-60 bg-gray-50 shadow transition-all z-40;
   }
@@ -55,7 +58,7 @@
     object-fit: cover;
   }
   .active-link {
-    @apply text-yellow border-b-2 border-yellow scale-105;
+    @apply border-b-4 border-yellow;
   }
 }
 
