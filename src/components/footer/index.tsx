@@ -20,7 +20,7 @@ export default function MainFooter() {
           </div>
         </div>
 
-        <div className="px-8  w-fit order-1 lg:order-2  mx-auto lg:absolute lg:left-4 xl:left-16 z-50">
+        <div className="px-8  w-fit order-1 lg:order-2  mx-auto lg:absolute lg:left-4 xl:left-16 z-20">
           <div
             data-aos="fade-down"
             className="w-full bg-[#fef9c3] border-4 p-8 xl:p-12 border-yellow flex-center flex-col lg:mb-4 gap-4 "

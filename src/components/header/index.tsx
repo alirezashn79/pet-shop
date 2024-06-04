@@ -10,15 +10,12 @@ export default function MainHeader() {
         <div className="container px-4 pb-2 md:pb-4">
           <div className="flex md:block">
             {/* logo */}
-            <div
-              data-aos="fade-down"
-              className="bg-yellow md:absolute h-20 w-20 md:w-28 md:h-28 lg:h-32 lg:w-36 flex-center flex-col rounded-b-full"
-            >
+            <div className="bg-yellow md:absolute h-20 w-20 md:w-28 md:h-28 lg:h-32 lg:w-36 flex-center flex-col rounded-b-full">
               <Feather className="w-8 h-8 lg:h-14 lg:w-14" />
               <h1 className="font-bold text-base lg:text-xl">پت شاپ</h1>
             </div>
             {/* left */}
-            <div data-aos="fade-left" className="flex-1">
+            <div className="flex-1">
               <div className="flex-1 p-2">
                 <div className="space-y-2 md:flex md:flex-row-reverse md:items-center md:gap-x-8">
                   {/* icons */}
@@ -56,7 +53,7 @@ export default function MainHeader() {
           <div className="container">
             <div className="flex md:mr-28 lg:mr-60 py-4">
               <nav>
-                <ul className="flex items-center text-xs md:gap-x-8 lg:gap-x-16">
+                <ul className="flex items-center text-sm md:gap-x-8 lg:gap-x-16">
                   <li>
                     <NavLink
                       className={({ isActive }) =>

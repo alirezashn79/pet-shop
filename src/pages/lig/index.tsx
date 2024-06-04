@@ -107,19 +107,13 @@ export default function Lig() {
                   <th scope="col" className="px-6 py-3">
                     رتبه
                   </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 bg-gray-50 dark:bg-gray-800"
-                  >
+                  <th scope="col" className="px-6 py-3">
                     لقب
                   </th>
                   <th scope="col" className="px-6 py-3">
                     نام
                   </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 bg-gray-50 dark:bg-gray-800"
-                  >
+                  <th scope="col" className="px-6 py-3">
                     امتیاز
                   </th>
                 </tr>
