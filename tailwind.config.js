@@ -20,5 +20,6 @@ export default {
       addVariant("child", "& > *");
       addVariant("child-hover", "& > *:hover");
     },
+    "prettier-plugin-tailwindcss",
   ],
 };

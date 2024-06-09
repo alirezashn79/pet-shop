@@ -1,4 +1,4 @@
-import { object, ref, string } from "yup";
+import { number, object, ref, string } from "yup";
 
 export const UserSchema = object({
   name: string()
@@ -33,4 +33,23 @@ export const UserSignInSchema = object({
       "رمز عبور باید حداقل شامل یک حرف بزرگ و کوچک انگلیسی، عدد و یک کاراکتر خاص باشد"
     )
     .required("رمز عبور الزامی است"),
+});
+
+export const changePasswordSchema = object({
+  password: string()
+    .matches(
+      /^$|^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
+      "رمز عبور باید حداقل شامل یک حرف بزرگ و کوچک انگلیسی، عدد و یک کاراکتر خاص باشد"
+    )
+    .required("رمز عبور الزامی است"),
+  confirmPassword: string().oneOf(
+    [ref("password")],
+    "با رمز عبور مطابقت ندارد"
+  ),
+});
+
+export const forgotPasswordSchema = object({
+  phone: string()
+    .matches(/((0?9)|(\+?989))\d{9}/g, "شماره معتبر نیست")
+    .max(11, "شماره معتبر نیست"),
 });

@@ -1,4 +1,4 @@
-import { Feather, MenuIcon, ShoppingCart, X } from "lucide-react";
+import { Feather, LogIn, MenuIcon, ShoppingCart, User, X } from "lucide-react";
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
@@ -6,7 +6,7 @@ export default function MainHeader() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <>
-      <header className="sticky top-0 left-0 right-0 bg-white shadow z-20">
+      <header className="sticky top-0 left-0 right-0 bg-white shadow z-30">
         <div className="container px-4 pb-2 md:pb-4">
           <div className="flex md:block">
             {/* logo */}
@@ -20,8 +20,20 @@ export default function MainHeader() {
                 <div className="space-y-2 md:flex md:flex-row-reverse md:items-center md:gap-x-8">
                   {/* icons */}
                   <div className="flex items-center gap-4 justify-end">
-                    <div className="">
-                      <ShoppingCart className="h-4 w-4 lg:h-6 lg:w-6" />
+                    <div className="flex-center gap-x-4 flex-row-reverse md:flex-row">
+                      <ShoppingCart className="h-6 w-6 lg:h-7 lg:w-7" />
+                      <Link
+                        className="text-sm bg-transparent rounded-lg  transition-all ease-in-out text-emerald-800"
+                        to="/signin"
+                      >
+                        <div className="md:hidden">
+                          <LogIn className="h-6 w-6" />
+                        </div>
+                        <div className="hidden md:flex-center gap-x-1">
+                          <User className="=h-7 w-7" />
+                          ورود | ثبت نام
+                        </div>
+                      </Link>
                     </div>
 
                     <button
@@ -77,9 +89,6 @@ export default function MainHeader() {
                     <Link to="/">بلاگ ها</Link>
                   </li>
                   <li>
-                    <Link to="/">ارتباط با ما</Link>
-                  </li>
-                  <li>
                     <NavLink
                       className={({ isActive }) =>
                         isActive ? "active-link" : ""
@@ -87,6 +96,26 @@ export default function MainHeader() {
                       to="/lig"
                     >
                       باشگاه مشتریان
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive ? "active-link" : ""
+                      }
+                      to="/contact-us"
+                    >
+                      ارتباط با ما
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive ? "active-link" : ""
+                      }
+                      to="/about-us"
+                    >
+                      درباره ما
                     </NavLink>
                   </li>
                 </ul>
@@ -140,7 +169,7 @@ export default function MainHeader() {
       {isOpen && (
         <div
           onClick={() => setIsOpen(false)}
-          className="fixed inset-0 bg-black/50 z-30 md:hidden transition-all"
+          className="fixed inset-0 bg-black/30 z-30 transition-all"
         ></div>
       )}
     </>

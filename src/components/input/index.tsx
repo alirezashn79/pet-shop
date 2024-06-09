@@ -3,7 +3,7 @@ import { ComponentPropsWithRef } from "react";
 interface IInputProps {
   name: string;
   label: string;
-  type: string;
+  type: "password" | "text";
   register: ComponentPropsWithRef<"input">;
 }
 export default function Input({ name, type, label, register }: IInputProps) {
