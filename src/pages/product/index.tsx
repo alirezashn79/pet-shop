@@ -44,7 +44,7 @@ export default function SingleProduct() {
                 onClick={() => setCurrentBtn("details")}
                 aria-current="page"
                 className={`inline-block p-4   rounded-t-lg ${
-                  currentBtn === "details" && "bg-yellow/20"
+                  currentBtn === "details" && "bg-primary/20"
                 }`}
               >
                 مشخصات
@@ -54,7 +54,7 @@ export default function SingleProduct() {
               <button
                 onClick={() => setCurrentBtn("comments")}
                 className={`inline-block p-4   rounded-t-lg ${
-                  currentBtn === "comments" && "bg-yellow/20"
+                  currentBtn === "comments" && "bg-primary/20"
                 }`}
               >
                 کامنت ها
@@ -101,7 +101,7 @@ export default function SingleProduct() {
               </div>
             )}
             {currentBtn === "comments" && (
-              <div className="h-64 w-1/2 flex flex-col gap-y-2 mx-auto items-center justify-center bg-yellow/20">
+              <div className="h-64 w-1/2 flex flex-col gap-y-2 mx-auto items-center justify-center bg-primary/20">
                 <div>
                   <MessageSquareDiff className="h-20 w-20" />
                 </div>

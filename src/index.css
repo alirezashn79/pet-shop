@@ -98,7 +98,7 @@
     object-fit: cover;
   }
   .active-link {
-    @apply border-b-4 border-yellow;
+    @apply border-b-4 border-primary;
   }
 }
 

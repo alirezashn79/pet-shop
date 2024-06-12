@@ -8,7 +8,7 @@ export default {
     },
     extend: {
       colors: {
-        yellow: "#facc15",
+        primary: "#facc15",
       },
       screens: {
         "2xl": "1512px",

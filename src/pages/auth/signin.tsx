@@ -27,14 +27,17 @@ export default function Signup() {
   console.log("error", errors);
   return (
     <>
-      <div className="hidden lg:flex items-center justify-center order-2">
+      <div
+        className="hidden lg:flex items-center justify-center order-2"
+        data-aos="zoom-in"
+      >
         <img
           src={Image}
           alt="Image"
           className="m-auto shrink-0  w-64 object-fit"
         />
       </div>
-      <div>
+      <div data-aos="zoom-in">
         <h1 className="text-center my-4 text-2xl font-bold text-[#240750]">
           ورود
         </h1>
@@ -93,6 +96,19 @@ export default function Signup() {
             ثبت نام
           </Link>
         </div>
+        <div className="mt-2 text-sm">
+          <span className="ml-2 text-gray-500">
+            رمز عبور خود را فراموش کرده اید؟
+          </span>
+          <Link className="text-[#240750] text-base" to="/forgot-password">
+            فراموشی رمز عبور
+          </Link>
+        </div>
+      </div>
+      <div className="absolute bottom-4 left-0 right-0 flex-center">
+        <Link className="text-center mx-auto text-xs text-blue-800" to="/">
+          بازگشت به صفحه اصلی
+        </Link>
       </div>
     </>
   );

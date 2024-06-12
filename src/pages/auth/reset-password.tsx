@@ -34,7 +34,7 @@ export default function ResetPassword() {
   }, [params.id, navigate]);
 
   return (
-    <div className="col-span-2 lg:w-64">
+    <div className="col-span-2 lg:w-64" data-aos="zoom-in">
       <h1 className="text-center  text-xl font-bold text-[#240750]">
         تغییر رمز عبور
       </h1>

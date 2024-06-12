@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 export default function AuthLayout() {
   return (
-    <div className="bg-emerald-950 h-screen">
+    <div className="bg-primary h-screen">
       {/* svgs */}
       <div>
         {/* top svg */}
@@ -87,7 +87,7 @@ export default function AuthLayout() {
       </div>
 
       <div className="flex items-center justify-center w-full h-full px-8">
-        <div className="z-20 w-full sm:w-3/4 lg:w-fit bg-gradient-to-l from-gray-300 to-gray-100 py-16 px-4 md:px-8 shadow-2xl rounded-lg shadow-[#240750] grid grid-cols-1 lg:grid-cols-2 gap-x-4 relative">
+        <div className="z-20 w-full sm:w-3/4 lg:w-fit bg-gradient-to-l from-gray-300 to-gray-100 pt-8 pb-16 px-8 shadow-2xl rounded-lg shadow-[#240750] grid grid-cols-1 lg:grid-cols-2 gap-x-4 relative">
           <Outlet />
         </div>
       </div>

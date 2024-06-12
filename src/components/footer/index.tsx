@@ -2,7 +2,7 @@ import { MessageCircle } from "lucide-react";
 
 export default function MainFooter() {
   return (
-    <div className="mt-20 md:mt-60 bg-white">
+    <div className="bg-white">
       <div className="flex flex-col  gap-y-4 pb-8 relative">
         <div className="w-full md:flex md:items-center md:gap-x-24 bg-green-700 text-center py-8 px-4 space-y-4 order-2 lg:order-1 md:px-20  xl:px-40">
           <h5 className="text-white text-xl xl:text-3xl font-bold">
@@ -14,21 +14,21 @@ export default function MainFooter() {
               placeholder="نام برند یا محصول مورد نظر..."
               className="bg-white text-gray-700 px-4 py-2 rounded-r-full flex-1"
             />
-            <button className="bg-yellow px-4 py-2 rounded-l-full">
+            <button className="bg-primary px-4 py-2 rounded-l-full">
               جستجو
             </button>
           </div>
         </div>
 
         <div className="px-8  w-fit order-1 lg:order-2  mx-auto lg:absolute lg:left-4 xl:left-16 z-20">
-          <div
-            data-aos="fade-down"
-            className="w-full bg-[#fef9c3] border-4 p-8 xl:p-12 border-yellow flex-center flex-col lg:mb-4 gap-4 "
-          >
+          <div className="w-full bg-[#fef9c3] border-4 p-8 xl:p-12 border-primary flex-center flex-col lg:mb-4 gap-4 ">
             <h5 className="text-2xl md:text-3xl xl:text-4xl font-bold">
               ساعت کاری
             </h5>
-            <div className="space-y-4 font-medium text-sm md:text-base xl:text-lg mt-8">
+            <div
+              className="space-y-4 font-medium text-sm md:text-base xl:text-lg mt-8"
+              data-aos="zoom-in"
+            >
               <div className="flex items-center gap-x-8">
                 <span>شنبه</span>
                 <span className="self-start text-left flex-1">
@@ -108,7 +108,7 @@ export default function MainFooter() {
           </div>
 
           <div className="space-y-4">
-            <a className="text-yellow font-bold text-2xl lg:text-3xl" href="#">
+            <a className="text-primary font-bold text-2xl lg:text-3xl" href="#">
               پت شاپ
             </a>
 

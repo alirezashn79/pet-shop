@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import OTPInput from "react-otp-input";
 import { forgotPasswordSchema } from "../../schemas/auth";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 export default function ForgotPassword() {
   const [phone, setPhone] = useState("");
@@ -48,7 +49,7 @@ export default function ForgotPassword() {
 
   return (
     <>
-      <div className="col-span-2">
+      <div className="col-span-2" data-aos="zoom-in">
         <h1 className="text-center  text-xl font-bold text-[#240750]">
           فراموشی رمز عبور
         </h1>
@@ -117,6 +118,14 @@ export default function ForgotPassword() {
             </button>
           </div>
         </form>
+      </div>
+      <div className="flex-center absolute bottom-4 left-0 right-0">
+        <Link
+          className="text-center mx-auto text-xs text-blue-800"
+          to="/signin"
+        >
+          بازگشت به صفحه ورود
+        </Link>
       </div>
     </>
   );

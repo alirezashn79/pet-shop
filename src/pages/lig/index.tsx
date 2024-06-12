@@ -25,9 +25,7 @@ export default function Lig() {
     <div>
       <div className="container py-8 space-y-16">
         <div
-          className={`border p-4 rounded-md  overflow-hidden transition-all duration-300 ${
-            showMore ? "h-[1050px]" : "h-64"
-          }`}
+          className={`border p-4 rounded-md  overflow-hidden transition-all duration-300`}
         >
           <div className="flex items-center gap-4">
             <img
@@ -84,7 +82,7 @@ export default function Lig() {
           <div className="flex justify-center my-2">
             <button
               onClick={() => setShowMore((prev) => !prev)}
-              className="bg-yellow px-4 py-2 rounded-lg font-bold text-sm md:text-base ease-in-out hover:bg-transparent hover:text-yellow duration-300 border-yellow border-2"
+              className="bg-primary px-4 py-2 rounded-lg font-bold text-sm md:text-base ease-in-out hover:bg-transparent hover:text-primary duration-300 border-primary border-2"
             >
               مشاهده بیشتر...
             </button>
@@ -93,7 +91,7 @@ export default function Lig() {
 
         {/* table */}
         <div className="flex items-center gap-4">
-          <AlignStartVertical className="w-6 h-6 md:w-10 md:h-10 text-yellow" />
+          <AlignStartVertical className="w-6 h-6 md:w-10 md:h-10 text-primary" />
           <h1 className="text-xl md:text-3xl text-gray-800">جدول</h1>
         </div>
         <div>
@@ -132,7 +130,7 @@ export default function Lig() {
                     <td className="px-6 py-4">{item.name}</td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-4  ">
-                        <Coins className="h-6 w-6 text-yellow" />
+                        <Coins className="h-6 w-6 text-primary" />
                         {item.score}
                       </div>
                     </td>

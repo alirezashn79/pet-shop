@@ -39,14 +39,17 @@ export default function Signup() {
 
   return (
     <>
-      <div className="hidden lg:flex items-center justify-center">
+      <div
+        className="hidden lg:flex items-center justify-center"
+        data-aos="zoom-in"
+      >
         <img
           src={Image}
           alt="Image"
           className="m-auto shrink-0 w-64 object-fit"
         />
       </div>
-      <div>
+      <div data-aos="zoom-in">
         <h1 className="text-center my-4 text-2xl font-bold text-[#240750]">
           ثبت نام
         </h1>
@@ -91,6 +94,10 @@ export default function Signup() {
           </div>
           <div className="space-y-1">
             <DatePicker
+              className="bg-gradient-to-l from-gray-300 to-gray-100"
+              arrowStyle={{
+                display: "none",
+              }}
               animations={[
                 transition({
                   from: 35,
@@ -104,7 +111,7 @@ export default function Signup() {
                 width: "100%",
               }}
               render={
-                <div className="relative z-0 w-full  group flex items-center">
+                <div className="relative w-full  group flex items-center">
                   <input
                     value={date?.toString()}
                     autoComplete="false"
@@ -179,6 +186,11 @@ export default function Signup() {
             ورود
           </Link>
         </div>
+      </div>
+      <div className="absolute bottom-4 left-0 right-0 flex-center -z-10">
+        <Link className="text-center mx-auto text-xs text-blue-800" to="/">
+          بازگشت به صفحه اصلی
+        </Link>
       </div>
     </>
   );

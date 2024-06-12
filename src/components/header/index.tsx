@@ -10,7 +10,7 @@ export default function MainHeader() {
         <div className="container px-4 pb-2 md:pb-4">
           <div className="flex md:block">
             {/* logo */}
-            <div className="bg-yellow md:absolute h-20 w-20 md:w-28 md:h-28 lg:h-32 lg:w-36 flex-center flex-col rounded-b-full">
+            <div className="bg-primary md:absolute h-20 w-20 md:w-28 md:h-28 lg:h-32 lg:w-36 flex-center flex-col rounded-b-full">
               <Feather className="w-8 h-8 lg:h-14 lg:w-14" />
               <h1 className="font-bold text-base lg:text-xl">پت شاپ</h1>
             </div>
@@ -51,7 +51,7 @@ export default function MainHeader() {
                       placeholder="نام محصول مورد نظر..."
                     />
 
-                    <button className="bg-yellow px-2.5 py-1 rounded-l-sm">
+                    <button className="bg-primary px-2.5 py-1 rounded-l-sm">
                       جستجو
                     </button>
                   </div>
@@ -86,7 +86,14 @@ export default function MainHeader() {
                     <Link to="/">محصولات مراقبتی</Link>
                   </li>
                   <li>
-                    <Link to="/">بلاگ ها</Link>
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive ? "active-link" : ""
+                      }
+                      to="/blogs"
+                    >
+                      بلاگ ها
+                    </NavLink>
                   </li>
                   <li>
                     <NavLink
