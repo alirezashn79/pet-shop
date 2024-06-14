@@ -19,6 +19,7 @@ import DogProducts from "../pages/products/dog-products";
 import Toys from "../pages/products/toys";
 import CaringService from "../pages/services/caring";
 import CleaningService from "../pages/services/cleaning";
+import CartPage from "../pages/cart";
 
 export default function PageRoutes() {
   return (
@@ -26,11 +27,12 @@ export default function PageRoutes() {
       <Route element={<MainLayout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/lig" element={<Lig />} />
-        <Route path="/products">
-          <Route path="cat-products" element={<CatProducts />} />
-          <Route path="dog-products" element={<DogProducts />} />
-          <Route path="animal-toys" element={<Toys />} />
+        <Route path="/shop">
+          <Route path="cat" element={<CatProducts />} />
+          <Route path="dog" element={<DogProducts />} />
+          <Route path="toys" element={<Toys />} />
           <Route path=":id" element={<SingleProduct />} />
+          <Route path="cart" element={<CartPage />} />
         </Route>
 
         <Route path="/services">

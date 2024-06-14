@@ -1,13 +1,12 @@
-import { useEffect, useState } from "react";
-import Breadcrumb from "../../components/breadcrumb";
 import { MessageSquareDiff } from "lucide-react";
+import { useState } from "react";
+import Breadcrumb from "../../components/breadcrumb";
 
 export default function SingleProduct() {
   const [currentBtn, setCurrentBtn] = useState<"details" | "comments">(
     "details"
   );
 
-  useEffect(() => {}, [currentBtn]);
   return (
     <div className="bg-white">
       <div className="page">
@@ -58,6 +57,16 @@ export default function SingleProduct() {
                 }`}
               >
                 کامنت ها
+              </button>
+            </li>
+            <li className="mr-2">
+              <button
+                onClick={() => setCurrentBtn("comments")}
+                className={`inline-block p-4   rounded-t-lg ${
+                  currentBtn === "comments" && "bg-primary/20"
+                }`}
+              >
+                توضیحات
               </button>
             </li>
           </ul>

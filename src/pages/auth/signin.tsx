@@ -47,6 +47,7 @@ export default function Signup() {
         >
           <div className="space-y-1">
             <Input
+              autoFocus={true}
               register={register("phone")}
               name="phone"
               type="text"

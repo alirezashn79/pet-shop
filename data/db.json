@@ -25,5 +25,21 @@
       "name": "مادرقحبه جلیلی",
       "score": 105
     }
+  ],
+  "cart": [
+    {
+      "id": "1",
+      "product": "غذا گربه",
+      "quantity": 5,
+      "img": "https://theme51.mywebzi.ir/uploads/8731eb4b78fb4b9c936076e35be80743.w_748,h_90,r_k.jpg",
+      "unitPrice": 25000
+    },
+    {
+      "id": "2",
+      "product": "غذا سگ",
+      "quantity": 3,
+      "img": "https://theme51.mywebzi.ir/uploads/8731eb4b78fb4b9c936076e35be80743.w_748,h_90,r_k.jpg",
+      "unitPrice": 15000
+    }
   ]
 }

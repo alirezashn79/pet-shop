@@ -1,8 +1,10 @@
 import { Feather, LogIn, MenuIcon, ShoppingCart, User, X } from "lucide-react";
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useCart } from "../../hooks/useCart";
 
 export default function MainHeader() {
+  const cartData = useCart((state) => state.data);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <>
@@ -20,21 +22,39 @@ export default function MainHeader() {
                 <div className="space-y-2 md:flex md:flex-row-reverse md:items-center md:gap-x-8">
                   {/* icons */}
                   <div className="flex items-center gap-4 justify-end">
-                    <div className="flex-center gap-x-4 flex-row-reverse md:flex-row">
-                      <ShoppingCart className="h-6 w-6 lg:h-7 lg:w-7" />
+                    <div className="relative">
                       <Link
-                        className="text-sm bg-transparent rounded-lg  transition-all ease-in-out text-emerald-800"
-                        to="/signin"
+                        to="/shop/cart"
+                        className="flex-center gap-x-4 flex-row-reverse md:flex-row"
                       >
-                        <div className="md:hidden">
-                          <LogIn className="h-6 w-6" />
-                        </div>
-                        <div className="hidden md:flex-center gap-x-1">
-                          <User className="=h-7 w-7" />
-                          ورود | ثبت نام
-                        </div>
+                        <ShoppingCart className="h-6 w-6 lg:h-7 lg:w-7 text-gray-700" />
                       </Link>
+
+                      <span
+                        style={{
+                          scale:
+                            cartData && cartData?.length > 0 ? "100%" : "0",
+                          opacity:
+                            cartData && cartData?.length > 0 ? "100%" : "0",
+                        }}
+                        className="absolute transition-all bg-primary h-4 w-4 flex-center rounded-full -top-1 -right-1 text-xs text-black"
+                      >
+                        {cartData?.length}
+                      </span>
                     </div>
+
+                    <Link
+                      className="text-sm bg-transparent rounded-lg  transition-all ease-in-out text-emerald-800"
+                      to="/signin"
+                    >
+                      <div className="md:hidden">
+                        <LogIn className="h-6 w-6" />
+                      </div>
+                      <div className="hidden md:flex-center gap-x-1">
+                        <User className="=h-7 w-7" />
+                        ورود | ثبت نام
+                      </div>
+                    </Link>
 
                     <button
                       onClick={() => setIsOpen(true)}

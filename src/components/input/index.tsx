@@ -5,8 +5,15 @@ interface IInputProps {
   label: string;
   type: "password" | "text";
   register: ComponentPropsWithRef<"input">;
+  autoFocus?: boolean;
 }
-export default function Input({ name, type, label, register }: IInputProps) {
+export default function Input({
+  name,
+  type,
+  label,
+  register,
+  autoFocus,
+}: IInputProps) {
   return (
     <div className="relative z-0 w-full  group">
       {name === "phone" && (
@@ -18,6 +25,7 @@ export default function Input({ name, type, label, register }: IInputProps) {
         </div>
       )}
       <input
+        autoFocus={autoFocus}
         autoComplete="false"
         type={type}
         name={name}

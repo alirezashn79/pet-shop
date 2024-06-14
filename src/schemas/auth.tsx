@@ -1,4 +1,4 @@
-import { number, object, ref, string } from "yup";
+import { object, ref, string } from "yup";
 
 export const UserSchema = object({
   name: string()

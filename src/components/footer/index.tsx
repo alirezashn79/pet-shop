@@ -84,8 +84,8 @@ export default function MainFooter() {
 
         <div className="flex items-start  justify-around lg:justify-start lg:gap-x-72 xl:gap-x-96 px-8 order-3 lg:mt-20 container">
           <div>
-            <h6 className="text-base lg:text-xl font-semibold mb-4">لینک ها</h6>
-            <ul className="text-sm lg:text-lg text-gray-500 mr-2 space-y-1">
+            <h6 className="text-base lg:text-lg font-semibold mb-4">لینک ها</h6>
+            <ul className="text-sm lg:text-base text-gray-500 mr-2 space-y-1">
               <li>
                 <a href="#">خانه</a>
               </li>
@@ -108,13 +108,16 @@ export default function MainFooter() {
           </div>
 
           <div className="space-y-4">
-            <a className="text-primary font-bold text-2xl lg:text-3xl" href="#">
+            <a className="text-primary font-bold text-base lg:text-lg" href="#">
               پت شاپ
             </a>
 
-            <p className="lg:text-lg">آدرس: فروشگاه ...</p>
+            <p className="text-sm lg:text-base">آدرس: فروشگاه ...</p>
 
-            <a className="block lg:text-lg" href="mailto:test@test.com">
+            <a
+              className="block text-sm lg:text-base"
+              href="mailto:test@test.com"
+            >
               info@test.ir
             </a>
 
