@@ -11,6 +11,7 @@ import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useCart } from "../../hooks/useCart";
 import { menuItems } from "../../utils/menu-items";
+import Overlay from "../common/overlay";
 
 export default function MainHeader() {
   const cartData = useCart((state) => state.data);
@@ -168,12 +169,7 @@ export default function MainHeader() {
         </div>
       </div>
       {/* overlay */}
-      {isOpen && (
-        <div
-          onClick={() => setIsOpen(false)}
-          className="fixed inset-0 bg-black/30 z-30 transition-all"
-        ></div>
-      )}
+      {isOpen && <Overlay isLoading={false} clickHandler={setIsOpen} />}
     </>
   );
 }

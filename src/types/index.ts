@@ -17,3 +17,11 @@ export interface IProductList {
 export type TCartProduct = IProductList & {
   quantity: number;
 };
+
+export interface IBlog {
+  id: string;
+  title: string;
+  desc: string;
+  image: string;
+  author: string;
+}

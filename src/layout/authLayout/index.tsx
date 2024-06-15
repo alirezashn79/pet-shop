@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 export default function AuthLayout() {
   return (
-    <div className="bg-primary h-screen">
+    <div className="bg-primary/60 h-screen">
       {/* svgs */}
       <div>
         {/* top svg */}
@@ -16,7 +16,7 @@ export default function AuthLayout() {
           >
             <defs>
               <linearGradient id="gradient" x1="0%" y1="50%" x2="100%" y2="50%">
-                <stop offset="5%" stopColor="#240750" />
+                <stop offset="5%" stopColor="#458985" />
                 <stop offset="95%" stopColor="#344c64" />
               </linearGradient>
             </defs>
@@ -30,7 +30,7 @@ export default function AuthLayout() {
             />
             <defs>
               <linearGradient id="gradient" x1="0%" y1="50%" x2="100%" y2="50%">
-                <stop offset="5%" stopColor="#240750" />
+                <stop offset="5%" stopColor="#458985" />
                 <stop offset="95%" stopColor="#344c64" />
               </linearGradient>
             </defs>

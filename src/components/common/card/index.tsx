@@ -1,27 +1,22 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../../../hooks/useCart";
-import Quantity from "../quantity";
 import { IProductList } from "../../../types";
+import Quantity from "../quantity";
 
 interface ICard {
   data: IProductList;
 }
 
 export default function Card({ data }: ICard) {
-  console.log("data", data);
   const cartData = useCart((state) => state.data);
   const addToCart = useCart((state) => state.addToCart);
-
-  console.log(
-    "bool",
-    cartData?.find((item) => item.id === "15")
-  );
 
   return (
     <div className="bg-white md:border-2 md:rounded flex flex-col items-center overflow-hidden relative">
       {/* <div className="absolute left-4 top-4 bg-red-500 px-1 text-sm text-white rounded-sm">
         {"سگ"}
       </div> */}
+
       <Link to="/shop/1">
         <img
           src={data?.thumbnail}

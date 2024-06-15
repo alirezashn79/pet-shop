@@ -4,6 +4,7 @@ import TitleBar from "../../components/common/titlebar";
 import { useCart } from "../../hooks/useCart";
 import { TCartProduct } from "../../types";
 import { Link } from "react-router-dom";
+import Loading from "../../components/loading";
 
 export default function CartPage() {
   const data = useCart((state) => state.data);
@@ -60,6 +61,8 @@ export default function CartPage() {
       ),
     },
   ];
+
+  if (loading) return <Loading />;
 
   return (
     <div className="page">
