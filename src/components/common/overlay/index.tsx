@@ -7,7 +7,7 @@ export default function Overlay({ clickHandler, isLoading }: IOverlay) {
   return (
     <div
       onClick={clickHandler ? () => clickHandler(false) : undefined}
-      className="fixed inset-0 bg-black/40 z-30 transition-all flex-center"
+      className={`fixed  inset-0 bg-black/40 z-30 transition-all flex-center ${!isLoading && "md:hidden"}`}
     >
       {isLoading && (
         <div className="flex-center flex-col gap-y-4">

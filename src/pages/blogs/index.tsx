@@ -3,6 +3,7 @@ import BlogCard from "../../components/blog-card";
 import Overlay from "../../components/common/overlay";
 import TitleBar from "../../components/common/titlebar";
 import useBlog from "../../hooks/useBlog";
+import Loading from "../../components/loading";
 
 export default function Blogs() {
   const loading = useBlog((state) => state.loading);
@@ -14,11 +15,7 @@ export default function Blogs() {
   }, []);
 
   if (loading) {
-    return (
-      <div className="h-[800px]">
-        <Overlay isLoading={true} />
-      </div>
-    );
+    return <Loading />;
   }
   return (
     <div className="page mb-4">

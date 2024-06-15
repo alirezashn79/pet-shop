@@ -13,7 +13,6 @@ export default function Signup() {
     handleSubmit,
     formState: { errors },
   } = useForm<InferType<typeof UserSignInSchema>>({
-    mode: "all",
     resolver: yupResolver(UserSignInSchema),
   });
 
@@ -57,7 +56,7 @@ export default function Signup() {
               errors={errors}
               name={"phone"}
               render={({ message }) => (
-                <span className="text-red-400 text-xs md:text-sm block">
+                <span className="text-red-400 text-xs md:text-sm block lg:max-w-72">
                   {message}
                 </span>
               )}
@@ -75,7 +74,7 @@ export default function Signup() {
               errors={errors}
               name={"password"}
               render={({ message }) => (
-                <span className="text-red-400 text-xs md:text-sm block">
+                <span className="text-red-400 text-xs md:text-sm block lg:max-w-72">
                   {message}
                 </span>
               )}

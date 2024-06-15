@@ -9,7 +9,7 @@ export default function BlogCard({ delay, data, link }: IBlogComponent) {
   return (
     <div
       className="block rounded-lg bg-white shadow"
-      data-aos="flip-up"
+      data-aos="zoom-in"
       data-aos-delay={delay}
     >
       <div className="relative overflow-hidden bg-cover bg-no-repeat">

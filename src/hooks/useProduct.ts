@@ -6,7 +6,7 @@ interface IUseProduct {
   data: null | IProductList[];
   getData: () => Promise<void>;
   spicialData: null | IProductList[];
-  getSpecialData: (type: "cat" | "dog" | "toys") => Promise<void>;
+  getSpecialData: (type: "cat" | "dog" | "accessories") => Promise<void>;
   loading: boolean;
 }
 

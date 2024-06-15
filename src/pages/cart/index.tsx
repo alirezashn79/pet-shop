@@ -13,19 +13,32 @@ export default function CartPage() {
 
   const columns: TableColumn<TCartProduct>[] = [
     {
+      name: "#",
+      cell: (row, idx) => idx + 1,
+      width: "40px",
+    },
+    {
       name: "کالا",
       selector: (row) => row.title,
       cell: (row) => (
-        <div className="flex-center gap-x-4 p-2">
-          <img className="w-24" src={row.thumbnail} alt={row.title} />
-          <span className="text-base block">{row.title}</span>
+        <div className="flex-center gap-x-4 p-2 w-[56rem] md:w-auto">
+          <img
+            className="lg:w-24 lg:h-24 h-16 w-16"
+            src={row.thumbnail}
+            alt={row.title}
+          />
+          <span className="lg:text-base block w-full text-sm">{row.title}</span>
         </div>
       ),
     },
     {
       name: "تعداد",
       selector: (row) => row.quantity,
-      cell: (row) => <Quantity id={row.id} quantity={row.quantity} />,
+      cell: (row) => (
+        <div>
+          <Quantity id={row.id} quantity={row.quantity} />
+        </div>
+      ),
     },
     {
       name: "قیمت واحد",
@@ -70,6 +83,7 @@ export default function CartPage() {
 
       <div data-aos="zoom-in">
         <DataTable
+          responsive={true}
           noDataComponent={
             <p className="text-lg font-semibold p-4">سبد خرید شما خالی است</p>
           }
@@ -80,36 +94,26 @@ export default function CartPage() {
 
       {data && data?.length > 0 ? (
         <>
-          <div className=" bg-white  w-1/3 mx-auto mt-4 p-4">
-            <ul className="divide-y">
-              {/* <li className="flex items-center justify-between py-2">
-                <span>جمع کل خرید شما</span>
-                <span>
-                  {" "}
-                  {data
-                    ?.reduce(
-                      (prev, current) =>
-                        prev + current.quantity * current.unitPrice,
-                      0
-                    )
-                    .toLocaleString()}
-                </span>
-              </li> */}
-              <li className="flex items-center justify-between py-2">
-                <span>مبلغ قابل پرداخت:</span>
-                <p className="text-green-600 text-xl">
-                  {" "}
-                  {data
-                    ?.reduce(
-                      (prev, current) =>
-                        prev + current.quantity * current.price,
-                      0
-                    )
-                    .toLocaleString()}
-                  <span className="ms-1">تومان</span>
-                </p>
-              </li>
-            </ul>
+          <div className=" bg-white  lg:w-1/3 md:w-1/2 w-full  mx-auto mt-4 p-4">
+            <div className="flex items-center justify-between py-2 mx-auto">
+              <span>تعداد کل کالا ها</span>
+              <span className="text-base lg:text-xl">
+                {data.reduce((prev, current) => prev + current.quantity, 0)} #
+              </span>
+            </div>
+            <div className="flex items-center justify-between py-2 mx-auto">
+              <span>مبلغ قابل پرداخت:</span>
+              <p className="text-green-600 text-base md:text-xl">
+                {" "}
+                {data
+                  ?.reduce(
+                    (prev, current) => prev + current.quantity * current.price,
+                    0
+                  )
+                  .toLocaleString()}
+                <span className="ms-1">تومان</span>
+              </p>
+            </div>
           </div>
           <div className="flex-center mt-4">
             <button className="bg-primary px-8 py-2.5 text-lg">

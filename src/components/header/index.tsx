@@ -1,5 +1,5 @@
 import {
-  ChevronDown,
+  Bird,
   Feather,
   LogIn,
   MenuIcon,
@@ -11,7 +11,9 @@ import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useCart } from "../../hooks/useCart";
 import { menuItems } from "../../utils/menu-items";
+import Dropdown from "../common/dropdown";
 import Overlay from "../common/overlay";
+import DropdownMobile from "../common/dropdown-mobile";
 
 export default function MainHeader() {
   const cartData = useCart((state) => state.data);
@@ -22,10 +24,13 @@ export default function MainHeader() {
         <div className="container px-4 pb-2 md:pb-4">
           <div className="flex md:block">
             {/* logo */}
-            <div className="bg-primary md:absolute h-20 w-20 md:w-28 md:h-28 lg:h-32 lg:w-36 flex-center flex-col rounded-b-full">
+            <Link
+              to="/"
+              className="bg-primary md:absolute h-20 w-20 md:w-28 md:h-28 lg:h-32 lg:w-36 flex-center flex-col rounded-b-full main-logo"
+            >
               <Feather className="w-8 h-8 lg:h-14 lg:w-14" />
               <h1 className="font-bold text-base lg:text-xl">پت شاپ</h1>
-            </div>
+            </Link>
             {/* left */}
             <div className="flex-1">
               <div className="flex-1 p-2">
@@ -76,7 +81,7 @@ export default function MainHeader() {
                   <span className="hidden md:block w-0.5 h-7 bg-gray-300"></span>
                   <div className="flex justify-end text-xs">
                     <input
-                      className="flex-1 px-2 lg:py-2 py-1 rounded-r-sm border border-l-0 outline-none max-w-sm lg:w-72"
+                      className="flex-1 px-2 py-2  rounded-r-sm border border-l-0 outline-none max-w-sm lg:w-72"
                       type="text"
                       placeholder="نام محصول مورد نظر..."
                     />
@@ -96,36 +101,28 @@ export default function MainHeader() {
             <div className="flex md:mr-28 lg:mr-60 py-4">
               <nav>
                 <ul className="flex items-center text-sm md:gap-x-8 lg:gap-x-16">
-                  {menuItems.map((item) => (
-                    <li key={item.id} className="relative">
-                      <NavLink
-                        className={({ isActive }) =>
-                          isActive && item.link ? "active-link" : ""
-                        }
-                        to={item.link || "#"}
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          gap: "2px",
-                        }}
-                      >
-                        {item.title}
-                        {item.hasSub && (
-                          <ChevronDown
-                            className="text-primary h-5 w-5"
-                            strokeWidth={3}
-                          />
-                        )}
-                      </NavLink>
-
-                      {item.hasSub && (
-                        <div className="absolute top-full translate-y-5 bg-white rounded-sm border min-w-[800px]">
-                          5
-                        </div>
-                      )}
-                    </li>
-                  ))}
+                  {menuItems.map((item) => {
+                    return item.hasSub ? (
+                      <Dropdown data={item} />
+                    ) : (
+                      <li key={item.id} className="relative">
+                        <NavLink
+                          className={({ isActive }) =>
+                            isActive && item.link ? "active-link" : ""
+                          }
+                          to={item.link || "#"}
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            gap: "2px",
+                          }}
+                        >
+                          {item.title}
+                        </NavLink>
+                      </li>
+                    );
+                  })}
                 </ul>
               </nav>
             </div>
@@ -143,28 +140,49 @@ export default function MainHeader() {
         {/* wrapper */}
         <div className="p-4">
           {/* close btn */}
-          <div
-            onClick={() => setIsOpen(false)}
-            className="mr-auto w-fit p-0.5 rounded text-red-500"
-          >
-            <X className="h-6 w-6" />
+          <div className="flex items-center justify-between w-full pb-2.5 border-b-2 border-b-primary">
+            <div className="">
+              {" "}
+              <Link
+                onClick={() => setIsOpen(false)}
+                className="text-primary font-bold text-lg flex-center gap-2"
+                to="/"
+              >
+                <Bird />
+                پت شاپ
+              </Link>
+            </div>
+            <div
+              onClick={() => setIsOpen(false)}
+              className="mr-auto w-fit p-0.5 rounded text-red-500"
+            >
+              <X className="h-6 w-6" />
+            </div>
           </div>
 
           {/* menu */}
-          <ul className="flex flex-col gap-y-4 divide-y divide-yellow text-lg child:py-2">
-            {menuItems.map((item) => (
-              <li key={item.id}>
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive && item.link ? "text-primary" : ""
-                  }
-                  onClick={setIsOpen.bind(null, false)}
-                  to={item.link || "#"}
-                >
-                  {item.title}
-                </NavLink>
-              </li>
-            ))}
+          <ul className="flex flex-col divide-y divide-yellow text-base">
+            {menuItems.map((item) => {
+              return item.hasSub ? (
+                <DropdownMobile
+                  key={item.id}
+                  data={item}
+                  setIsOpen={setIsOpen}
+                />
+              ) : (
+                <li key={item.id}>
+                  <NavLink
+                    className={({ isActive }) =>
+                      `${isActive && item.link ? "text-primary" : ""} block py-4`
+                    }
+                    onClick={setIsOpen.bind(null, false)}
+                    to={item.link || "#"}
+                  >
+                    {item.title}
+                  </NavLink>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>

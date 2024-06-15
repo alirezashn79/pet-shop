@@ -1,6 +1,7 @@
 import useProduct from "../../hooks/useProduct";
 import Card from "../common/card";
 import TitleBar from "../common/titlebar";
+import Loading from "../loading";
 
 interface IServiceProps {
   title: string;
@@ -9,10 +10,11 @@ interface IServiceProps {
 }
 export default function Service({ title, subtitle, icon }: IServiceProps) {
   const CatProducts = useProduct((state) => state.spicialData);
+  const loading = useProduct((state) => state.loading);
 
   console.log("CatProducts", CatProducts);
 
-  const loading = useProduct((state) => state.loading);
+  if (loading) return <Loading />;
   return (
     <div className="page">
       <TitleBar title={title} />

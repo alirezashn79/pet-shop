@@ -8,7 +8,7 @@ const client = axios.create({
 client.interceptors.response.use(
   (res) => res,
   (err) => {
-    toast.error("somthing went wrong...!");
+    toast.error("خطا در بارگذاری...!");
   }
 );
 export default client;

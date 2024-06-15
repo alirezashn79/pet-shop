@@ -4,9 +4,9 @@ import { menuItems } from "../../utils/menu-items";
 
 export default function MainFooter() {
   return (
-    <div className="bg-white">
+    <div className="bg-primary/20">
       <div className="flex flex-col  gap-y-4 pb-8 relative">
-        <div className="w-full md:flex md:items-center md:gap-x-24 bg-green-700 text-center py-8 px-4 space-y-4 order-2 lg:order-1 md:px-20  xl:px-40">
+        {/* <div className="w-full md:flex md:items-center md:gap-x-24 bg-green-700 text-center py-8 px-4 space-y-4 order-2 lg:order-1 md:px-20  xl:px-40">
           <h5 className="text-white text-xl xl:text-3xl font-bold">
             جستجو در سایت
           </h5>
@@ -20,9 +20,9 @@ export default function MainFooter() {
               جستجو
             </button>
           </div>
-        </div>
+        </div> */}
 
-        <div className="px-8  w-fit order-1 lg:order-2  mx-auto lg:absolute lg:left-4 xl:left-16 z-20">
+        {/* <div className="px-8  w-fit order-1 lg:order-2  mx-auto lg:absolute lg:left-4 xl:left-16 z-20">
           <div className="w-full bg-[#fef9c3] border-4 p-8 xl:p-12 border-primary flex-center flex-col lg:mb-4 gap-4 ">
             <h5 className="text-2xl md:text-3xl xl:text-4xl font-bold">
               ساعت کاری
@@ -82,7 +82,7 @@ export default function MainFooter() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="flex items-start  justify-around lg:justify-start lg:gap-x-72 xl:gap-x-96 px-8 order-3 lg:mt-20 container">
           <div>

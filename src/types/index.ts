@@ -25,3 +25,14 @@ export interface IBlog {
   image: string;
   author: string;
 }
+export interface IMenu {
+  id: number;
+  title: string;
+  link?: string;
+  hasSub?: boolean;
+  subItems?: {
+    id: number;
+    title: string;
+    link: string;
+  }[];
+}

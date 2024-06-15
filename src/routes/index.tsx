@@ -16,7 +16,7 @@ import NotFound from "../pages/not-found";
 import SingleProduct from "../pages/product";
 import CatProducts from "../pages/products/cat-products";
 import DogProducts from "../pages/products/dog-products";
-import Toys from "../pages/products/toys";
+import AccessoriesPage from "../pages/products/accessories";
 import CaringService from "../pages/services/caring";
 import CleaningService from "../pages/services/cleaning";
 import CartPage from "../pages/cart";
@@ -32,7 +32,7 @@ export default function PageRoutes() {
           <Route path="" element={<AllProducts />} />
           <Route path="cat" element={<CatProducts />} />
           <Route path="dog" element={<DogProducts />} />
-          <Route path="toys" element={<Toys />} />
+          <Route path="accessories" element={<AccessoriesPage />} />
           <Route path=":id" element={<SingleProduct />} />
           <Route path="cart" element={<CartPage />} />
         </Route>

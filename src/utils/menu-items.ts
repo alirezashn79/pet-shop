@@ -1,9 +1,4 @@
-interface IMenu {
-  id: number;
-  title: string;
-  link?: string;
-  hasSub?: boolean;
-}
+import { IMenu } from "../types";
 
 export const menuItems: IMenu[] = [
   {
@@ -12,19 +7,49 @@ export const menuItems: IMenu[] = [
     link: "/",
   },
   {
-    id: 2,
-    title: "فروشگاه",
-    link: "/shop",
+    id: 9,
+    title: "محصولات ویژه",
   },
   {
     id: 3,
     title: "محصولات",
     hasSub: true,
+    link: "/shop",
+    subItems: [
+      {
+        id: 10,
+        title: "محصولات غذایی گربه",
+        link: "/shop/cat",
+      },
+      {
+        id: 11,
+        title: "محصولات غذایی سگ",
+        link: "/shop/dog",
+      },
+      {
+        id: 12,
+        title: "لوازم پت",
+        link: "/shop/accessories",
+      },
+    ],
   },
+
   {
     id: 4,
     title: "خدمات",
-    // hasSub: true,
+    hasSub: true,
+    subItems: [
+      {
+        id: 13,
+        title: "نظافت پت",
+        link: "/services/cleaning",
+      },
+      {
+        id: 14,
+        title: "نگهداری پت",
+        link: "/services/caring",
+      },
+    ],
   },
   {
     id: 5,

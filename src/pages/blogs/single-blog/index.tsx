@@ -29,7 +29,10 @@ export default function BlogPage() {
         alt={data?.title}
         className="mx-auto w-full lg:w-2/3 max-h-96 object-cover object-center shadow-lg rounded-lg"
       />
-      <p className="max-w-screen-xl text-pretty mx-auto mt-8 text-gray-700 text-sm/8 md:text-base/8">
+      <p
+        className="max-w-screen-xl text-justify
+       mx-auto mt-8 text-gray-700 text-sm/8 md:text-base/8"
+      >
         {data?.desc}
       </p>
     </div>

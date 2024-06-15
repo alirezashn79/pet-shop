@@ -25,7 +25,6 @@ export default function Signup() {
     handleSubmit,
     formState: { errors },
   } = useForm<InferType<typeof UserSchema>>({
-    mode: "all",
     resolver: yupResolver(UserSchema),
   });
 
@@ -69,7 +68,7 @@ export default function Signup() {
               errors={errors}
               name={"name"}
               render={({ message }) => (
-                <span className="text-red-400 text-[10px] md:text-xs  block">
+                <span className="text-red-400 text-[10px] md:text-xs  block max-w-64">
                   {message}
                 </span>
               )}
@@ -87,7 +86,7 @@ export default function Signup() {
               errors={errors}
               name={"phone"}
               render={({ message }) => (
-                <span className="text-red-400 text-[10px] md:text-xs  block">
+                <span className="text-red-400 text-[10px] md:text-xs  block max-w-64">
                   {message}
                 </span>
               )}
@@ -147,7 +146,7 @@ export default function Signup() {
               errors={errors}
               name={"password"}
               render={({ message }) => (
-                <span className="text-red-400 text-[10px] md:text-xs  block">
+                <span className="text-red-400 text-[10px] md:text-xs  block max-w-64">
                   {message}
                 </span>
               )}
@@ -165,7 +164,7 @@ export default function Signup() {
               errors={errors}
               name={"confirmPassword"}
               render={({ message }) => (
-                <span className="text-red-400 text-[10px] md:text-xs  block">
+                <span className="text-red-400 text-[10px] md:text-xs  block max-w-64">
                   {message}
                 </span>
               )}

@@ -1,4 +1,4 @@
-import { AlignStartVertical, Coins } from "lucide-react";
+import { AlignStartVertical, ChevronDown, Coins } from "lucide-react";
 import { useEffect, useState } from "react";
 import client from "../../app/client";
 import CoinImg from "../../assets/image/coin.png";
@@ -82,9 +82,12 @@ export default function Lig() {
           <div className="flex justify-center my-2">
             <button
               onClick={() => setShowMore((prev) => !prev)}
-              className="bg-primary px-4 py-2 rounded-lg font-bold text-sm md:text-base ease-in-out hover:bg-transparent hover:text-primary duration-300 border-primary border-2"
+              className="bg-primary px-4 py-2 rounded-lg font-bold text-sm md:text-base ease-in-out hover:bg-transparent hover:text-primary duration-300 border-primary border-2 flex-center gap-x-2"
             >
-              مشاهده بیشتر...
+              {showMore ? <span>بستن</span> : <span>مشاهده بیشتر...</span>}
+              <ChevronDown
+                className={`${showMore ? "rotate-180" : "rotate-0"} transition-all`}
+              />
             </button>
           </div>
         </div>
