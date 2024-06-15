@@ -1,6 +1,6 @@
-import { Trash, Trash2Icon } from "lucide-react";
-import { useCart } from "../../../hooks/useCart";
+import { Trash2Icon } from "lucide-react";
 import { useState } from "react";
+import { useCart } from "../../../hooks/useCart";
 
 export default function Quantity({
   id,

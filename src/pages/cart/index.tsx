@@ -2,7 +2,7 @@ import DataTable, { TableColumn } from "react-data-table-component";
 import Quantity from "../../components/common/quantity";
 import TitleBar from "../../components/common/titlebar";
 import { useCart } from "../../hooks/useCart";
-import { IDataRowCart } from "../../types";
+import { TCartProduct } from "../../types";
 import { Link } from "react-router-dom";
 
 export default function CartPage() {
@@ -10,14 +10,14 @@ export default function CartPage() {
   const loading = useCart((state) => state.loading);
   const removeFromCart = useCart((state) => state.removeFromCart);
 
-  const columns: TableColumn<IDataRowCart>[] = [
+  const columns: TableColumn<TCartProduct>[] = [
     {
       name: "کالا",
-      selector: (row) => row.product,
+      selector: (row) => row.title,
       cell: (row) => (
         <div className="flex-center gap-x-4 p-2">
-          <img className="w-24" src={row.img} alt={row.product} />
-          <span className="text-base block">{row.product}</span>
+          <img className="w-24" src={row.thumbnail} alt={row.title} />
+          <span className="text-base block">{row.title}</span>
         </div>
       ),
     },
@@ -28,10 +28,10 @@ export default function CartPage() {
     },
     {
       name: "قیمت واحد",
-      selector: (row) => row.unitPrice,
+      selector: (row) => row.price,
       cell: (row) => (
         <p className="text-base text-gray-600">
-          {row.unitPrice.toLocaleString()}
+          {row.price.toLocaleString()}
           <span className="mr-1">تومان</span>
         </p>
       ),
@@ -39,10 +39,10 @@ export default function CartPage() {
 
     {
       name: "قیمت کل",
-      selector: (row) => row.quantity * row.unitPrice,
+      selector: (row) => row.quantity * row.price,
       cell: (row) => (
         <p className="text-base text-gray-600">
-          {(row.quantity * row.unitPrice).toLocaleString()}
+          {(row.quantity * row.price).toLocaleString()}
           <span className="mr-1">تومان</span>
         </p>
       ),
@@ -99,7 +99,7 @@ export default function CartPage() {
                   {data
                     ?.reduce(
                       (prev, current) =>
-                        prev + current.quantity * current.unitPrice,
+                        prev + current.quantity * current.price,
                       0
                     )
                     .toLocaleString()}

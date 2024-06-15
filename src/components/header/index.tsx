@@ -1,7 +1,16 @@
-import { Feather, LogIn, MenuIcon, ShoppingCart, User, X } from "lucide-react";
+import {
+  ChevronDown,
+  Feather,
+  LogIn,
+  MenuIcon,
+  ShoppingCart,
+  User,
+  X,
+} from "lucide-react";
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useCart } from "../../hooks/useCart";
+import { menuItems } from "../../utils/menu-items";
 
 export default function MainHeader() {
   const cartData = useCart((state) => state.data);
@@ -86,65 +95,36 @@ export default function MainHeader() {
             <div className="flex md:mr-28 lg:mr-60 py-4">
               <nav>
                 <ul className="flex items-center text-sm md:gap-x-8 lg:gap-x-16">
-                  <li>
-                    <NavLink
-                      className={({ isActive }) =>
-                        isActive ? "active-link" : ""
-                      }
-                      to="/"
-                    >
-                      خانه
-                    </NavLink>
-                  </li>
-                  <li>
-                    <Link to="/">محصولات ویژه</Link>
-                  </li>
-                  <li>
-                    <Link to="/">محصولات غذایی</Link>
-                  </li>
-                  <li>
-                    <Link to="/">محصولات مراقبتی</Link>
-                  </li>
-                  <li>
-                    <NavLink
-                      className={({ isActive }) =>
-                        isActive ? "active-link" : ""
-                      }
-                      to="/blogs"
-                    >
-                      بلاگ ها
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      className={({ isActive }) =>
-                        isActive ? "active-link" : ""
-                      }
-                      to="/lig"
-                    >
-                      باشگاه مشتریان
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      className={({ isActive }) =>
-                        isActive ? "active-link" : ""
-                      }
-                      to="/contact-us"
-                    >
-                      ارتباط با ما
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      className={({ isActive }) =>
-                        isActive ? "active-link" : ""
-                      }
-                      to="/about-us"
-                    >
-                      درباره ما
-                    </NavLink>
-                  </li>
+                  {menuItems.map((item) => (
+                    <li key={item.id} className="relative">
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive && item.link ? "active-link" : ""
+                        }
+                        to={item.link || "#"}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          gap: "2px",
+                        }}
+                      >
+                        {item.title}
+                        {item.hasSub && (
+                          <ChevronDown
+                            className="text-primary h-5 w-5"
+                            strokeWidth={3}
+                          />
+                        )}
+                      </NavLink>
+
+                      {item.hasSub && (
+                        <div className="absolute top-full translate-y-5 bg-white rounded-sm border min-w-[800px]">
+                          5
+                        </div>
+                      )}
+                    </li>
+                  ))}
                 </ul>
               </nav>
             </div>
@@ -171,24 +151,19 @@ export default function MainHeader() {
 
           {/* menu */}
           <ul className="flex flex-col gap-y-4 divide-y divide-yellow text-lg child:py-2">
-            <li>
-              <Link to="/">خانه</Link>
-            </li>
-            <li>
-              <Link to="/">محصولات ویژه</Link>
-            </li>
-            <li>
-              <Link to="/">محصولات غذایی</Link>
-            </li>
-            <li>
-              <Link to="/">محصولات مراقبتی</Link>
-            </li>
-            <li>
-              <Link to="/">بلاگ ها</Link>
-            </li>
-            <li>
-              <Link to="/">ارتباط با ما</Link>
-            </li>
+            {menuItems.map((item) => (
+              <li key={item.id}>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive && item.link ? "text-primary" : ""
+                  }
+                  onClick={setIsOpen.bind(null, false)}
+                  to={item.link || "#"}
+                >
+                  {item.title}
+                </NavLink>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

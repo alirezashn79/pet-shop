@@ -1,7 +1,14 @@
 import { Dog } from "lucide-react";
 import Service from "../../../components/service";
+import useProduct from "../../../hooks/useProduct";
+import { useEffect } from "react";
 
 export default function DogProducts() {
+  const getSpecialData = useProduct((state) => state.getSpecialData);
+
+  useEffect(() => {
+    getSpecialData("dog");
+  }, []);
   return (
     <Service
       title="محصولات غذایی سگ"

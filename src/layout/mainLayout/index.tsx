@@ -3,9 +3,10 @@ import { Outlet, useLocation } from "react-router-dom";
 import MainFooter from "../../components/footer";
 import MainHeader from "../../components/header";
 import { useCart } from "../../hooks/useCart";
+import useProduct from "../../hooks/useProduct";
 
 export default function MainLayout() {
-  const cartData = useCart((state) => state.data);
+  const getProductData = useProduct((state) => state.getData);
   const getCartData = useCart((state) => state.getData);
   const location = useLocation();
 
@@ -17,6 +18,7 @@ export default function MainLayout() {
   }, [location.pathname]);
 
   useEffect(() => {
+    getProductData();
     getCartData();
   }, []);
 

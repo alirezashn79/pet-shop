@@ -1,18 +1,20 @@
 import { create } from "zustand";
 import client from "../app/client";
-import { IDataRowCart } from "../types";
+import { TCartProduct } from "../types";
 
 interface IUseCart {
-  data: null | IDataRowCart[];
+  data: null | TCartProduct[];
   loading: boolean;
   getData: () => Promise<void>;
+  getSingleData: TCartProduct | undefined;
   updateData: (id: string, type: "increment" | "decrement") => Promise<void>;
   removeFromCart: (id: string) => Promise<void>;
-  addToCart: (item: IDataRowCart) => Promise<void>;
+  addToCart: (item: TCartProduct) => Promise<void>;
 }
 
 export const useCart = create<IUseCart>((set, get) => ({
   data: null,
+  getSingleData: undefined,
   loading: false,
 
   getData: async () => {

@@ -1,4 +1,6 @@
 import { MessageCircle } from "lucide-react";
+import { Link } from "react-router-dom";
+import { menuItems } from "../../utils/menu-items";
 
 export default function MainFooter() {
   return (
@@ -86,31 +88,23 @@ export default function MainFooter() {
           <div>
             <h6 className="text-base lg:text-lg font-semibold mb-4">لینک ها</h6>
             <ul className="text-sm lg:text-base text-gray-500 mr-2 space-y-1">
-              <li>
-                <a href="#">خانه</a>
-              </li>
-              <li>
-                <a href="#">محصولات ویژه</a>
-              </li>
-              <li>
-                <a href="#">محصولات غذایی</a>
-              </li>
-              <li>
-                <a href="#">محصولات مراقبتی</a>
-              </li>
-              <li>
-                <a href="#">بلاگ ها</a>
-              </li>
-              <li>
-                <a href="#">ارتباط با ما</a>
-              </li>
+              {menuItems
+                .filter((item) => !item.hasSub)
+                .map((menuItem) => (
+                  <li key={menuItem.id}>
+                    <Link to={menuItem.link || "#"}>{menuItem.title}</Link>
+                  </li>
+                ))}
             </ul>
           </div>
 
           <div className="space-y-4">
-            <a className="text-primary font-bold text-base lg:text-lg" href="#">
+            <Link
+              className="text-primary font-bold text-base lg:text-lg"
+              to="/"
+            >
               پت شاپ
-            </a>
+            </Link>
 
             <p className="text-sm lg:text-base">آدرس: فروشگاه ...</p>
 

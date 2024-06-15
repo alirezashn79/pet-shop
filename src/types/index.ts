@@ -5,3 +5,15 @@ export interface IDataRowCart {
   quantity: number;
   unitPrice: number;
 }
+
+export interface IProductList {
+  id: string;
+  available: boolean;
+  category_id: string;
+  title: string;
+  thumbnail: string;
+  price: number;
+}
+export type TCartProduct = IProductList & {
+  quantity: number;
+};

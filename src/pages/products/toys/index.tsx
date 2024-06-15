@@ -1,7 +1,14 @@
-import { DownloadCloud, ToyBrick } from "lucide-react";
+import { DownloadCloud } from "lucide-react";
 import Service from "../../../components/service";
+import useProduct from "../../../hooks/useProduct";
+import { useEffect } from "react";
 
 export default function Toys() {
+  const getSpecialData = useProduct((state) => state.getSpecialData);
+
+  useEffect(() => {
+    getSpecialData("toys");
+  }, []);
   return (
     <Service
       title="اسباب بازی های پت"

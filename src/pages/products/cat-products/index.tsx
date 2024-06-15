@@ -1,7 +1,14 @@
 import { Cat } from "lucide-react";
 import Service from "../../../components/service";
+import useProduct from "../../../hooks/useProduct";
+import { useEffect } from "react";
 
 export default function CatProducts() {
+  const getSpecialData = useProduct((state) => state.getSpecialData);
+
+  useEffect(() => {
+    getSpecialData("cat");
+  }, []);
   return (
     <Service
       title="محصولات غذایی گربه"
