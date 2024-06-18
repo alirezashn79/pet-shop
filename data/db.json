@@ -30,7 +30,7 @@
     {
       "id": "1",
       "available": true,
-      "category_id": "1",
+      "category_id": 1,
       "title": "غذای خشک سگ مفید مدل Mini Dog Puppy وزن 2 کیلوگرم",
       "thumbnail": "https://dkstatics-public.digikala.com/digikala-products/114003911.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800/quality,q_90",
       "price": 213500,
@@ -39,7 +39,7 @@
     {
       "id": "3",
       "available": true,
-      "category_id": "3",
+      "category_id": 3,
       "title": "اسباب بازی سگ و گربه پت داکتر مدل GC005",
       "thumbnail": "https://dkstatics-public.digikala.com/digikala-products/2020241.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800/quality,q_90",
       "price": 213500,
@@ -50,7 +50,7 @@
     {
       "id": "1",
       "available": true,
-      "category_id": "1",
+      "category_id": 1,
       "title": "غذای خشک سگ مفید مدل Mini Dog Puppy وزن 2 کیلوگرم",
       "thumbnail": "https://dkstatics-public.digikala.com/digikala-products/114003911.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800/quality,q_90",
       "price": 213500
@@ -58,7 +58,7 @@
     {
       "id": "2",
       "available": false,
-      "category_id": "2",
+      "category_id": 2,
       "title": "غذای خشک گربه مفید مدل ADULT10 وزن 10 کیلوگرم",
       "thumbnail": "https://dkstatics-public.digikala.com/digikala-products/112038011.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800/quality,q_90",
       "price": 863990
@@ -66,7 +66,7 @@
     {
       "id": "3",
       "available": true,
-      "category_id": "3",
+      "category_id": 3,
       "title": "اسباب بازی سگ و گربه پت داکتر مدل GC005",
       "thumbnail": "https://dkstatics-public.digikala.com/digikala-products/2020241.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800/quality,q_90",
       "price": 213500
@@ -74,15 +74,15 @@
     {
       "id": "4",
       "available": true,
-      "category_id": "1",
+      "category_id": 1,
       "title": "غذای خشک توله سگ ودو مدل سوپرپرمیوم پاپی وزن 10کیلوگرم",
       "thumbnail": "https://dkstatics-public.digikala.com/digikala-products/a5bc8ffe6cde792304de6a25afa4bad4e1296a98_1656125333.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800/quality,q_90",
-      "price": 930000
+      "price": 10000
     },
     {
       "id": "5",
       "available": true,
-      "category_id": "2",
+      "category_id": 2,
       "title": "غذای خشک گربه روتیکا مدل kitten وزن 2 کیلوگرم",
       "thumbnail": "https://dkstatics-public.digikala.com/digikala-products/adb25f38d76de0fb57ddb2fc4203a62065f88248_1601891457.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800/quality,q_90",
       "price": 252140
@@ -90,7 +90,7 @@
     {
       "id": "6",
       "available": true,
-      "category_id": "3",
+      "category_id": 3,
       "title": "ست اسباب بازی تجهیزات پزشکی مدل مدیکال پت کیج طرح لوازم دامپزشکی کد 100212",
       "thumbnail": "https://dkstatics-public.digikala.com/digikala-products/1045e65987eceefc742ab01be04fca5a32a51f91_1634476575.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800/quality,q_90",
       "price": 148500
@@ -100,7 +100,7 @@
     {
       "id": "1",
       "available": true,
-      "category_id": "1",
+      "category_id": 1,
       "title": "غذای خشک سگ مفید مدل Mini Dog Puppy وزن 2 کیلوگرم",
       "thumbnail": "https://dkstatics-public.digikala.com/digikala-products/114003911.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800/quality,q_90",
       "price": 213500
@@ -108,17 +108,17 @@
     {
       "id": "4",
       "available": true,
-      "category_id": "1",
+      "category_id": 1,
       "title": "غذای خشک توله سگ ودو مدل سوپرپرمیوم پاپی وزن 10کیلوگرم",
       "thumbnail": "https://dkstatics-public.digikala.com/digikala-products/a5bc8ffe6cde792304de6a25afa4bad4e1296a98_1656125333.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800/quality,q_90",
-      "price": 930000
+      "price": 10000
     }
   ],
   "cat": [
     {
       "id": "2",
       "available": true,
-      "category_id": "2",
+      "category_id": 2,
       "title": "غذای خشک گربه مفید مدل ADULT10 وزن 10 کیلوگرم",
       "thumbnail": "https://dkstatics-public.digikala.com/digikala-products/112038011.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800/quality,q_90",
       "price": 863990
@@ -126,7 +126,7 @@
     {
       "id": "5",
       "available": true,
-      "category_id": "2",
+      "category_id": 2,
       "title": "غذای خشک گربه روتیکا مدل kitten وزن 2 کیلوگرم",
       "thumbnail": "https://dkstatics-public.digikala.com/digikala-products/adb25f38d76de0fb57ddb2fc4203a62065f88248_1601891457.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800/quality,q_90",
       "price": 252140
@@ -136,7 +136,7 @@
     {
       "id": "3",
       "available": true,
-      "category_id": "3",
+      "category_id": 3,
       "title": "اسباب بازی سگ و گربه پت داکتر مدل GC005",
       "thumbnail": "https://dkstatics-public.digikala.com/digikala-products/2020241.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800/quality,q_90",
       "price": 213500
@@ -144,7 +144,7 @@
     {
       "id": "6",
       "available": true,
-      "category_id": "3",
+      "category_id": 3,
       "title": "ست اسباب بازی تجهیزات پزشکی مدل مدیکال پت کیج طرح لوازم دامپزشکی کد 100212",
       "thumbnail": "https://dkstatics-public.digikala.com/digikala-products/1045e65987eceefc742ab01be04fca5a32a51f91_1634476575.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800/quality,q_90",
       "price": 148500
@@ -152,16 +152,16 @@
   ],
   "categories": [
     {
-      "id": "1",
-      "title": "غذای سگ"
+      "id": 1,
+      "title": "محصولات غذایی سگ"
     },
     {
-      "id": "2",
-      "title": "غذای گربه"
+      "id": 2,
+      "title": "محصولات غذایی گربه"
     },
     {
-      "id": "3",
-      "title": "اسباب بازی پت"
+      "id": 3,
+      "title": "لوازم پت"
     }
   ],
   "blogs": [

@@ -64,6 +64,11 @@
   ::-webkit-scrollbar {
     width: 8px;
   }
+  option {
+    direction: rtl;
+    @apply text-right bg-gray-50;
+    font-family: Vazirmatn !important;
+  }
 
   /* Track */
   ::-webkit-scrollbar-track {
@@ -73,7 +78,7 @@
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #facc156f;
+    background: #facc15c4;
     border-radius: 10px;
   }
 
@@ -84,11 +89,15 @@
 }
 
 @layer components {
+  .lock-body-scroll {
+    overflow: hidden !important;
+    @apply md:mr-2;
+  }
   .page {
     @apply container py-8 px-6 md:px-0;
   }
   .mb-menu {
-    @apply fixed top-0 bottom-0 md:hidden w-60 bg-gray-50 shadow transition-all delay-100 z-40 overflow-y-scroll h-screen;
+    @apply fixed top-0 bottom-0 md:hidden w-60 bg-gray-50 shadow transition-all delay-100 z-40 overflow-y-auto h-screen;
   }
   .mb-menu-not-active {
     @apply -right-60;
@@ -134,14 +143,34 @@
   .active-link {
     @apply border-b-4 border-primary;
   }
+
   .show-dropdown {
-    @apply opacity-100 visible;
-  }
-  .show-dropdown {
-    @apply opacity-100 visible;
+    @apply opacity-100 scale-100 visible;
   }
   .hidden-dropdown {
-    @apply opacity-0 invisible;
+    @apply opacity-0 scale-0 invisible;
+  }
+  .quantity_animation_up {
+    animation: quanUp 300ms;
+  }
+  @keyframes quanUp {
+    0% {
+      transform: translateY(-1.5rem);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  .quantity_animation_down {
+    animation: quanDown 300ms;
+  }
+  @keyframes quanDown {
+    0% {
+      transform: translateY(-1.5rem);
+    }
+    100% {
+      transform: translateY(0);
+    }
   }
 }
 

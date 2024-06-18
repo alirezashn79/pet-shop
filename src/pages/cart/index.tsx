@@ -97,11 +97,11 @@ export default function CartPage() {
           <div className=" bg-white  lg:w-1/3 md:w-1/2 w-full  mx-auto mt-4 p-4">
             <div className="flex items-center justify-between py-2 mx-auto">
               <span>تعداد کل کالا ها</span>
-              <span className="text-base lg:text-xl">
+              <span className="text-base lg:text-xl font-semibold">
                 {data.reduce((prev, current) => prev + current.quantity, 0)} #
               </span>
             </div>
-            <div className="flex items-center justify-between py-2 mx-auto">
+            <div className="flex items-center justify-between py-2 mx-auto font-semibold">
               <span>مبلغ قابل پرداخت:</span>
               <p className="text-green-600 text-base md:text-xl">
                 {" "}

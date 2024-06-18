@@ -9,7 +9,7 @@ export interface IDataRowCart {
 export interface IProductList {
   id: string;
   available: boolean;
-  category_id: string;
+  category_id: number;
   title: string;
   thumbnail: string;
   price: number;
@@ -35,4 +35,9 @@ export interface IMenu {
     title: string;
     link: string;
   }[];
+}
+
+export interface ICategory {
+  id: number;
+  title: string;
 }

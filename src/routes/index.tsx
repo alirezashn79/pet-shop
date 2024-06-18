@@ -29,7 +29,7 @@ export default function PageRoutes() {
         <Route path="/" element={<HomePage />} />
         <Route path="/lig" element={<Lig />} />
         <Route path="/shop">
-          <Route path="" element={<AllProducts />} />
+          <Route path="all" element={<AllProducts />} />
           <Route path="cat" element={<CatProducts />} />
           <Route path="dog" element={<DogProducts />} />
           <Route path="accessories" element={<AccessoriesPage />} />

@@ -6,16 +6,17 @@ export const menuItems: IMenu[] = [
     title: "خانه",
     link: "/",
   },
-  {
-    id: 9,
-    title: "محصولات ویژه",
-  },
+
   {
     id: 3,
-    title: "محصولات",
+    title: "فروشگاه",
     hasSub: true,
-    link: "/shop",
     subItems: [
+      {
+        id: 15,
+        title: "همه محصولات",
+        link: "/shop/all",
+      },
       {
         id: 10,
         title: "محصولات غذایی گربه",
@@ -33,7 +34,10 @@ export const menuItems: IMenu[] = [
       },
     ],
   },
-
+  {
+    id: 9,
+    title: "محصولات ویژه",
+  },
   {
     id: 4,
     title: "خدمات",

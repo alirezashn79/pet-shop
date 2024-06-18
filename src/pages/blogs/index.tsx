@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 import BlogCard from "../../components/blog-card";
-import Overlay from "../../components/common/overlay";
 import TitleBar from "../../components/common/titlebar";
-import useBlog from "../../hooks/useBlog";
 import Loading from "../../components/loading";
+import useBlog from "../../hooks/useBlog";
 
 export default function Blogs() {
   const loading = useBlog((state) => state.loading);

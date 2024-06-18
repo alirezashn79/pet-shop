@@ -1,13 +1,14 @@
 import { LoaderPinwheel } from "lucide-react";
+import useOverlay from "../../../hooks/useOverlay";
 interface IOverlay {
-  clickHandler?: (boolean: boolean) => void;
   isLoading: boolean;
 }
-export default function Overlay({ clickHandler, isLoading }: IOverlay) {
+export default function Overlay({ isLoading }: IOverlay) {
+  const toggleOverlay = useOverlay((state) => state.toggleOverlay);
   return (
     <div
-      onClick={clickHandler ? () => clickHandler(false) : undefined}
-      className={`fixed  inset-0 bg-black/40 z-30 transition-all flex-center ${!isLoading && "md:hidden"}`}
+      onClick={!isLoading ? toggleOverlay : undefined}
+      className={`fixed  inset-0 backdrop-blur-sm z-30 transition-all duration-300 flex-center delay-200`}
     >
       {isLoading && (
         <div className="flex-center flex-col gap-y-4">

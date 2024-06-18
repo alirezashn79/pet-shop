@@ -1,26 +1,27 @@
 import {
   Bird,
-  Feather,
+  Dog,
   LogIn,
   MenuIcon,
   ShoppingCart,
   User,
   X,
 } from "lucide-react";
-import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useCart } from "../../hooks/useCart";
+import useOverlay from "../../hooks/useOverlay";
 import { menuItems } from "../../utils/menu-items";
 import Dropdown from "../common/dropdown";
-import Overlay from "../common/overlay";
 import DropdownMobile from "../common/dropdown-mobile";
+import Overlay from "../common/overlay";
 
 export default function MainHeader() {
   const cartData = useCart((state) => state.data);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const showOverlay = useOverlay((state) => state.showOverlay);
+  const toggleOverlay = useOverlay((state) => state.toggleOverlay);
   return (
     <>
-      <header className="sticky top-0 left-0 right-0 bg-white shadow z-30">
+      <header className="sticky top-0 left-0 right-0 bg-white shadow z-30 md:z-40">
         <div className="container px-4 pb-2 md:pb-4">
           <div className="flex md:block">
             {/* logo */}
@@ -28,7 +29,7 @@ export default function MainHeader() {
               to="/"
               className="bg-primary md:absolute h-20 w-20 md:w-28 md:h-28 lg:h-32 lg:w-36 flex-center flex-col rounded-b-full main-logo"
             >
-              <Feather className="w-8 h-8 lg:h-14 lg:w-14" />
+              <Dog className="w-8 h-8 lg:h-14 lg:w-14" />
               <h1 className="font-bold text-base lg:text-xl">پت شاپ</h1>
             </Link>
             {/* left */}
@@ -72,7 +73,7 @@ export default function MainHeader() {
                     </Link>
 
                     <button
-                      onClick={() => setIsOpen(true)}
+                      onClick={() => toggleOverlay()}
                       className="bg-gray-800 text-white p-1 rounded-md md:hidden"
                     >
                       <MenuIcon />
@@ -134,7 +135,7 @@ export default function MainHeader() {
 
       <div
         className={`mb-menu ${
-          isOpen ? "mb-menu-active" : "mb-menu-not-active"
+          showOverlay ? "mb-menu-active" : "mb-menu-not-active"
         }`}
       >
         {/* wrapper */}
@@ -144,16 +145,16 @@ export default function MainHeader() {
             <div className="">
               {" "}
               <Link
-                onClick={() => setIsOpen(false)}
+                onClick={() => toggleOverlay()}
                 className="text-primary font-bold text-lg flex-center gap-2"
                 to="/"
               >
-                <Bird />
+                <Dog className="h-8 w-8" />
                 پت شاپ
               </Link>
             </div>
             <div
-              onClick={() => setIsOpen(false)}
+              onClick={() => toggleOverlay()}
               className="mr-auto w-fit p-0.5 rounded text-red-500"
             >
               <X className="h-6 w-6" />
@@ -164,18 +165,14 @@ export default function MainHeader() {
           <ul className="flex flex-col divide-y divide-yellow text-base">
             {menuItems.map((item) => {
               return item.hasSub ? (
-                <DropdownMobile
-                  key={item.id}
-                  data={item}
-                  setIsOpen={setIsOpen}
-                />
+                <DropdownMobile key={item.id} data={item} />
               ) : (
                 <li key={item.id}>
                   <NavLink
                     className={({ isActive }) =>
                       `${isActive && item.link ? "text-primary" : ""} block py-4`
                     }
-                    onClick={setIsOpen.bind(null, false)}
+                    onClick={toggleOverlay}
                     to={item.link || "#"}
                   >
                     {item.title}
@@ -187,7 +184,7 @@ export default function MainHeader() {
         </div>
       </div>
       {/* overlay */}
-      {isOpen && <Overlay isLoading={false} clickHandler={setIsOpen} />}
+      {showOverlay && <Overlay isLoading={false} />}
     </>
   );
 }

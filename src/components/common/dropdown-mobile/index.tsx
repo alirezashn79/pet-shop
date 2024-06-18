@@ -2,14 +2,12 @@ import { ChevronUp } from "lucide-react";
 import { useState } from "react";
 import { IMenu } from "../../../types";
 import { Link, NavLink } from "react-router-dom";
+import useOverlay from "../../../hooks/useOverlay";
 interface IDropdownMobileProps {
   data: IMenu;
-  setIsOpen: (boolean: boolean) => void;
 }
-export default function DropdownMobile({
-  data,
-  setIsOpen,
-}: IDropdownMobileProps) {
+export default function DropdownMobile({ data }: IDropdownMobileProps) {
+  const toggleOverlay = useOverlay((state) => state.toggleOverlay);
   const [showDropdownItems, setShowDropdownItems] = useState(false);
   return (
     <li key={data.id}>
@@ -24,11 +22,11 @@ export default function DropdownMobile({
       </button>
 
       {showDropdownItems && (
-        <ul className="bg-gray-200 divide-y divide-white p-1.5 text-sm">
+        <ul className="bg-gray-100 divide-y divide-white p-1.5 text-sm">
           {data.subItems?.map((item) => (
             <li key={item.id}>
               <NavLink
-                onClick={() => setIsOpen(false)}
+                onClick={toggleOverlay}
                 to={item.link}
                 className={({ isActive }) =>
                   `${isActive && "text-primary font-bold"} hover:text-primary transition-all  duration-300 block py-2.5`
