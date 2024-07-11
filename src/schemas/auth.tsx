@@ -35,7 +35,7 @@ export const UserSignInSchema = object({
     .required("رمز عبور الزامی است"),
 });
 
-export const changePasswordSchema = object({
+export const resetPasswordSchema = object({
   password: string()
     .matches(
       /^$|^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
@@ -44,6 +44,26 @@ export const changePasswordSchema = object({
     .required("رمز عبور الزامی است"),
   confirmPassword: string().oneOf(
     [ref("password")],
+    "با رمز عبور مطابقت ندارد"
+  ),
+});
+
+export const changePasswordSchema = object({
+  prevPassword: string()
+    .matches(
+      /^$|^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
+      "رمز عبور باید حداقل شامل یک حرف بزرگ و کوچک انگلیسی، عدد و یک کاراکتر خاص باشد"
+    )
+    .required("رمز عبور قبلی الزامی است"),
+
+  newPassword: string()
+    .matches(
+      /^$|^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
+      "رمز عبور باید حداقل شامل یک حرف بزرگ و کوچک انگلیسی، عدد و یک کاراکتر خاص باشد"
+    )
+    .required("رمز عبور قبلی الزامی است"),
+  confirmPassword: string().oneOf(
+    [ref("newPassword")],
     "با رمز عبور مطابقت ندارد"
   ),
 });

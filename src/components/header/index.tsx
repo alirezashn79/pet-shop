@@ -1,12 +1,4 @@
-import {
-  Bird,
-  Dog,
-  LogIn,
-  MenuIcon,
-  ShoppingCart,
-  User,
-  X,
-} from "lucide-react";
+import { Dog, LogIn, MenuIcon, ShoppingCart, User, X } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 import { useCart } from "../../hooks/useCart";
 import useOverlay from "../../hooks/useOverlay";

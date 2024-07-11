@@ -1,8 +1,8 @@
 import { ChevronUp } from "lucide-react";
 import { useState } from "react";
-import { IMenu } from "../../../types";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import useOverlay from "../../../hooks/useOverlay";
+import { IMenu } from "../../../types";
 interface IDropdownMobileProps {
   data: IMenu;
 }

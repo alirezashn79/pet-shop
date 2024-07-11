@@ -5,25 +5,28 @@ import { InferType } from "yup";
 import Image from "../../assets/image/signin.webp";
 import Input from "../../components/input";
 import { UserSignInSchema } from "../../schemas/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/auth/useAuth";
 
 export default function Signup() {
+  const loading = useAuth((state) => state.loading);
+  const login = useAuth((state) => state.login);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, dirtyFields },
   } = useForm<InferType<typeof UserSignInSchema>>({
     resolver: yupResolver(UserSignInSchema),
   });
 
   // handlers
-  const onSubmit: SubmitHandler<InferType<typeof UserSignInSchema>> = (
+  const onSubmit: SubmitHandler<InferType<typeof UserSignInSchema>> = async (
     values
   ) => {
-    console.log(values);
+    await login({ ...values, navigate });
   };
 
-  console.log("error", errors);
   return (
     <>
       <div
@@ -66,8 +69,9 @@ export default function Signup() {
           <div className="space-y-1">
             <Input
               register={register("password")}
+              isDirty={dirtyFields.password}
               name="password"
-              type="text"
+              type="password"
               label="رمز عبور"
             />
             <ErrorMessage
@@ -83,6 +87,7 @@ export default function Signup() {
 
           <div className="flex justify-center mt-4">
             <button
+              disabled={loading}
               type="submit"
               className="bg-[#240750] text-white px-6 py-2 rounded-md "
             >

@@ -1,25 +1,29 @@
 import { Info, Phone } from "lucide-react";
 import { useEffect, useState } from "react";
 import OTPInput from "react-otp-input";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/auth/useAuth";
 
 export default function VerifyNumber() {
   const [otp, setOtp] = useState("");
-  const [disableOtp, setDisableOtp] = useState(false);
+
+  const loading = useAuth((state) => state.loading);
+  const verify = useAuth((state) => state.verify);
+
+  const phone = sessionStorage.getItem("phone");
+  const navigate = useNavigate();
 
   const otpChangeHandler = (otp: string) => {
     setOtp(otp);
-
-    if (otp.length === 4) {
-      setDisableOtp(true);
-    }
   };
 
-  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("otp ===>", otp);
+    verify({ code: otp, navigate });
   };
 
   useEffect(() => {
+    if (!phone) navigate("/signin");
     document.title = "پت شاپ | تایید شماره همراه";
   }, []);
 
@@ -40,7 +44,7 @@ export default function VerifyNumber() {
           <input
             type="text"
             disabled
-            value={"09123658965"}
+            value={phone || undefined}
             className="bg-transparent text-left cursor-not-allowed"
           />
           <Phone className="h-4 w-4" />
@@ -67,12 +71,11 @@ export default function VerifyNumber() {
             fontSize: "1.25rem",
             fontFamily: "Vazirmatn FD",
           }}
-          renderInput={(props) => (
-            <input required disabled={disableOtp} {...props} />
-          )}
+          renderInput={(props) => <input required {...props} />}
         />
         <div className="flex justify-center mt-4">
           <button
+            disabled={loading}
             type="submit"
             className="bg-[#240750] text-white px-6 py-2 rounded-md "
           >

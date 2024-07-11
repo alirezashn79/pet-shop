@@ -86,12 +86,14 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #facc15;
   }
+  button:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
 }
 
 @layer components {
   .lock-body-scroll {
     overflow: hidden !important;
-    @apply md:mr-2;
   }
   .page {
     @apply container py-8 px-6 md:px-0;

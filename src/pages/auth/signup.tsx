@@ -7,19 +7,20 @@ import transition from "react-element-popper/animations/transition";
 import { SubmitHandler, useForm } from "react-hook-form";
 import type { Value } from "react-multi-date-picker";
 import DatePicker from "react-multi-date-picker";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { InferType } from "yup";
 import Image from "../../assets/image/signup.png";
 import Input from "../../components/input";
+import { useAuth } from "../../hooks/auth/useAuth";
 import { UserSchema } from "../../schemas/auth";
 
 export default function Signup() {
   const [date, setDate] = useState<Value | null>(null);
+  const signUp = useAuth((state) => state.signUp);
+  const loading = useAuth((state) => state.loading);
 
-  console.log(
-    "dateaaa",
-    new Date(date).toLocaleDateString().split("/").reverse().join("-")
-  );
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -29,10 +30,15 @@ export default function Signup() {
   });
 
   // handlers
-  const onSubmit: SubmitHandler<InferType<typeof UserSchema>> = (values) => {
-    console.log({
-      ...values,
-      date: new Date(date).toLocaleDateString("en-US"),
+  const onSubmit: SubmitHandler<InferType<typeof UserSchema>> = async (
+    values
+  ) => {
+    signUp({
+      values: {
+        ...values,
+        date,
+      },
+      navigate,
     });
   };
 
@@ -173,6 +179,7 @@ export default function Signup() {
 
           <div className="flex justify-center mt-4">
             <button
+              disabled={loading}
               type="submit"
               className="bg-[#240750] text-white px-6 py-2 rounded-md "
             >

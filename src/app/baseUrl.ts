@@ -1,1 +1,1 @@
-export const baseUrl = "http://192.168.43.123:3000";
+export const baseUrl = "https://rosepetshop-dg.liara.run";

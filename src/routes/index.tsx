@@ -21,6 +21,7 @@ import CaringService from "../pages/services/caring";
 import CleaningService from "../pages/services/cleaning";
 import CartPage from "../pages/cart";
 import AllProducts from "../pages/products/all";
+import ChangePassword from "../pages/auth/change-password";
 
 export default function PageRoutes() {
   return (
@@ -58,6 +59,7 @@ export default function PageRoutes() {
         <Route path="/verify" element={<VerifyNumber />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:id" element={<ResetPassword />} />
+        <Route path="/change-password" element={<ChangePassword />} />
       </Route>
     </Routes>
   );

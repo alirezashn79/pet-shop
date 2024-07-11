@@ -1,45 +1,36 @@
 import { Info, Phone } from "lucide-react";
 import { useEffect, useState } from "react";
-import OTPInput from "react-otp-input";
-import { forgotPasswordSchema } from "../../schemas/auth";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import client from "../../app/client";
+import { forgotPasswordSchema } from "../../schemas/auth";
 
 export default function ForgotPassword() {
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState<string | null>(null);
   const [disablePhone, setDisablePhone] = useState(false);
-  const [showOtp, setShowOtp] = useState(false);
-  const [otp, setOtp] = useState("");
-  const [disableOtp, setDisableOtp] = useState(false);
-
-  const otpChangeHandler = async (otpCode: string) => {
-    setOtp(otpCode);
-
-    if (otpCode.length === 4) {
-      setDisableOtp(true);
-      await sendCode(otpCode);
-    }
-  };
-
-  const sendCode = async (otpCode: string) => {
-    console.log(otpCode);
-  };
+  const [isSent, setIsSent] = useState(false);
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (showOtp) {
-      await sendCode(otp);
-    } else {
-      try {
-        await forgotPasswordSchema.validate({ phone });
-        setDisablePhone(true);
-        toast.success("کد برای شما ارسال شد.");
-        setShowOtp(true);
-      } catch (error) {
-        setPhoneError(error.message);
-        return;
+    const loadingToast = toast.loading("درحال بررسی شماره تلفن همراه");
+    try {
+      await forgotPasswordSchema.validate({ phone });
+      setDisablePhone(true);
+      const res = await client.post("/forgot-password/", {
+        phone_number: phone,
+      });
+      setIsSent(true);
+      console.log(res);
+      toast.success("لینک صفحه تغییر رمز عبور برای شما پیامک شد.");
+    } catch (error) {
+      setPhoneError(error.message);
+      setDisablePhone(false);
+      if (error.response) {
+        toast.error(`${error.response.status}: ${error.response.data.message}`);
       }
+    } finally {
+      toast.dismiss(loadingToast);
     }
   };
 
@@ -80,41 +71,20 @@ export default function ForgotPassword() {
             </span>
           )}
 
-          {showOtp && (
-            <OTPInput
-              value={otp}
-              onChange={otpChangeHandler}
-              renderSeparator={<span> - </span>}
-              shouldAutoFocus={true}
-              numInputs={4}
-              inputType="number"
-              containerStyle={{
-                direction: "ltr",
-                width: "fit-content",
-                margin: "1rem 0  auto",
-              }}
-              inputStyle={{
-                margin: "0 2px",
-                padding: "1px",
-                borderRadius: "4px",
-                width: "2.5rem",
-                height: "2.52rem",
-                border: "2px solid #344c64",
-                fontSize: "1.25rem",
-                fontFamily: "Vazirmatn FD",
-              }}
-              renderInput={(props) => (
-                <input required disabled={disableOtp} {...props} />
-              )}
-            />
-          )}
           <div className="flex justify-center mt-4">
             <button
-              disabled={phone.length !== 11 || (otp.length < 4 && showOtp)}
+              disabled={phone.length !== 11 || isSent}
               type="submit"
               className="bg-[#240750] text-white px-6 py-2 rounded-md disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              ارسال
+              {isSent ? (
+                <span>
+                  لینک صفحه تغییر رمز عبور برای شما پیامک شد.
+                  <br /> میتوانید این صفحه را ببندید
+                </span>
+              ) : (
+                <span>ارسال</span>
+              )}
             </button>
           </div>
         </form>

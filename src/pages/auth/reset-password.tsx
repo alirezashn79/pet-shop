@@ -1,42 +1,63 @@
 import { ErrorMessage } from "@hookform/error-message";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Info } from "lucide-react";
-import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { InferType } from "yup";
+import client from "../../app/client";
 import Input from "../../components/input";
-import { changePasswordSchema } from "../../schemas/auth";
+import { resetPasswordSchema } from "../../schemas/auth";
+import Cookies from "js-cookie";
+import { useState } from "react";
 
 export default function ResetPassword() {
   const params = useParams();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<InferType<typeof changePasswordSchema>>({
+  } = useForm<InferType<typeof resetPasswordSchema>>({
     mode: "all",
-    resolver: yupResolver(changePasswordSchema),
+    resolver: yupResolver(resetPasswordSchema),
   });
 
-  const onSubmit: SubmitHandler<InferType<typeof changePasswordSchema>> = (
+  const onSubmit: SubmitHandler<InferType<typeof resetPasswordSchema>> = async (
     values
   ) => {
-    console.log(values);
-  };
+    const toastLoading = toast.loading("در حال پردازش");
+    try {
+      setLoading(true);
+      const res = await client.post(`/account/reset-pass/${params.id}/`, {
+        password: values.password,
+      });
 
-  useEffect(() => {
-    if (params.id !== "2") {
-      navigate("/", { replace: true });
+      console.log(res);
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status === 301) {
+          Cookies.remove("JWT_Token_Access");
+          Cookies.remove("JWT_Token_Refresh");
+          navigate("/signin", {
+            replace: true,
+          });
+          return toast.success("رمز شما با موفقیت تغییر کرد");
+        }
+        toast.error(`${error.response.status}: ${error.response.data.message}`);
+      }
+    } finally {
+      toast.dismiss(toastLoading);
+      setLoading(false);
     }
-  }, [params.id, navigate]);
+  };
 
   return (
     <div className="col-span-2 lg:w-64" data-aos="zoom-in">
       <h1 className="text-center  text-xl font-bold text-[#240750]">
-        تغییر رمز عبور
+        بازنشانی رمز عبور
       </h1>
       <p className="text-center text-xs text-gray-700 py-4 flex items-center gap-x-2 justify-center">
         <Info className="w-3 h-3" />
@@ -81,6 +102,7 @@ export default function ResetPassword() {
 
         <div className="flex justify-center mt-4">
           <button
+            disabled={loading}
             type="submit"
             className="bg-[#240750] text-white px-6 py-2 rounded-md "
           >

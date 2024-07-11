@@ -1,4 +1,5 @@
-import { ComponentPropsWithRef } from "react";
+import { Eye, EyeOff } from "lucide-react";
+import { ComponentPropsWithRef, useState } from "react";
 
 interface IInputProps {
   name: string;
@@ -6,6 +7,7 @@ interface IInputProps {
   type: "password" | "text";
   register: ComponentPropsWithRef<"input">;
   autoFocus?: boolean;
+  isDirty?: boolean;
 }
 export default function Input({
   name,
@@ -13,7 +15,9 @@ export default function Input({
   label,
   register,
   autoFocus,
+  isDirty,
 }: IInputProps) {
+  const [typeState, setTypeState] = useState(type);
   return (
     <div className="relative z-0 w-full  group">
       {name === "phone" && (
@@ -24,10 +28,26 @@ export default function Input({
           +98
         </div>
       )}
+      {type === "password" && isDirty && (
+        <div
+          onClick={() => {
+            typeState === "password"
+              ? setTypeState("text")
+              : setTypeState("password");
+          }}
+          className="absolute left-0 top-0 bottom-0 flex-center text-sm -translate-y-px cursor-pointer"
+        >
+          {typeState === "password" ? (
+            <Eye className="h-5 w-5 text-indigo-700" />
+          ) : (
+            <EyeOff className="h-5 w-5 text-indigo-900" />
+          )}
+        </div>
+      )}
       <input
         autoFocus={autoFocus}
         autoComplete="false"
-        type={type}
+        type={typeState}
         name={name}
         id={name}
         {...register}
