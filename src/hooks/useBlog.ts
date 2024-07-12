@@ -2,9 +2,14 @@ import { create } from "zustand";
 import { IBlog } from "../types";
 import client from "../app/client";
 interface IUseBlog {
-  data: null | IBlog[];
+  data: null | {
+    count: number;
+    next: string | null;
+    previous: string | null;
+    results: [];
+  };
   singleData: null | IBlog;
-  getData: () => Promise<void>;
+  getData: ({ current }: { current: number }) => Promise<void>;
   loading: boolean;
   getSingleData: ({ id }: { id: string }) => Promise<void>;
 }
@@ -12,9 +17,9 @@ const useBlog = create<IUseBlog>((set) => ({
   data: null,
   singleData: null,
   loading: false,
-  getData: async () => {
+  getData: async ({ current }) => {
     set({ loading: true });
-    const res = await client.get("/blogs");
+    const res = await client.get(`/blog/list/?page=${current}`);
     if (res.status === 200) {
       set({ data: res.data });
     }

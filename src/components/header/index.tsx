@@ -1,4 +1,16 @@
-import { Dog, LogIn, MenuIcon, ShoppingCart, User, X } from "lucide-react";
+import Cookies from "js-cookie";
+import {
+  ChevronDown,
+  Dog,
+  LogIn,
+  MenuIcon,
+  ShoppingCart,
+  User,
+  UserCircle,
+  X,
+} from "lucide-react";
+import { useEffect, useState } from "react";
+import { useJwt } from "react-jwt";
 import { Link, NavLink } from "react-router-dom";
 import { useCart } from "../../hooks/useCart";
 import useOverlay from "../../hooks/useOverlay";
@@ -11,6 +23,21 @@ export default function MainHeader() {
   const cartData = useCart((state) => state.data);
   const showOverlay = useOverlay((state) => state.showOverlay);
   const toggleOverlay = useOverlay((state) => state.toggleOverlay);
+  const setOverley = useOverlay((state) => state.setOverley);
+  const { isExpired } = useJwt(String(Cookies.get("JWT_Token_Access")));
+  const [isAuth, setisAuth] = useState(false);
+  const [toggleAuthBtn, setToggleAuthBtn] = useState(false);
+
+  const isAuthentication = () => {
+    if (Cookies.get("JWT_Token_Access") && !isExpired) {
+      setisAuth(true);
+    }
+  };
+
+  useEffect(() => {
+    isAuthentication();
+  }, []);
+
   return (
     <>
       <header className="sticky top-0 left-0 right-0 bg-white shadow z-30 md:z-40">
@@ -51,18 +78,51 @@ export default function MainHeader() {
                       </span>
                     </div>
 
-                    <Link
-                      className="text-sm bg-transparent rounded-lg  transition-all ease-in-out text-emerald-800"
-                      to="/signin"
-                    >
-                      <div className="md:hidden">
-                        <LogIn className="h-6 w-6" />
-                      </div>
-                      <div className="hidden md:flex-center gap-x-1">
-                        <User className="=h-7 w-7" />
-                        ورود | ثبت نام
-                      </div>
-                    </Link>
+                    {isAuth ? (
+                      <button
+                        className="relative flex-center gap-x-px group text-xs"
+                        type="button"
+                        onMouseOver={() => setToggleAuthBtn(true)}
+                        onMouseOut={() => setToggleAuthBtn(false)}
+                        onClick={() => {
+                          setToggleAuthBtn((prev) => !prev);
+                        }}
+                      >
+                        <UserCircle className="h-6 w-6 lg:h-7 lg:w-7 text-gray-700" />
+                        <ChevronDown className="h-4 w-4 group-hover:rotate-180 transition-all" />
+
+                        {toggleAuthBtn && (
+                          <div className="absolute top-full left-0 z-10 pt-2">
+                            <div className="rounded-md min-w-24 border bg-white overflow-hidden">
+                              <div className="flex flex-col divide-y">
+                                <Link
+                                  className="block py-2 hover:bg-primary/40"
+                                  to="/forgot-password"
+                                >
+                                  فراموشی رمز عبور
+                                </Link>
+                                <div className="block py-2 bg-rose-500 text-white">
+                                  خروج
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </button>
+                    ) : (
+                      <Link
+                        className="text-sm bg-transparent rounded-lg  transition-all ease-in-out text-emerald-800"
+                        to="/signin"
+                      >
+                        <div className="md:hidden">
+                          <LogIn className="h-6 w-6" />
+                        </div>
+                        <div className="hidden md:flex-center gap-x-1">
+                          <User className="=h-7 w-7" />
+                          ورود | ثبت نام
+                        </div>
+                      </Link>
+                    )}
 
                     <button
                       onClick={() => toggleOverlay()}

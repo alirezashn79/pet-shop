@@ -1,10 +1,10 @@
-import { useEffect, useLayoutEffect } from "react";
+import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import MainFooter from "../../components/footer";
 import MainHeader from "../../components/header";
 import { useCart } from "../../hooks/useCart";
-import useProduct from "../../hooks/useProduct";
 import useOverlay from "../../hooks/useOverlay";
+import useProduct from "../../hooks/useProduct";
 
 export default function MainLayout() {
   const getProductData = useProduct((state) => state.getData);

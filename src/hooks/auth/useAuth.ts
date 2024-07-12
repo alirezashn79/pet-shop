@@ -77,10 +77,12 @@ export const useAuth = create<IUseAuth>((set) => ({
       Cookies.set("JWT_Token_Access", res.data.JWT_Token_Access, {
         path: "/",
         secure: true,
+        expires: 1,
       });
       Cookies.set("JWT_Token_Refresh", res.data.JWT_Token_Refresh, {
         path: "/",
         secure: true,
+        expires: 7,
       });
       toast.success("ثبت نام با موفقیت انجام شد");
       navigate("/", {
@@ -106,10 +108,12 @@ export const useAuth = create<IUseAuth>((set) => ({
       Cookies.set("JWT_Token_Access", res.data.JWT_Token_Access, {
         path: "/",
         secure: true,
+        expires: 1,
       });
       Cookies.set("JWT_Token_Refresh", res.data.JWT_Token_Refresh, {
         path: "/",
         secure: true,
+        expires: 7,
       });
       navigate("/", {
         replace: true,

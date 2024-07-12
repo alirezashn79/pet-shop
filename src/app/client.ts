@@ -37,6 +37,7 @@ client.interceptors.response.use(
           Cookies.set("JWT_Token_Access", rs.data.access, {
             path: "/",
             secure: true,
+            expires: 1,
           });
           return client(originalConfig);
         } catch (err) {
