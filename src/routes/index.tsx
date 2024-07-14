@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import AuthLayout from "../layout/authLayout";
 import MainLayout from "../layout/mainLayout";
 import AboutUs from "../pages/about-us";
+import ChangePassword from "../pages/auth/change-password";
 import ForgotPassword from "../pages/auth/forgot-password";
 import ResetPassword from "../pages/auth/reset-password";
 import SignIn from "../pages/auth/signin";
@@ -9,19 +10,17 @@ import Signup from "../pages/auth/signup";
 import VerifyNumber from "../pages/auth/verify";
 import Blogs from "../pages/blogs";
 import BlogPage from "../pages/blogs/single-blog";
+import CartPage from "../pages/cart";
 import ContactUs from "../pages/contact-us";
 import HomePage from "../pages/home";
 import Lig from "../pages/lig";
 import NotFound from "../pages/not-found";
 import SingleProduct from "../pages/product";
+import AccessoriesPage from "../pages/products/accessories";
+import AllProducts from "../pages/products/all";
 import CatProducts from "../pages/products/cat-products";
 import DogProducts from "../pages/products/dog-products";
-import AccessoriesPage from "../pages/products/accessories";
-import CaringService from "../pages/services/caring";
-import CleaningService from "../pages/services/cleaning";
-import CartPage from "../pages/cart";
-import AllProducts from "../pages/products/all";
-import ChangePassword from "../pages/auth/change-password";
+import Services from "../pages/services";
 
 export default function PageRoutes() {
   return (
@@ -30,18 +29,15 @@ export default function PageRoutes() {
         <Route path="/" element={<HomePage />} />
         <Route path="/lig" element={<Lig />} />
         <Route path="/shop">
-          <Route path="all" element={<AllProducts />} />
-          <Route path="cat" element={<CatProducts />} />
-          <Route path="dog" element={<DogProducts />} />
+          {/* <Route path="all" element={<AllProducts />} /> */}
+          <Route path="foods" element={<CatProducts />} />
+          {/* <Route path="dog" element={<DogProducts />} /> */}
           <Route path="accessories" element={<AccessoriesPage />} />
           <Route path=":id" element={<SingleProduct />} />
-          <Route path="cart" element={<CartPage />} />
+          {/* <Route path="cart" element={<CartPage />} /> */}
         </Route>
 
-        <Route path="/services">
-          <Route path="cleaning" element={<CleaningService />} />
-          <Route path="caring" element={<CaringService />} />
-        </Route>
+        <Route path="/services" element={<Services />} />
 
         <Route path="/blogs">
           <Route path="" element={<Blogs />} />

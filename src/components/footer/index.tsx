@@ -1,8 +1,54 @@
 import { MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import { menuItems } from "../../utils/menu-items";
+import { IMenu } from "../../types";
+import useCategory from "../../hooks/useCategory";
 
 export default function MainFooter() {
+  const categories = useCategory((state) => state.data);
+
+  const menuItems: IMenu[] = [
+    {
+      id: 1,
+      title: "خانه",
+      link: "/",
+    },
+
+    {
+      id: 3,
+      title: "لوازم جانبی ها",
+      hasSub: true,
+      subItems: categories?.map((item) => ({
+        id: item.id,
+        title: item.title,
+        link: "S",
+      })),
+    },
+    {
+      id: 4,
+      title: "خدمات",
+      link: "/services",
+    },
+    {
+      id: 5,
+      title: "بلاگ ها",
+      link: "/blogs",
+    },
+    {
+      id: 6,
+      title: "باشگاه مشتریان",
+      link: "/lig",
+    },
+    {
+      id: 7,
+      title: "ارتباط با ما",
+      link: "/contact-us",
+    },
+    {
+      id: 8,
+      title: "درباره ما",
+      link: "/about-us",
+    },
+  ];
   return (
     <div className="bg-gray-50">
       <div className="flex flex-col  gap-y-4 pb-8 relative">

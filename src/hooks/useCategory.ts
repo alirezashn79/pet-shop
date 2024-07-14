@@ -12,7 +12,7 @@ const useCategory = create<IUseCategory>((set) => ({
   data: null,
   loading: false,
   getData: async () => {
-    const res = await client.get("/categories");
+    const res = await client.get("/product/category-list/");
     if (res.status === 200) {
       set({ data: res.data });
     }

@@ -28,7 +28,7 @@ export default function Blogs() {
         {/* card */}
 
         {data?.results.map((item, idx) => (
-          <BlogCard link={`/blogs/${idx}`} key={idx} data={item} />
+          <BlogCard link={`/blogs/${item.id}`} key={idx} data={item} />
         ))}
       </div>
 

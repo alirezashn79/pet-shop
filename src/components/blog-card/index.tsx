@@ -2,10 +2,11 @@ import { Link } from "react-router-dom";
 import { baseUrl } from "../../app/baseUrl";
 interface IBlogComponent {
   data: {
+    id: number;
     aparat_video_link: string;
     description: string;
     image: "/product/media/blog/3bvp0iil_XgFNNBg.jpg";
-    tags: [];
+    tags: { id: number; title: string }[];
     title: string;
   };
   link: string;
@@ -22,11 +23,16 @@ export default function BlogCard({ data, link }: IBlogComponent) {
           src={baseUrl + data.image.split("/product")[1]}
           alt={data.title}
         />
-        <Link to={link}>
-          <div className="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-[hsla(0,0%,98%,0.15)] bg-fixed opacity-0 transition duration-300 ease-in-out hover:opacity-100"></div>
-        </Link>
+
+        <div className="flex items-start flex-wrap gap-1 px-4 h-full min-h-6 my-1 text-xs">
+          {data?.tags.map((item) => (
+            <div className="bg-primary min-w-8 py-0.5 rounded flex-center">
+              {item.title}
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="p-6">
+      <div className="py-2 px-4">
         <h5 className="mb-2 text-xl font-medium leading-tight">{data.title}</h5>
         <p className="mb-4 text-base line-clamp-3">{data.description}</p>
         <Link

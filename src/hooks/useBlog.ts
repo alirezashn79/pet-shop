@@ -8,7 +8,19 @@ interface IUseBlog {
     previous: string | null;
     results: [];
   };
-  singleData: null | IBlog;
+  singleData: null | {
+    title: string;
+    aparat_video_link: string;
+    tags: [
+      {
+        id: number;
+        title: string;
+      },
+    ];
+    description: string;
+    image: string;
+    id: number;
+  };
   getData: ({ current }: { current: number }) => Promise<void>;
   loading: boolean;
   getSingleData: ({ id }: { id: string }) => Promise<void>;
@@ -27,7 +39,7 @@ const useBlog = create<IUseBlog>((set) => ({
   },
   getSingleData: async ({ id }) => {
     set({ loading: true });
-    const res = await client.get(`/blogs/${id}`);
+    const res = await client.get(`/blog/detail/${id}/`);
     if (res.status === 200) {
       set({ singleData: res.data });
     }

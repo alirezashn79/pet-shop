@@ -4,6 +4,25 @@ import client from "../app/client";
 
 interface IUseProduct {
   data: null | IProductList[];
+  accessories: null | {
+    count: number;
+    next: string | null;
+    previous: string | null;
+    results: [
+      {
+        title: string;
+        description: string;
+        discount_amount: string;
+        images: string;
+        made_by_country: string;
+        unit: string;
+        price: number;
+        color: string;
+        id: number;
+      },
+    ];
+  };
+  getAllAccessories: ({ current }: { current: number }) => Promise<void>;
   getData: () => Promise<void>;
   //
   spicialData: null | IProductList[];
@@ -19,6 +38,7 @@ interface IUseProduct {
 
 const useProduct = create<IUseProduct>((set, get) => ({
   data: null,
+  accessories: null,
   spicialData: null,
   filteredData: null,
   loading: false,
@@ -29,6 +49,17 @@ const useProduct = create<IUseProduct>((set, get) => ({
 
     if (res.status === 200) {
       set({ data: res.data });
+    }
+
+    set({ loading: false });
+  },
+  getAllAccessories: async ({ current }) => {
+    set({ loading: true });
+
+    const res = await client.get(`/product/list/?page${current}`);
+
+    if (res.status === 200) {
+      set({ accessories: res.data });
     }
 
     set({ loading: false });

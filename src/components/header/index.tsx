@@ -14,19 +14,71 @@ import { useJwt } from "react-jwt";
 import { Link, NavLink } from "react-router-dom";
 import { useCart } from "../../hooks/useCart";
 import useOverlay from "../../hooks/useOverlay";
-import { menuItems } from "../../utils/menu-items";
+
 import Dropdown from "../common/dropdown";
 import DropdownMobile from "../common/dropdown-mobile";
 import Overlay from "../common/overlay";
+import { IMenu } from "../../types";
+import useCategory from "../../hooks/useCategory";
 
 export default function MainHeader() {
   const cartData = useCart((state) => state.data);
   const showOverlay = useOverlay((state) => state.showOverlay);
   const toggleOverlay = useOverlay((state) => state.toggleOverlay);
-  const setOverley = useOverlay((state) => state.setOverley);
   const { isExpired } = useJwt(String(Cookies.get("JWT_Token_Access")));
   const [isAuth, setisAuth] = useState(false);
   const [toggleAuthBtn, setToggleAuthBtn] = useState(false);
+  const categories = useCategory((state) => state.data);
+
+  const menuItems: IMenu[] = [
+    {
+      id: 1,
+      title: "خانه",
+      link: "/",
+    },
+    {
+      id: 1,
+      title: "غذا ها",
+      link: "/shop/foods",
+    },
+
+    {
+      id: 3,
+      title: "لوازم جانبی ها",
+      link: "/shop/accessories",
+      hasSub: true,
+      subItems: categories?.map((item) => ({
+        id: item.id,
+        title: item.title,
+        link: "S",
+      })),
+    },
+    {
+      id: 4,
+      title: "خدمات",
+      link: "/services",
+    },
+    {
+      id: 5,
+      title: "بلاگ ها",
+      link: "/blogs",
+    },
+    {
+      id: 6,
+      title: "باشگاه مشتریان",
+      link: "/lig",
+    },
+    {
+      id: 7,
+      title: "ارتباط با ما",
+      link: "/contact-us",
+    },
+    {
+      id: 8,
+      title: "درباره ما",
+      link: "/about-us",
+    },
+  ];
 
   const isAuthentication = () => {
     if (Cookies.get("JWT_Token_Access") && !isExpired) {

@@ -5,11 +5,11 @@ import MainHeader from "../../components/header";
 import { useCart } from "../../hooks/useCart";
 import useOverlay from "../../hooks/useOverlay";
 import useProduct from "../../hooks/useProduct";
+import useCategory from "../../hooks/useCategory";
 
 export default function MainLayout() {
-  const getProductData = useProduct((state) => state.getData);
+  const getCategories = useCategory((state) => state.getData);
   const showOverlay = useOverlay((state) => state.showOverlay);
-  const getCartData = useCart((state) => state.getData);
   const location = useLocation();
 
   useEffect(() => {
@@ -26,8 +26,9 @@ export default function MainLayout() {
   }, [showOverlay]);
 
   useEffect(() => {
-    getProductData();
-    getCartData();
+    // getProductData();
+    // getCartData();
+    getCategories();
   }, []);
 
   return (

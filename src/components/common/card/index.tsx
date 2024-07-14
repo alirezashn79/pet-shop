@@ -2,14 +2,13 @@ import { Link } from "react-router-dom";
 import { useCart } from "../../../hooks/useCart";
 import { IProductList } from "../../../types";
 import Quantity from "../quantity";
+import { baseUrl } from "../../../app/baseUrl";
 
-interface ICard {
-  data: IProductList;
-}
-
-export default function Card({ data }: ICard) {
+export default function Card({ data }: any) {
   const cartData = useCart((state) => state.data);
   const addToCart = useCart((state) => state.addToCart);
+
+  console.log("jjjjjjjjjjj", baseUrl + data?.images[0].image);
 
   return (
     <div
@@ -31,8 +30,7 @@ export default function Card({ data }: ICard) {
 
       <Link to="/shop/1">
         <img
-          // onLoad={() => setIsShowImage(true)}
-          src={data?.thumbnail}
+          src={baseUrl + data?.images[0].image || ""}
           alt={data?.title}
           loading="lazy"
           // style={{

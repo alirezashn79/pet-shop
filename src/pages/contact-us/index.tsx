@@ -47,7 +47,11 @@ export default function AboutUs() {
     <div className="page text-gray-600">
       <TitleBar title="ارتباط با ما" />
       <div className="flex flex-wrap justify-around items-center">
-        <a href={data?.instagram} className="mr-4 flex items-center gap-x-2">
+        <a
+          target="_blank"
+          href={data?.instagram}
+          className="mr-4 flex items-center gap-x-2"
+        >
           <img
             className="h-16 w-16 lg:h-20 lg:w-20"
             src={Instagram}
@@ -55,7 +59,11 @@ export default function AboutUs() {
           />
           اینستاگرام
         </a>
-        <a href={data?.telegram} className="mr-4 flex items-center gap-x-2">
+        <a
+          target="_blank"
+          href={data?.telegram}
+          className="mr-4 flex items-center gap-x-2"
+        >
           <img
             className="h-16 w-16 lg:h-20 lg:w-20"
             src={Telegram}
@@ -63,7 +71,11 @@ export default function AboutUs() {
           />
           تلگرام
         </a>
-        <a href={data?.whats_app} className="mr-4 flex items-center gap-x-2">
+        <a
+          target="_blank"
+          href={data?.whats_app}
+          className="mr-4 flex items-center gap-x-2"
+        >
           <img
             className="h-16 w-16 lg:h-20 lg:w-20"
             src={WhatsApp}
@@ -72,6 +84,7 @@ export default function AboutUs() {
           واتس اپ
         </a>
         <a
+          target="_blank"
           href={"tel:" + data?.phone_number}
           className="mr-4 flex items-center gap-x-2"
         >
@@ -83,6 +96,7 @@ export default function AboutUs() {
           شماره همراه
         </a>
         <a
+          target="_blank"
           href={"mailto:" + data?.email}
           className="mr-4 flex items-center gap-x-2"
         >
