@@ -26,7 +26,10 @@ export default function BlogCard({ data, link }: IBlogComponent) {
 
         <div className="flex items-start flex-wrap gap-1 px-4 h-full min-h-6 my-1 text-xs">
           {data?.tags.map((item) => (
-            <div className="bg-primary min-w-8 py-0.5 rounded flex-center">
+            <div
+              key={item.id}
+              className="bg-primary min-w-8 py-0.5 rounded flex-center"
+            >
               {item.title}
             </div>
           ))}

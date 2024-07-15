@@ -2,7 +2,6 @@ import Banner from "../../components/banner";
 import Benefits from "../../components/benefits";
 // import Brands from "../../components/brands";
 import CareProducts from "../../components/care-products";
-import FoodProducts from "../../components/food-products";
 import Services from "../../components/services";
 import Slider from "../../components/slider";
 import SpecialProducts from "../../components/special-products";

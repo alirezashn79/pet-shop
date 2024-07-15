@@ -8,6 +8,7 @@ import Instagram from "../../assets/image/site/instagram.svg";
 import Telegram from "../../assets/image/site/telegram.svg";
 import Phone from "../../assets/image/site/phone-telephone.svg";
 import Email from "../../assets/image/site/email.svg";
+import { Link } from "react-router-dom";
 
 export default function AboutUs() {
   const [data, setData] = useState<{
@@ -47,9 +48,9 @@ export default function AboutUs() {
     <div className="page text-gray-600">
       <TitleBar title="ارتباط با ما" />
       <div className="flex flex-wrap justify-around items-center">
-        <a
+        <Link
           target="_blank"
-          href={data?.instagram}
+          to={String(data?.instagram)}
           className="mr-4 flex items-center gap-x-2"
         >
           <img
@@ -58,10 +59,10 @@ export default function AboutUs() {
             alt="instagram"
           />
           اینستاگرام
-        </a>
-        <a
+        </Link>
+        <Link
           target="_blank"
-          href={data?.telegram}
+          to={String(data?.telegram)}
           className="mr-4 flex items-center gap-x-2"
         >
           <img
@@ -70,10 +71,10 @@ export default function AboutUs() {
             alt="instagram"
           />
           تلگرام
-        </a>
-        <a
+        </Link>
+        <Link
           target="_blank"
-          href={data?.whats_app}
+          to={String(data?.whats_app)}
           className="mr-4 flex items-center gap-x-2"
         >
           <img
@@ -82,10 +83,10 @@ export default function AboutUs() {
             alt="instagram"
           />
           واتس اپ
-        </a>
-        <a
+        </Link>
+        <Link
           target="_blank"
-          href={"tel:" + data?.phone_number}
+          to={String("tel:" + data?.phone_number)}
           className="mr-4 flex items-center gap-x-2"
         >
           <img
@@ -94,10 +95,10 @@ export default function AboutUs() {
             alt="instagram"
           />
           شماره همراه
-        </a>
-        <a
+        </Link>
+        <Link
           target="_blank"
-          href={"mailto:" + data?.email}
+          to={String("mailto:" + data?.email)}
           className="mr-4 flex items-center gap-x-2"
         >
           <img
@@ -106,7 +107,7 @@ export default function AboutUs() {
             alt="instagram"
           />
           ایمیل
-        </a>
+        </Link>
       </div>
     </div>
   );

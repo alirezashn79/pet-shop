@@ -36,20 +36,24 @@ export default function Dropdown({ data }: IDropdownProps) {
       <div
         className={`absolute top-full  bg-gray-50 rounded-md px-1 shadow-xl border border-primary min-w-48 transition-all duration-300 delay-100 ${showDropdownItems ? "show-dropdown" : "hidden-dropdown"}`}
       >
-        <ul className="text-sm text-gray-600 divide-y">
-          {data.subItems?.map((item) => (
-            <li key={item.id}>
-              <NavLink
-                className={({ isActive }) =>
-                  `${isActive && "text-primary font-bold"} block hover:text-primary hover:scale-105 transition-all h-full w-full py-2 px-1.5`
-                }
-                to={item.link}
-              >
-                {item.title}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
+        {data ? (
+          <ul className="text-sm text-gray-600 divide-y">
+            {data.subItems?.map((item) => (
+              <li key={item.id}>
+                <NavLink
+                  className={({ isActive }) =>
+                    `${isActive && "text-primary font-bold"} block hover:text-primary hover:scale-105 transition-all h-full w-full py-2 px-1.5`
+                  }
+                  to={item.link}
+                >
+                  {item.title}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className="flex-center p-2">درحال بارگذاری...</div>
+        )}
       </div>
     </li>
   );

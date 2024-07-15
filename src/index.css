@@ -181,6 +181,43 @@
   .pagination_active {
     @apply bg-primary font-bold text-white focus:z-20 hover:bg-primary/90;
   }
+
+  .gallery-slider .swiper-button-prev:after,
+  .gallery-slider .swiper-button-next:after {
+    font-size: 26px !important;
+    color: #070707 !important;
+    font-weight: 1000;
+  }
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .gallery-slider-2 {
+    box-sizing: border-box;
+    padding: 10px 0;
+    height: 100px;
+  }
+
+  .gallery-slider-2 .swiper-slide {
+    opacity: 0.4;
+  }
+
+  .gallery-slider-2 .swiper-slide-thumb-active {
+    opacity: 1;
+  }
 }
 
 @layer utilities {

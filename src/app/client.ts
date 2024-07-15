@@ -12,7 +12,7 @@ const client = axios.create({
 
 client.interceptors.request.use(
   (config) => {
-    if (config.url === "/change-password/") {
+    if (config.url === "/change-password/" || config.url?.includes("/order")) {
       config.headers["Authorization"] =
         `Bearer ${Cookies.get("JWT_Token_Access")}`;
     }

@@ -1,16 +1,27 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import Card from "../card";
+
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 
 // import required modules
 import { Navigation } from "swiper/modules";
+import FoodCard from "../../common/food-card";
+import Card from "../card";
 
-export default function ProductsSlider() {
+export default function ProductsSlider({
+  data,
+  id,
+  type,
+}: {
+  data: any;
+  id?: number;
+  type: "ACCESSORY" | "FOOD";
+}) {
+  console.log(data);
   return (
-    <div className="container px-8 md:px-0">
+    <div className="container md:px-0">
       <div data-aos="fade-up" className="min-h-96">
         <Swiper
           slidesPerView={1}
@@ -33,54 +44,35 @@ export default function ProductsSlider() {
           modules={[Navigation]}
           className="swiper"
         >
-          <SwiperSlide className="swiper-slide">
-            <Card
-              title="تشویقی سگ تاندون Madcow"
-              image="https://theme51.mywebzi.ir/uploads/8731eb4b78fb4b9c936076e35be80743.w_748,h_90,r_k.jpg"
-              link="#"
-              price={450000}
-            />
-          </SwiperSlide>
-          <SwiperSlide className="swiper-slide">
-            <Card
-              title="تشویقی سگ تاندون Madcow"
-              image="https://theme51.mywebzi.ir/uploads/8731eb4b78fb4b9c936076e35be80743.w_748,h_90,r_k.jpg"
-              link="#"
-              price={450000}
-            />
-          </SwiperSlide>
-          <SwiperSlide className="swiper-slide">
-            <Card
-              title="تشویقی سگ تاندون Madcow"
-              image="https://theme51.mywebzi.ir/uploads/8731eb4b78fb4b9c936076e35be80743.w_748,h_90,r_k.jpg"
-              link="#"
-              price={450000}
-            />
-          </SwiperSlide>
-          <SwiperSlide className="swiper-slide">
-            <Card
-              title="تشویقی سگ تاندون Madcow"
-              image="https://theme51.mywebzi.ir/uploads/8731eb4b78fb4b9c936076e35be80743.w_748,h_90,r_k.jpg"
-              link="#"
-              price={450000}
-            />
-          </SwiperSlide>
-          <SwiperSlide className="swiper-slide">
-            <Card
-              title="تشویقی سگ تاندون Madcow"
-              image="https://theme51.mywebzi.ir/uploads/8731eb4b78fb4b9c936076e35be80743.w_748,h_90,r_k.jpg"
-              link="#"
-              price={450000}
-            />
-          </SwiperSlide>
-          <SwiperSlide className="swiper-slide">
-            <Card
-              title="تشویقی سگ تاندون Madcow"
-              image="https://theme51.mywebzi.ir/uploads/8731eb4b78fb4b9c936076e35be80743.w_748,h_90,r_k.jpg"
-              link="#"
-              price={450000}
-            />
-          </SwiperSlide>
+          {type === "FOOD"
+            ? id
+              ? data
+                  ?.filter((res) => res.id !== id)
+                  .map((item) => (
+                    <SwiperSlide key={item.id} className="swiper-slide">
+                      <FoodCard data={item} />
+                    </SwiperSlide>
+                  ))
+              : data?.map((item) => (
+                  <SwiperSlide key={item.id} className="swiper-slide">
+                    <FoodCard data={item} />
+                  </SwiperSlide>
+                ))
+            : id
+              ? data
+                  ?.filter((res) => res.id !== id)
+                  .map((item) => (
+                    <SwiperSlide key={item.id} className="swiper-slide">
+                      <Card data={item} />
+                    </SwiperSlide>
+                  ))
+              : data?.map((item) => (
+                  <SwiperSlide key={item.id} className="swiper-slide">
+                    <Card data={item} />
+                  </SwiperSlide>
+                ))}
+
+          {}
         </Swiper>
       </div>
     </div>

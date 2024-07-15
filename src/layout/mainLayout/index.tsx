@@ -2,14 +2,18 @@ import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import MainFooter from "../../components/footer";
 import MainHeader from "../../components/header";
-import { useCart } from "../../hooks/useCart";
-import useOverlay from "../../hooks/useOverlay";
-import useProduct from "../../hooks/useProduct";
 import useCategory from "../../hooks/useCategory";
+import useFood from "../../hooks/useFood";
+import useOverlay from "../../hooks/useOverlay";
+import { useCart } from "../../hooks/useCart";
 
 export default function MainLayout() {
   const getCategories = useCategory((state) => state.getData);
+  const getAllFoods = useFood((state) => state.getAllFoods);
   const showOverlay = useOverlay((state) => state.showOverlay);
+  const getCartData = useCart((state) => state.getData);
+  const cartData = useCart((state) => state.data);
+
   const location = useLocation();
 
   useEffect(() => {
@@ -27,9 +31,12 @@ export default function MainLayout() {
 
   useEffect(() => {
     // getProductData();
-    // getCartData();
+    getCartData();
     getCategories();
+    getAllFoods({ current: 1 });
   }, []);
+
+  console.log("cartData", cartData);
 
   return (
     <>

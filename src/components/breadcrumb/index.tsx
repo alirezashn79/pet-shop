@@ -12,8 +12,8 @@ export default function Breadcrumb() {
     <nav className="flex" aria-label="Breadcrumb">
       <ol className="inline-flex items-center space-x-1 md:space-x-2 mb-4 text-xs md:text-sm xl:text-base">
         {locItems.map((item, idx, row) => (
-          <li className="inline-flex items-center">
-            <Link to={`/${item}`}>{item === "" ? "خانه" : item}</Link>
+          <li key={idx} className="inline-flex items-center">
+            <Link to={`/shop/${item}`}>{item === "" ? "خانه" : item}</Link>
             {idx + 1 !== row.length && <ChevronLeft />}
           </li>
         ))}

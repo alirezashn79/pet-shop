@@ -151,12 +151,12 @@ export default function MainFooter() {
 
             <p className="text-sm lg:text-base">آدرس: فروشگاه ...</p>
 
-            <a
+            <Link
               className="block text-sm lg:text-base"
-              href="mailto:test@test.com"
+              to="mailto:test@test.com"
             >
               info@test.ir
-            </a>
+            </Link>
 
             <div className="flex gap-x-4">
               <div className="bg-blue-600 text-white p-1 lg:p-2 rounded">

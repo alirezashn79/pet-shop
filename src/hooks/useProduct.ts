@@ -4,6 +4,7 @@ import client from "../app/client";
 
 interface IUseProduct {
   data: null | IProductList[];
+  // accessories
   accessories: null | {
     count: number;
     next: string | null;
@@ -23,8 +24,41 @@ interface IUseProduct {
     ];
   };
   getAllAccessories: ({ current }: { current: number }) => Promise<void>;
-  getData: () => Promise<void>;
+  // accessory category
+  accessoryProducts:
+    | null
+    | {
+        title: string;
+        description: string;
+        discount_amount: string;
+        images: string;
+        made_by_country: string;
+        unit: string;
+        price: number;
+        color: string;
+        id: number;
+      }[];
+  getSingleAccessoryCategory: ({ id }: { id: string }) => Promise<void>;
   //
+
+  singleAccessory: null | {
+    title: string;
+    description: string;
+    discount_amount: {
+      discount_price: string;
+    };
+    images: {
+      image: string;
+    }[];
+    made_by_country: string;
+    unit: string;
+    price: number;
+    color: string;
+  };
+  getSingleAccessory: ({ id }: { id: string }) => Promise<void>;
+
+  getData: () => Promise<void>;
+
   spicialData: null | IProductList[];
   getSpecialData: (type: "cat" | "dog" | "accessories") => Promise<void>;
   //
@@ -39,6 +73,8 @@ interface IUseProduct {
 const useProduct = create<IUseProduct>((set, get) => ({
   data: null,
   accessories: null,
+  singleAccessory: null,
+  accessoryProducts: null,
   spicialData: null,
   filteredData: null,
   loading: false,
@@ -53,6 +89,7 @@ const useProduct = create<IUseProduct>((set, get) => ({
 
     set({ loading: false });
   },
+
   getAllAccessories: async ({ current }) => {
     set({ loading: true });
 
@@ -62,6 +99,22 @@ const useProduct = create<IUseProduct>((set, get) => ({
       set({ accessories: res.data });
     }
 
+    set({ loading: false });
+  },
+  getSingleAccessoryCategory: async ({ id }) => {
+    set({ loading: true });
+    const res = await client.get(`/product/category-product-list/${id}/`);
+
+    set({ accessoryProducts: res.data });
+
+    set({ loading: false });
+  },
+  getSingleAccessory: async ({ id }) => {
+    set({ loading: true });
+    const res = await client.get(`/product/detail/${id}/`);
+    if (res.status === 200) {
+      set({ singleAccessory: res.data });
+    }
     set({ loading: false });
   },
   getSpecialData: async (type) => {
@@ -108,10 +161,10 @@ const useProduct = create<IUseProduct>((set, get) => ({
         break;
 
       case "newest":
-        const data = get().data?.slice();
-        set({
-          filteredData: data,
-        });
+        // const data = get().data?.slice();
+        // set({
+        //   filteredData: data,
+        // });
         break;
 
       default:

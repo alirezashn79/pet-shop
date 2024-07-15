@@ -10,16 +10,15 @@ import Signup from "../pages/auth/signup";
 import VerifyNumber from "../pages/auth/verify";
 import Blogs from "../pages/blogs";
 import BlogPage from "../pages/blogs/single-blog";
-import CartPage from "../pages/cart";
 import ContactUs from "../pages/contact-us";
+import FoodPage from "../pages/food";
 import HomePage from "../pages/home";
 import Lig from "../pages/lig";
 import NotFound from "../pages/not-found";
-import SingleProduct from "../pages/product";
 import AccessoriesPage from "../pages/products/accessories";
-import AllProducts from "../pages/products/all";
-import CatProducts from "../pages/products/cat-products";
-import DogProducts from "../pages/products/dog-products";
+import AccessoryPage from "../pages/products/accessory";
+import SingleAccessoryPage from "../pages/products/accessory-single";
+import Foods from "../pages/products/cat-products";
 import Services from "../pages/services";
 
 export default function PageRoutes() {
@@ -30,10 +29,17 @@ export default function PageRoutes() {
         <Route path="/lig" element={<Lig />} />
         <Route path="/shop">
           {/* <Route path="all" element={<AllProducts />} /> */}
-          <Route path="foods" element={<CatProducts />} />
+          <Route path="foods">
+            <Route path="" element={<Foods />} />
+            <Route path=":foodId" element={<FoodPage />} />
+          </Route>
           {/* <Route path="dog" element={<DogProducts />} /> */}
-          <Route path="accessories" element={<AccessoriesPage />} />
-          <Route path=":id" element={<SingleProduct />} />
+          <Route path="accessories">
+            <Route path="" element={<AccessoriesPage />} />
+            <Route path=":id" element={<AccessoryPage />} />
+            <Route path="product/:id" element={<SingleAccessoryPage />} />
+          </Route>
+
           {/* <Route path="cart" element={<CartPage />} /> */}
         </Route>
 

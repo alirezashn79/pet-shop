@@ -11,15 +11,16 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useJwt } from "react-jwt";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useCart } from "../../hooks/useCart";
 import useOverlay from "../../hooks/useOverlay";
 
+import useCategory from "../../hooks/useCategory";
+import { IMenu } from "../../types";
+import logout from "../../utils/logout";
 import Dropdown from "../common/dropdown";
 import DropdownMobile from "../common/dropdown-mobile";
 import Overlay from "../common/overlay";
-import { IMenu } from "../../types";
-import useCategory from "../../hooks/useCategory";
 
 export default function MainHeader() {
   const cartData = useCart((state) => state.data);
@@ -50,7 +51,7 @@ export default function MainHeader() {
       subItems: categories?.map((item) => ({
         id: item.id,
         title: item.title,
-        link: "S",
+        link: `/shop/accessories/${item.id}`,
       })),
     },
     {
@@ -80,13 +81,18 @@ export default function MainHeader() {
     },
   ];
 
-  const isAuthentication = () => {
-    if (Cookies.get("JWT_Token_Access") && !isExpired) {
-      setisAuth(true);
-    }
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    logout();
+    navigate(0);
   };
 
   useEffect(() => {
+    const isAuthentication = () => {
+      if (Cookies.get("JWT_Token_Access") && !isExpired) {
+        setisAuth(true);
+      }
+    };
     isAuthentication();
   }, []);
 
@@ -148,12 +154,15 @@ export default function MainHeader() {
                             <div className="rounded-md min-w-24 border bg-white overflow-hidden">
                               <div className="flex flex-col divide-y">
                                 <Link
-                                  className="block py-2 hover:bg-primary/40"
+                                  className="block py-2 hover:bg-primary/10"
                                   to="/forgot-password"
                                 >
                                   فراموشی رمز عبور
                                 </Link>
-                                <div className="block py-2 bg-rose-500 text-white">
+                                <div
+                                  onClick={handleLogout}
+                                  className="block py-2 text-rose-500 hover:bg-rose-500 hover:text-white"
+                                >
                                   خروج
                                 </div>
                               </div>
@@ -206,11 +215,11 @@ export default function MainHeader() {
             <div className="flex md:mr-28 lg:mr-60 py-4">
               <nav>
                 <ul className="flex items-center text-sm md:gap-x-8 lg:gap-x-16">
-                  {menuItems.map((item) => {
+                  {menuItems.map((item, idx) => {
                     return item.hasSub ? (
-                      <Dropdown data={item} />
+                      <Dropdown key={item.id * 11} data={item} />
                     ) : (
-                      <li key={item.id} className="relative">
+                      <li key={idx * 23} className="relative">
                         <NavLink
                           className={({ isActive }) =>
                             isActive && item.link ? "active-link" : ""
@@ -267,11 +276,11 @@ export default function MainHeader() {
 
           {/* menu */}
           <ul className="flex flex-col divide-y divide-yellow text-base">
-            {menuItems.map((item) => {
+            {menuItems.map((item, idx) => {
               return item.hasSub ? (
-                <DropdownMobile key={item.id} data={item} />
+                <DropdownMobile key={item.id * 459} data={item} />
               ) : (
-                <li key={item.id}>
+                <li key={idx * 89}>
                   <NavLink
                     className={({ isActive }) =>
                       `${isActive && item.link ? "text-primary" : ""} block py-4`
