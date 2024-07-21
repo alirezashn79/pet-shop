@@ -3,11 +3,13 @@ import AuthLayout from "../layout/authLayout";
 import MainLayout from "../layout/mainLayout";
 import AboutUs from "../pages/about-us";
 import ChangePassword from "../pages/auth/change-password";
+import EditProfile from "../pages/auth/change-profile";
 import ForgotPassword from "../pages/auth/forgot-password";
 import ResetPassword from "../pages/auth/reset-password";
 import SignIn from "../pages/auth/signin";
 import Signup from "../pages/auth/signup";
 import VerifyNumber from "../pages/auth/verify";
+import EditPhone from "../pages/auth/verify-phone";
 import Blogs from "../pages/blogs";
 import BlogPage from "../pages/blogs/single-blog";
 import ContactUs from "../pages/contact-us";
@@ -20,6 +22,8 @@ import AccessoryPage from "../pages/products/accessory";
 import SingleAccessoryPage from "../pages/products/accessory-single";
 import Foods from "../pages/products/cat-products";
 import Services from "../pages/services";
+import Private from "./private";
+import Protected from "./protected";
 
 export default function PageRoutes() {
   return (
@@ -56,12 +60,18 @@ export default function PageRoutes() {
       </Route>
 
       <Route element={<AuthLayout />}>
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/verify" element={<VerifyNumber />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password/:id" element={<ResetPassword />} />
-        <Route path="/change-password" element={<ChangePassword />} />
+        <Route element={<Protected />}>
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/signin" element={<SignIn />} />
+        </Route>
+        <Route element={<Private />}>
+          <Route path="/verify" element={<VerifyNumber />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:id" element={<ResetPassword />} />
+          <Route path="/change-password" element={<ChangePassword />} />
+          <Route path="/edit-profile" element={<EditProfile />} />
+          <Route path="/edit-phone" element={<EditPhone />} />
+        </Route>
       </Route>
     </Routes>
   );

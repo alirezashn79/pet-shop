@@ -3,6 +3,7 @@ import { create } from "zustand";
 import client from "../../app/client";
 import { NavigateFunction } from "react-router-dom";
 import Cookies from "js-cookie";
+import logout from "../../utils/logout";
 
 interface IUseAuth {
   isAuth: boolean;
@@ -30,6 +31,13 @@ interface IUseAuth {
     password: string;
     navigate: NavigateFunction;
   }) => Promise<void>;
+  verifyEditPhone: ({
+    code,
+    navigate,
+  }: {
+    code: string;
+    navigate: NavigateFunction;
+  }) => Promise<void>;
 }
 
 export const useAuth = create<IUseAuth>((set) => ({
@@ -42,11 +50,7 @@ export const useAuth = create<IUseAuth>((set) => ({
         full_name: values.name,
         phone_number: 0 + values.phone,
         password: values.password,
-        date_birth: new Date(values.date)
-          .toLocaleDateString()
-          .split("/")
-          .reverse()
-          .join("-"),
+        date_birth: values.date,
       });
     } catch (error) {
       if (error.response && error.response.status === 302) {
@@ -72,7 +76,6 @@ export const useAuth = create<IUseAuth>((set) => ({
         code,
       });
 
-      console.log(res);
       sessionStorage.removeItem("phone");
       Cookies.set("JWT_Token_Access", res.data.JWT_Token_Access, {
         path: "/",
@@ -103,7 +106,7 @@ export const useAuth = create<IUseAuth>((set) => ({
         phone_number: `0${phone}`,
         password,
       });
-      console.log("Login res", res);
+
       toast.success("ورود موفقیت آمیز");
       Cookies.set("JWT_Token_Access", res.data.JWT_Token_Access, {
         path: "/",
@@ -132,6 +135,27 @@ export const useAuth = create<IUseAuth>((set) => ({
     } finally {
       set({ loading: false });
       toast.dismiss(toastLoading);
+    }
+  },
+  verifyEditPhone: async ({ code, navigate }) => {
+    const loadingToast = toast.loading("درحال تایید کد، منتظر بمانید");
+    try {
+      set({ loading: true });
+      const res = await client.post("/verify-phone/", {
+        code,
+      });
+
+      toast.success("تغییر شماره با موفقیت انجام شد");
+      toast.success("با شماره جدید وارد شوید.");
+      logout();
+      navigate("/signin", {
+        replace: true,
+      });
+    } catch (error) {
+      toast.error("کد اشتباه است");
+    } finally {
+      set({ loading: false });
+      toast.dismiss(loadingToast);
     }
   },
 }));

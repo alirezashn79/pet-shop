@@ -6,6 +6,10 @@ import useCategory from "../../hooks/useCategory";
 import useFood from "../../hooks/useFood";
 import useOverlay from "../../hooks/useOverlay";
 import { useCart } from "../../hooks/useCart";
+import useProduct from "../../hooks/useProduct";
+import useBlog from "../../hooks/useBlog";
+import { useAboutUs } from "../../hooks/useAboutUs";
+import { useContactUs } from "../../hooks/useContactUs";
 
 export default function MainLayout() {
   const getCategories = useCategory((state) => state.getData);
@@ -13,6 +17,12 @@ export default function MainLayout() {
   const showOverlay = useOverlay((state) => state.showOverlay);
   const getCartData = useCart((state) => state.getData);
   const cartData = useCart((state) => state.data);
+  const getDiscountData = useProduct((state) => state.getDiscountData);
+  const getMostVisitData = useProduct((state) => state.getMostVisitData);
+  const getAllAccessories = useProduct((state) => state.getAllAccessories);
+  const getBlogsData = useBlog((state) => state.getData);
+  const getAboutUs = useAboutUs((state) => state.getData);
+  const getContactUs = useContactUs((state) => state.getData);
 
   const location = useLocation();
 
@@ -33,10 +43,14 @@ export default function MainLayout() {
     // getProductData();
     getCartData();
     getCategories();
+    getDiscountData();
+    getMostVisitData();
+    getAllAccessories({ current: 1 });
     getAllFoods({ current: 1 });
+    getBlogsData({ current: 1 });
+    getAboutUs();
+    getContactUs();
   }, []);
-
-  console.log("cartData", cartData);
 
   return (
     <>

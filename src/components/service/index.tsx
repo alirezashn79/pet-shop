@@ -9,10 +9,7 @@ interface IServiceProps {
   icon?: JSX.Element;
 }
 export default function Service({ title, subtitle, icon }: IServiceProps) {
-  const CatProducts = useProduct((state) => state.spicialData);
   const loading = useProduct((state) => state.loading);
-
-  console.log("CatProducts", CatProducts);
 
   if (loading) return <Loading />;
   return (

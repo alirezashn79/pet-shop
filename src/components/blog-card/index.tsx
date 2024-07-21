@@ -13,8 +13,6 @@ interface IBlogComponent {
 }
 
 export default function BlogCard({ data, link }: IBlogComponent) {
-  console.log(data);
-
   return (
     <div className="block rounded-lg bg-white shadow" data-aos="zoom-in">
       <div className="relative overflow-hidden bg-cover bg-no-repeat">

@@ -21,6 +21,7 @@ import logout from "../../utils/logout";
 import Dropdown from "../common/dropdown";
 import DropdownMobile from "../common/dropdown-mobile";
 import Overlay from "../common/overlay";
+import { useContactUs } from "../../hooks/useContactUs";
 
 export default function MainHeader() {
   const cartData = useCart((state) => state.data);
@@ -30,6 +31,7 @@ export default function MainHeader() {
   const [isAuth, setisAuth] = useState(false);
   const [toggleAuthBtn, setToggleAuthBtn] = useState(false);
   const categories = useCategory((state) => state.data);
+  const contactUsData = useContactUs((state) => state.data);
 
   const menuItems: IMenu[] = [
     {
@@ -107,13 +109,14 @@ export default function MainHeader() {
               className="bg-primary md:absolute h-20 w-20 md:w-28 md:h-28 lg:h-32 lg:w-36 flex-center flex-col rounded-b-full main-logo"
             >
               <Dog className="w-8 h-8 lg:h-14 lg:w-14" />
-              <h1 className="font-bold text-base lg:text-xl">پت شاپ</h1>
+              <h1 className="font-bold text-base lg:text-xl">رز پت شاپ</h1>
             </Link>
             {/* left */}
             <div className="flex-1">
               <div className="flex-1 p-2">
                 <div className="space-y-2 md:flex md:flex-row-reverse md:items-center md:gap-x-8">
                   {/* icons */}
+
                   <div className="flex items-center gap-4 justify-end">
                     <div className="relative">
                       <Link
@@ -155,6 +158,18 @@ export default function MainHeader() {
                               <div className="flex flex-col divide-y">
                                 <Link
                                   className="block py-2 hover:bg-primary/10"
+                                  to="/edit-phone"
+                                >
+                                  ویرایش شماره
+                                </Link>
+                                <Link
+                                  className="block py-2 hover:bg-primary/10"
+                                  to="/edit-profile"
+                                >
+                                  ویرایش اطلاعات
+                                </Link>
+                                <Link
+                                  className="block py-2 hover:bg-primary/10"
                                   to="/forgot-password"
                                 >
                                   فراموشی رمز عبور
@@ -193,16 +208,24 @@ export default function MainHeader() {
                     </button>
                   </div>
                   <span className="hidden md:block w-0.5 h-7 bg-gray-300"></span>
-                  <div className="flex justify-end text-xs">
-                    <input
-                      className="flex-1 px-2 py-2  rounded-r-sm border border-l-0 outline-none max-w-sm lg:w-72"
-                      type="text"
-                      placeholder="نام محصول مورد نظر..."
-                    />
-
-                    <button className="bg-primary px-2.5 py-1 rounded-l-sm">
-                      جستجو
-                    </button>
+                  <div className="flex-1 ">
+                    <div className="flex items-center flex-col md:flex-row justify-between w-full gap-y-1 lg:w-2/4 text-sm   lg:text-base mr-auto">
+                      <a
+                        className="hover:text-primary"
+                        href={`mailto:${contactUsData?.email}`}
+                      >
+                        <span className="text-slate-600"> ایمیل:</span>{" "}
+                        {contactUsData?.email}
+                      </a>
+                      <span className="hidden md:block w-0.5 h-7 bg-gray-300"></span>
+                      <a
+                        className="hover:text-primary"
+                        href={`tel:${contactUsData?.phone_number}`}
+                      >
+                        <span className="text-slate-600">شماره تماس:</span>{" "}
+                        {contactUsData?.phone_number}
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -263,7 +286,7 @@ export default function MainHeader() {
                 to="/"
               >
                 <Dog className="h-8 w-8" />
-                پت شاپ
+                رز پت شاپ
               </Link>
             </div>
             <div

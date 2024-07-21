@@ -1,18 +1,24 @@
+import toast from "react-hot-toast";
 import { create } from "zustand";
 import client from "../app/client";
-import toast from "react-hot-toast";
 interface IAbout {
-  data: null | { id: number; address: string; description: string };
+  data: null | {
+    phone_number: string;
+    email: string;
+    instagram: string;
+    whats_app: string;
+    telegram: string;
+  };
   loading: boolean;
   getData: () => Promise<void>;
 }
-export const useAboutUs = create<IAbout>((set) => ({
+export const useContactUs = create<IAbout>((set) => ({
   data: null,
   loading: false,
   getData: async () => {
     try {
       set({ loading: true });
-      const res = await client.get("/site/about-us/");
+      const res = await client.get("/site/contact-us/");
       set({ data: res.data });
     } catch (error) {
       if (error.response) {

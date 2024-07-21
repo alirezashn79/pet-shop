@@ -1,9 +1,21 @@
 import { create } from "zustand";
-import { IProductList } from "../types";
 import client from "../app/client";
 
+interface IProduct {
+  title: string;
+  description: string;
+  discount_amount: {
+    discount_price: number;
+  };
+  images: string;
+  made_by_country: string;
+  unit: string;
+  price: number;
+  color: string;
+  id: number;
+}
+
 interface IUseProduct {
-  data: null | IProductList[];
   // accessories
   accessories: null | {
     count: number;
@@ -25,19 +37,7 @@ interface IUseProduct {
   };
   getAllAccessories: ({ current }: { current: number }) => Promise<void>;
   // accessory category
-  accessoryProducts:
-    | null
-    | {
-        title: string;
-        description: string;
-        discount_amount: string;
-        images: string;
-        made_by_country: string;
-        unit: string;
-        price: number;
-        color: string;
-        id: number;
-      }[];
+  accessoryProducts: null | IProduct[];
   getSingleAccessoryCategory: ({ id }: { id: string }) => Promise<void>;
   //
 
@@ -59,24 +59,23 @@ interface IUseProduct {
 
   getData: () => Promise<void>;
 
-  spicialData: null | IProductList[];
-  getSpecialData: (type: "cat" | "dog" | "accessories") => Promise<void>;
   //
-  filteredData: null | IProductList[];
-  filteringData: ({ tags }: { tags: number }) => void;
-  //
-  sortingData: ({ tags }: { tags: string }) => void;
-  //
+  getDiscountData: () => Promise<void>;
+  discountData: null | IProduct[];
+
+  mostVisitData: null | IProduct[];
+  getMostVisitData: () => Promise<void>;
+
   loading: boolean;
 }
 
-const useProduct = create<IUseProduct>((set, get) => ({
-  data: null,
+const useProduct = create<IUseProduct>((set) => ({
   accessories: null,
   singleAccessory: null,
   accessoryProducts: null,
-  spicialData: null,
-  filteredData: null,
+  discountData: null,
+  mostVisitData: null,
+
   loading: false,
   getData: async () => {
     set({ loading: true });
@@ -117,58 +116,29 @@ const useProduct = create<IUseProduct>((set, get) => ({
     }
     set({ loading: false });
   },
-  getSpecialData: async (type) => {
-    set({ loading: false });
-    const res = await client.get(`/${type}`);
+
+  getDiscountData: async () => {
+    const res = await client.get("/product/discount/");
+
     if (res.status === 200) {
-      set({ spicialData: res.data });
+      const srotedData = res.data.map((item) => {
+        return {
+          ...item.product,
+          images: item.images,
+          discount_amount: {
+            discount_price: item.discount_price,
+          },
+        };
+      });
+
+      set({ discountData: srotedData });
     }
-
-    set({ loading: false });
   },
-  filteringData: async ({ tags }) => {
-    if (tags === 0) {
-      set({ loading: true });
-      await get().getData();
-      const dataClone = get().data?.slice();
-      set({ filteredData: dataClone });
-      set({ loading: false });
-      return;
-    }
+  getMostVisitData: async () => {
+    const res = await client.get("/product/most-visit/");
 
-    const dataClone = get().data;
-    const filteredData = dataClone?.filter((item) => item.category_id === tags);
-
-    set({ filteredData: filteredData });
-  },
-  sortingData: ({ tags }) => {
-    const dataClone = get().filteredData?.slice();
-    switch (tags) {
-      case "cheapest":
-        set({
-          filteredData: dataClone?.sort(
-            (a, b) => Number(a.price) - Number(b.price)
-          ),
-        });
-        break;
-
-      case "expensive":
-        set({
-          filteredData: dataClone?.sort(
-            (a, b) => Number(b.price) - Number(a.price)
-          ),
-        });
-        break;
-
-      case "newest":
-        // const data = get().data?.slice();
-        // set({
-        //   filteredData: data,
-        // });
-        break;
-
-      default:
-        break;
+    if (res.status === 200) {
+      set({ mostVisitData: res.data });
     }
   },
 }));

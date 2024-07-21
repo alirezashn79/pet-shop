@@ -49,7 +49,6 @@ export default function ChangePassword() {
             err.response.status !== 401 &&
             err.config.url !== "/accounts/api/refresh/"
           ) {
-            console.log("err.config.url", err.config.url);
             return err.response.data.message;
           }
           return "خطا";

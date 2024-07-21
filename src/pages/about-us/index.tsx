@@ -1,38 +1,11 @@
-import { useEffect, useState } from "react";
-import client from "../../app/client";
-import toast from "react-hot-toast";
-import Loading from "../../components/loading";
-import TitleBar from "../../components/common/titlebar";
 import { MapPin } from "lucide-react";
+import TitleBar from "../../components/common/titlebar";
+import Loading from "../../components/loading";
+import { useAboutUs } from "../../hooks/useAboutUs";
 
 export default function AboutUs() {
-  const [data, setData] = useState<{
-    address: string;
-    description: string;
-  } | null>(null);
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    const getData = async () => {
-      setLoading(true);
-      try {
-        const res = await client.get("/site/about-us/");
-        setData(res.data);
-        console.log("res", res);
-      } catch (error) {
-        if (error.response) {
-          toast.error(
-            `${error.response.status}: ${error.response.data.message}`
-          );
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (!data) {
-      getData();
-    }
-  }, []);
+  const data = useAboutUs((state) => state.data);
+  const loading = useAboutUs((state) => state.loading);
 
   if (loading) return <Loading />;
   return (

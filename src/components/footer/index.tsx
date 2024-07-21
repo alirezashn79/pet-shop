@@ -1,10 +1,14 @@
 import { MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { IMenu } from "../../types";
-import useCategory from "../../hooks/useCategory";
+import { useAboutUs } from "../../hooks/useAboutUs";
+import { useContactUs } from "../../hooks/useContactUs";
+import { FaTelegram, FaWhatsapp } from "react-icons/fa";
+import { FiInstagram } from "react-icons/fi";
 
 export default function MainFooter() {
-  const categories = useCategory((state) => state.data);
+  const aboutUsData = useAboutUs((state) => state.data);
+  const contactUsData = useContactUs((state) => state.data);
 
   const menuItems: IMenu[] = [
     {
@@ -12,16 +16,16 @@ export default function MainFooter() {
       title: "خانه",
       link: "/",
     },
+    {
+      id: 1,
+      title: "غذا ها",
+      link: "/shop/foods",
+    },
 
     {
       id: 3,
       title: "لوازم جانبی ها",
-      hasSub: true,
-      subItems: categories?.map((item) => ({
-        id: item.id,
-        title: item.title,
-        link: "S",
-      })),
+      link: "/shop/accessories",
     },
     {
       id: 4,
@@ -131,13 +135,11 @@ export default function MainFooter() {
           <div>
             <h6 className="text-base lg:text-lg font-semibold mb-4">لینک ها</h6>
             <ul className="text-sm lg:text-base text-gray-500 mr-2 space-y-1">
-              {menuItems
-                .filter((item) => !item.hasSub)
-                .map((menuItem) => (
-                  <li key={menuItem.id}>
-                    <Link to={menuItem.link || "#"}>{menuItem.title}</Link>
-                  </li>
-                ))}
+              {menuItems.map((menuItem) => (
+                <li key={menuItem.id}>
+                  <Link to={menuItem.link || "#"}>{menuItem.title}</Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -149,25 +151,42 @@ export default function MainFooter() {
               پت شاپ
             </Link>
 
-            <p className="text-sm lg:text-base">آدرس: فروشگاه ...</p>
+            <p className="text-sm lg:text-base max-w-xs">
+              آدرس: {aboutUsData?.address}
+            </p>
 
             <Link
               className="block text-sm lg:text-base"
-              to="mailto:test@test.com"
+              to={`mailto:${contactUsData?.email}`}
             >
-              info@test.ir
+              ایمیل: {contactUsData?.email}
+            </Link>
+            <Link
+              className="block text-sm lg:text-base"
+              to={`tel:${contactUsData?.phone_number}`}
+            >
+              شماره تماس: {contactUsData?.phone_number}
             </Link>
 
-            <div className="flex gap-x-4">
-              <div className="bg-blue-600 text-white p-1 lg:p-2 rounded">
-                <MessageCircle className="lg:h-8 lg:w-8" />
-              </div>
-              <div className="bg-lime-500 text-white p-1 lg:p-2 rounded">
-                <MessageCircle className="lg:h-8 lg:w-8" />
-              </div>
-              <div className="bg-purple-600 text-white p-1 lg:p-2 rounded">
-                <MessageCircle className="lg:h-8 lg:w-8" />
-              </div>
+            <div className="flex flex-wrap gap-x-4">
+              <Link
+                className="h-8 w-8 text-slate-500 hover:text-sky-600"
+                to={contactUsData?.telegram as string}
+              >
+                <FaTelegram className="h-full w-full" />
+              </Link>
+              <Link
+                className="h-8 w-8 text-slate-500 hover:text-rose-500"
+                to={contactUsData?.instagram as string}
+              >
+                <FiInstagram className="h-full w-full" />
+              </Link>
+              <Link
+                className="h-8 w-8 text-slate-500 hover:text-green-500"
+                to={("https://" + contactUsData?.whats_app) as string}
+              >
+                <FaWhatsapp className="h-full w-full" />
+              </Link>
             </div>
           </div>
         </div>

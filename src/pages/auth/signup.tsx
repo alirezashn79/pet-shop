@@ -36,7 +36,11 @@ export default function Signup() {
     signUp({
       values: {
         ...values,
-        date,
+        date: new Date(String(date)) //String
+          .toLocaleDateString("en-GB")
+          .split("/")
+          .reverse()
+          .join("-"),
       },
       navigate,
     });

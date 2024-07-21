@@ -205,6 +205,11 @@
     object-fit: cover;
   }
 
+  .swiper-button-prev,
+  .swiper-button-next {
+    @apply !text-red-50;
+  }
+
   .gallery-slider-2 {
     box-sizing: border-box;
     padding: 10px 0;

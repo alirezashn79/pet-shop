@@ -29,24 +29,41 @@ export default function Card({ data }: { data: any }) {
             {data?.title}
           </Link>
 
-          <div className="min-h-16">
-            <p
-              className={cn(
-                data.discount_amount.discount_price
-                  ? "text-rose-500 text-lg line-through"
-                  : "text-green-800 text-lg "
-              )}
-            >
-              {data?.price.toLocaleString()} تومان
-            </p>
-            {data.discount_amount.discount_price ? (
-              <p className="text-green-800 text-lg ">
-                {data?.discount_amount.discount_price.toLocaleString()} تومان
+          {data.discount_price ? (
+            <div className="min-h-16">
+              <p
+                className={cn(
+                  data.discount_price
+                    ? "text-rose-500 text-lg line-through"
+                    : "text-green-800 text-lg "
+                )}
+              >
+                {data?.price.toLocaleString()} تومان
               </p>
-            ) : (
-              ""
-            )}
-          </div>
+              {data.discount_price && (
+                <p className="text-green-800 text-lg ">
+                  {data?.discount_amount.discount_price.toLocaleString()} تومان
+                </p>
+              )}
+            </div>
+          ) : (
+            <div className="min-h-16">
+              <p
+                className={cn(
+                  data.discount_amount.discount_price
+                    ? "text-rose-500 text-lg line-through"
+                    : "text-green-800 text-lg "
+                )}
+              >
+                {data?.price.toLocaleString()} تومان
+              </p>
+              {data.discount_amount.discount_price && (
+                <p className="text-green-800 text-lg ">
+                  {data?.discount_amount.discount_price.toLocaleString()} تومان
+                </p>
+              )}
+            </div>
+          )}
         </div>
       </Link>
 

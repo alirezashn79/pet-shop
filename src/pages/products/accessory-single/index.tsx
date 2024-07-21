@@ -22,8 +22,6 @@ export default function SingleAccessoryPage() {
     getSingleAccessory({ id: String(params.id) });
   }, [params, getSingleAccessory]);
 
-  console.log("allAccessories", allAccessories?.results);
-
   if (loading) {
     return <Loading />;
   }

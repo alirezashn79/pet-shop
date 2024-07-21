@@ -16,7 +16,7 @@ export default function BlogPage() {
     if (params.id) {
       getData({ id: params.id });
     }
-  }, [params]);
+  }, [params, getData]);
 
   if (loading) {
     return <Loading />;

@@ -25,8 +25,6 @@ export default function FoodPage() {
     return <Loading />;
   }
 
-  console.log("singleFood?.image", singleFood?.image);
-
   return (
     <div className="bg-white">
       <div className="page">

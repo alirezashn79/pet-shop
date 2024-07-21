@@ -17,8 +17,6 @@ export default function AccessoryPage() {
     getData({ id: String(params.id) });
   }, [params, getData]);
 
-  console.log(data);
-
   if (loading) {
     return <Loading />;
   }

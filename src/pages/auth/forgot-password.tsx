@@ -17,11 +17,11 @@ export default function ForgotPassword() {
     try {
       await forgotPasswordSchema.validate({ phone });
       setDisablePhone(true);
-      const res = await client.post("/forgot-password/", {
+      await client.post("/forgot-password/", {
         phone_number: phone,
       });
       setIsSent(true);
-      console.log(res);
+
       toast.success("لینک صفحه تغییر رمز عبور برای شما پیامک شد.");
     } catch (error) {
       setPhoneError(error.message);

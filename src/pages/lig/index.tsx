@@ -20,7 +20,6 @@ export default function Lig() {
     getData();
   }, []);
 
-  console.log("data", data);
   return (
     <div>
       <div className="container py-8 space-y-16">

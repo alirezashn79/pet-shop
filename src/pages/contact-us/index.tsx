@@ -9,45 +9,17 @@ import Telegram from "../../assets/image/site/telegram.svg";
 import Phone from "../../assets/image/site/phone-telephone.svg";
 import Email from "../../assets/image/site/email.svg";
 import { Link } from "react-router-dom";
+import { useContactUs } from "../../hooks/useContactUs";
 
 export default function AboutUs() {
-  const [data, setData] = useState<{
-    phone_number: string;
-    email: string;
-    instagram: string;
-    whats_app: string;
-    telegram: string;
-  } | null>(null);
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    const getData = async () => {
-      setLoading(true);
-      try {
-        const res = await client.get("/site/contact-us/");
-        setData(res.data);
-
-        console.log("res", res.data);
-      } catch (error) {
-        if (error.response) {
-          toast.error(
-            `${error.response.status}: ${error.response.data.message}`
-          );
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (!data) {
-      getData();
-    }
-  }, []);
+  const data = useContactUs((state) => state.data);
+  const loading = useContactUs((state) => state.loading);
 
   if (loading) return <Loading />;
   return (
     <div className="page text-gray-600">
       <TitleBar title="ارتباط با ما" />
-      <div className="flex flex-wrap justify-around items-center">
+      <div className="flex flex-wrap flex-col lg:flex-row gap-y-8 lg:justify-around  lg:items-center">
         <Link
           target="_blank"
           to={String(data?.instagram)}

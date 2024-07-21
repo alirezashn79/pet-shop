@@ -19,7 +19,6 @@ export default function ProductsSlider({
   id?: number;
   type: "ACCESSORY" | "FOOD";
 }) {
-  console.log(data);
   return (
     <div className="container md:px-0">
       <div data-aos="fade-up" className="min-h-96">

@@ -1,12 +1,25 @@
 import { create } from "zustand";
 import { IBlog } from "../types";
 import client from "../app/client";
+
+interface IBlog {
+  aparat_video_link: string;
+  description: string;
+  id: number;
+  image: string;
+  tags: {
+    id: number;
+    title: string;
+  }[];
+  title: string;
+}
+
 interface IUseBlog {
   data: null | {
     count: number;
     next: string | null;
     previous: string | null;
-    results: [];
+    results: IBlog[];
   };
   singleData: null | {
     title: string;

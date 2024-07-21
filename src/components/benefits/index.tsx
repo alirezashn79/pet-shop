@@ -1,4 +1,5 @@
 import TitleBar from "../common/titlebar";
+import HomePet from "../../assets/image/home/home_pets.png";
 
 export default function Benefits() {
   return (
@@ -17,10 +18,7 @@ export default function Benefits() {
           data-aos-duration="1000"
           className="w-[500px] my-20 h-[500px] rounded-full border border-gray-400 bg-white mx-auto hidden lg:flex-center relative"
         >
-          <img
-            src="https://theme51.mywebzi.ir/uploads/6e9adb121af34d7c83e95964e47ba7c5.w_204,h_274,r_k.jpg"
-            alt="item-image"
-          />
+          <img className="w-1/2" src={HomePet} alt="item-image" />
 
           <div className="absolute -left-40 top-5 flex-center gap-4">
             <div className="h-20 w-20 rounded-full flex-center bg-primary shrink-0">

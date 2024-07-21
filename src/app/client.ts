@@ -5,6 +5,8 @@ import { baseUrl } from "./baseUrl";
 
 const client = axios.create({
   baseURL: baseUrl,
+  withCredentials: true,
+
   headers: {
     "Content-Type": "application/json",
   },
@@ -12,7 +14,13 @@ const client = axios.create({
 
 client.interceptors.request.use(
   (config) => {
-    if (config.url === "/change-password/" || config.url?.includes("/order")) {
+    if (
+      config.url === "/change-password/" ||
+      config.url?.includes("/order") ||
+      config.url == "/edit-profile/" ||
+      config.url == "/change-phone/" ||
+      config.url == "/verify-phone/"
+    ) {
       config.headers["Authorization"] =
         `Bearer ${Cookies.get("JWT_Token_Access")}`;
     }

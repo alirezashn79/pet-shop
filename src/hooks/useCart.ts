@@ -43,13 +43,11 @@ export const useCart = create<IUseCart>((set, get) => ({
         `/order/cart-detail/?Type=Product`
       );
 
-      console.log("foodResponse", foodResponse);
-      console.log("productResponse", productResponse);
       const cartItems = [...foodResponse.data, ...productResponse.data];
 
       set({ data: cartItems });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     } finally {
       set({ loading: false });
     }
@@ -78,8 +76,7 @@ export const useCart = create<IUseCart>((set, get) => ({
     // !isExist && set((state) => ({ data: state.data && [...state.data, item] }));
   },
   cartCreate: async () => {
-    const res = await client.get("/order/create/");
-    console.log(res);
+    await client.get("/order/create/");
   },
 
   updateData: async (id, type) => {

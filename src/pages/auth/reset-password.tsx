@@ -34,8 +34,6 @@ export default function ResetPassword() {
       const res = await client.post(`/account/reset-pass/${params.id}/`, {
         password: values.password,
       });
-
-      console.log(res);
     } catch (error) {
       if (error.response) {
         if (error.response.status === 301) {
