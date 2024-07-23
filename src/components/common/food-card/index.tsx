@@ -1,21 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { baseUrl } from "../../../app/baseUrl";
-import { useCart } from "../../../hooks/useCart";
+import useCart from "../../../hooks/useCart";
 import Quantity from "../quantity";
 
 export default function Card({ data }: { data: any }) {
-  const cartData = useCart((state) => state.data);
-  const addToCart = useCart((state) => state.addToCart);
-  const cartClear = useCart((state) => state.cartClear);
-  const cartCreate = useCart((state) => state.cartCreate);
+  const navigate = useNavigate();
+
+  const foodCart = useCart((state) => state.food);
+  const incrementCartItem = useCart((state) => state.increment);
+  const food = foodCart?.find((item) => item.food_id === data?.id);
 
   return (
     <div
       data-aos={location.pathname.includes("/shop") ? "fade-up" : undefined}
       className="bg-white md:border-2 rounded flex flex-col items-center overflow-hidden relative border"
     >
-      <button onClick={cartClear}>cart clear</button>
-      <button onClick={cartCreate}>cart create</button>
       <Link to={`/shop/foods/${data.id}`}>
         <img
           src={data.image ? baseUrl + data?.image[0].image : ""}
@@ -37,25 +36,39 @@ export default function Card({ data }: { data: any }) {
         </div>
       </Link>
 
-      {/* {cartData?.some((item) => item.id === data?.id) ? (
+      {food ? (
         <div className="mb-4">
           <Quantity
+            type="food"
+            price={data.price}
             id={data?.id}
-            quantity={
-              cartData?.find((item) => item.id === data?.id)?.quantity || 1
-            }
+            quantity={food?.quantity || 1}
+            image={baseUrl + data?.image[0].image}
+            title={data.title}
+            unit={data.price}
           />
         </div>
-      ) : ( */}
-      <button
-        onClick={() =>
-          addToCart({ id: Number(data.id), quantity: 1, type: "Food" })
-        }
-        className="px-4 py-2 bg-primary text-base mb-4 font-semibold rounded shadow-sm hover:scale-95 transition-all"
-      >
-        افزودن به سبد خرید
-      </button>
-      {/* )} */}
+      ) : (
+        <button
+          onClick={() =>
+            incrementCartItem(
+              "food",
+              {
+                id: data.id,
+                price: data.price,
+                quantity: 1,
+                image: baseUrl + data?.image[0].image,
+                title: data.title,
+                unit: data.price,
+              },
+              navigate
+            )
+          }
+          className="px-4 py-2 bg-primary text-base mb-4 font-semibold rounded shadow-sm hover:scale-95 transition-all"
+        >
+          افزودن به سبد خرید
+        </button>
+      )}
     </div>
   );
 }

@@ -1,21 +1,30 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Breadcrumb from "../../components/breadcrumb";
 import Gallery from "../../components/common/gallery";
 import Loading from "../../components/loading";
 import useFood from "../../hooks/useFood";
 import ProductsSlider from "../../components/common/product-slider";
 import TitleBar from "../../components/common/titlebar";
+import useCart from "../../hooks/useCart";
+import Quantity from "../../components/common/quantity";
+import { baseUrl } from "../../app/baseUrl";
 
 export default function FoodPage() {
-  // const [currentBtn, setCurrentBtn] = useState<"details" | "description">(
-  //   "details"
-  // );
   const params = useParams();
   const getSingleFood = useFood((state) => state.getSingleFood);
   const loading = useFood((state) => state.loading);
   const allFoods = useFood((state) => state.allFoods);
   const singleFood = useFood((state) => state.singleFood);
+  const navigate = useNavigate();
+
+  const foodCart = useCart((state) => state.food);
+  const incrementCartItem = useCart((state) => state.increment);
+  const isfood = foodCart?.find(
+    (item) => item.food_id === Number(params.foodId)
+  );
+
+  console.log("isfood", params);
 
   useEffect(() => {
     getSingleFood({ id: String(params.foodId) });
@@ -47,9 +56,39 @@ export default function FoodPage() {
               </ul>
 
               <div className="flex-center lg:block">
-                <button className="px-8 py-2 bg-primary rounded-sm mx-auto">
-                  اضافه به سبد خرید
-                </button>
+                {isfood ? (
+                  <div className="mb-4">
+                    <Quantity
+                      image={baseUrl + singleFood?.image[0].image}
+                      title={singleFood?.title as string}
+                      unit={singleFood?.price as number}
+                      type="food"
+                      price={singleFood?.price as number}
+                      id={Number(params.foodId)}
+                      quantity={isfood.quantity || 1}
+                    />
+                  </div>
+                ) : (
+                  <button
+                    onClick={() =>
+                      incrementCartItem(
+                        "food",
+                        {
+                          id: Number(params.foodId),
+                          price: singleFood?.price as number,
+                          quantity: 1,
+                          image: baseUrl + singleFood?.image[0].image,
+                          title: singleFood?.title as string,
+                          unit: singleFood?.price as number,
+                        },
+                        navigate
+                      )
+                    }
+                    className="px-4 py-2 bg-primary text-base mb-4 font-semibold rounded shadow-sm hover:scale-95 transition-all"
+                  >
+                    افزودن به سبد خرید
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -88,7 +127,7 @@ export default function FoodPage() {
             <TitleBar title="محصولات مرتبط" />
             <ProductsSlider
               type="FOOD"
-              id={Number(params.id)}
+              id={Number(params.foodId)}
               data={allFoods?.results}
             />
           </div>

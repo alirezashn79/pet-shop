@@ -1,143 +1,209 @@
 import { create } from "zustand";
-import client from "../app/client";
-import { TCartProduct } from "../types";
 import Cookies from "js-cookie";
+import toast from "react-hot-toast";
+import { NavigateFunction } from "react-router-dom";
+
 interface IUseCart {
-  data:
+  getFoods: () => void;
+  getProducts: () => void;
+  product:
+    | []
     | {
-        product_name: string;
+        product_id: number;
         quantity: number;
         price: number;
-        product_id: number;
-        total_price: number;
-      }[]
-    | null;
-  loading: boolean;
-  getData: () => Promise<void>;
-  cartClear: () => Promise<void>;
-  cartCreate: () => Promise<void>;
-  getSingleData: TCartProduct | undefined;
-  updateData: (id: string, type: "increment" | "decrement") => Promise<void>;
-  removeFromCart: (id: string) => Promise<void>;
-  addToCart: ({
-    id,
-    quantity,
-    type,
-  }: {
-    id: number;
-    quantity: number;
-    type: "Product" | "Food";
-  }) => Promise<void>;
+        title: string;
+        image: string;
+        unit: number;
+      }[];
+  food:
+    | []
+    | {
+        food_id: number;
+        quantity: number;
+        price: number;
+        title: string;
+        image: string;
+        unit: number;
+      }[];
+
+  increment: (
+    type: "food" | "product",
+    data: {
+      id: number;
+      quantity: number;
+      price: number;
+      title: string;
+      image: string;
+      unit: number;
+    },
+    navigate: NavigateFunction
+  ) => void;
+  decrement: (
+    type: "food" | "product",
+    data: {
+      id: number;
+      quantity: number;
+      price: number;
+      title: string;
+      image: string;
+      unit: number;
+    },
+    navigate: NavigateFunction
+  ) => void;
 }
 
-export const useCart = create<IUseCart>((set, get) => ({
-  data: null,
-  getSingleData: undefined,
-  loading: false,
+const useCart = create<IUseCart>((set, get) => ({
+  food: [],
+  product: [],
+  getFoods: () => {
+    if (Cookies.get("food_cart")) {
+      const foodCookie = JSON.parse(Cookies.get("food_cart") as string);
+      set({ food: foodCookie });
+    } else {
+      Cookies.remove("food_cart");
+    }
+  },
+  getProducts: () => {
+    if (Cookies.get("product_cart")) {
+      const productCookie = JSON.parse(Cookies.get("product_cart") as string);
+      set({ product: productCookie });
+    } else {
+      Cookies.remove("product_cart");
+    }
+  },
 
-  getData: async () => {
-    set({ loading: true });
-    try {
-      const foodResponse = await client.get(`/order/cart-detail/?Type=Food`);
-      const productResponse = await client.get(
-        `/order/cart-detail/?Type=Product`
+  increment: (type, data, navigate) => {
+    if (!Cookies.get("JWT_Token_Access")) {
+      toast.error("ابتدا لاگین کنید");
+      return navigate("/signin");
+    }
+    if (type === "food") {
+      const index = get().food.findIndex((item) => item.food_id === data.id);
+      if (index === -1) {
+        set((state) => ({
+          food: [
+            ...state.food,
+            {
+              food_id: data.id,
+              price: data.quantity * data.price,
+              quantity: data.quantity,
+              image: data.image,
+              title: data.title,
+              unit: data.price,
+            },
+          ],
+        }));
+      } else {
+        const allFoods = get().food.slice();
+        allFoods[index].quantity++;
+        allFoods[index].price = data.unit * data.quantity;
+        set({ food: allFoods });
+      }
+      let now = new Date();
+      var time = now.getTime();
+      time += 3600 * 1000;
+      now.setTime(time);
+      Cookies.set("food_cart", JSON.stringify(get().food.slice()), {
+        path: "/",
+        secure: true,
+        expires: now,
+        sameSite: "none",
+      });
+      console.log("food cookie", Cookies.get("food_cart"));
+    } else {
+      const index = get().product.findIndex(
+        (item) => item.product_id === data.id
       );
-
-      const cartItems = [...foodResponse.data, ...productResponse.data];
-
-      set({ data: cartItems });
-    } catch (error) {
-      // console.log(error);
-    } finally {
-      set({ loading: false });
-    }
-  },
-
-  cartClear: async () => {
-    const res = await client.get("/order/cart-clear/");
-    if (res.status === 200) {
-      await get().getData();
-    }
-  },
-
-  addToCart: async ({ id, quantity, type }) => {
-    const res = await client.post(`/order/cart-add/?Type=${type}`, {
-      product_id: id,
-      quantity,
-    });
-
-    if (res.status === 200) {
-      await get().getData();
-    }
-
-    // copy array data
-    // const dataClone = get().data?.slice();
-    // const isExist = dataClone?.some((value) => value.id === item.id);
-    // !isExist && set((state) => ({ data: state.data && [...state.data, item] }));
-  },
-  cartCreate: async () => {
-    await client.get("/order/create/");
-  },
-
-  updateData: async (id, type) => {
-    const data = get().data;
-
-    switch (type) {
-      case "increment": {
-        const index = data?.findIndex((item) => item.id === id);
-
-        if (data && typeof index !== "undefined" && index !== -1) {
-          const newData = [...data];
-          ++newData[index].quantity;
-
-          set({ data: newData });
-        }
-
-        // const res = await axios.put("/cart", { id });
-
-        break;
+      if (index === -1) {
+        set((state) => ({
+          product: [
+            ...state.product,
+            {
+              product_id: data.id,
+              price: data.quantity * data.price,
+              quantity: data.quantity,
+              title: data.title,
+              image: data.image,
+              unit: data.price,
+            },
+          ],
+        }));
+      } else {
+        const allProducts = get().product.slice();
+        allProducts[index].quantity++;
+        allProducts[index].price = data.unit * data.quantity;
+        set({ product: allProducts });
       }
-
-      case "decrement": {
-        const index = data?.findIndex((item) => item.id === id);
-
-        if (
-          data &&
-          typeof index !== "undefined" &&
-          index !== -1 &&
-          data[index].quantity === 2
-        ) {
-          console.log("delete");
-        }
-
-        if (
-          data &&
-          typeof index !== "undefined" &&
-          index !== -1 &&
-          data[index].quantity > 1
-        ) {
-          const newData = [...data];
-          --newData[index].quantity;
-
-          set({ data: newData });
-        }
-
-        // const res = await axios.put("/cart", { id });
-
-        break;
-      }
-
-      default:
-        break;
+      let now = new Date();
+      var time = now.getTime();
+      time += 3600 * 1000;
+      now.setTime(time);
+      Cookies.set("product_cart", JSON.stringify(get().product.slice()), {
+        path: "/",
+        secure: true,
+        expires: now,
+        sameSite: "none",
+      });
+      console.log("product cookie", Cookies.get("product_cart"));
     }
   },
+  decrement: (type, data, navigate) => {
+    if (!Cookies.get("JWT_Token_Access")) {
+      toast.error("ابتدا لاگین کنید");
+      return navigate("/signin");
+    }
 
-  removeFromCart: async (id) => {
-    // copy array data
-    const dataClone = get().data?.slice();
+    if (type === "food") {
+      const food = get().food.find((item) => item.food_id === data.id);
+      if (!food) return;
+      if (data.quantity === 0) {
+        const newFoods = get()
+          .food.filter((item) => item.food_id !== data.id)
+          .slice();
+        set({ food: newFoods });
+      } else {
+        const index = get().food.findIndex((item) => item.food_id === data.id);
 
-    const filteredData = dataClone?.filter((item) => item.id !== id);
+        const allFoods = get().food.slice();
+        allFoods[index].quantity--;
+        allFoods[index].price = data.unit * data.quantity;
+        set({ food: allFoods });
+      }
+      Cookies.set("food_cart", JSON.stringify(get().food.slice()), {
+        path: "/",
+        secure: true,
+        expires: 3600,
+        sameSite: "none",
+      });
+      console.log("food cookie", Cookies.get("food_cart"));
+    } else {
+      const product = get().product.find((item) => item.product_id === data.id);
+      if (!product) return;
+      if (data.quantity === 0) {
+        const newProducts = get().product.filter(
+          (item) => item.product_id !== data.id
+        );
+        set({ product: newProducts });
+      } else {
+        const index = get()
+          .product.slice()
+          .findIndex((item) => item.product_id === data.id);
 
-    set({ data: filteredData });
+        const allProducts = get().product.slice();
+        allProducts[index].quantity--;
+        allProducts[index].price = data.unit * data.quantity;
+        set({ product: allProducts });
+      }
+      Cookies.set("product_cart", JSON.stringify(get().product), {
+        path: "/",
+        secure: true,
+        expires: 3600,
+        sameSite: "none",
+      });
+      console.log("product cookie", Cookies.get("product_cart"));
+    }
   },
 }));
+
+export default useCart;

@@ -5,10 +5,21 @@ import { useAboutUs } from "../../hooks/useAboutUs";
 import { useContactUs } from "../../hooks/useContactUs";
 import { FaTelegram, FaWhatsapp } from "react-icons/fa";
 import { FiInstagram } from "react-icons/fi";
+import { useEffect, useState } from "react";
+import client from "../../app/client";
 
 export default function MainFooter() {
   const aboutUsData = useAboutUs((state) => state.data);
   const contactUsData = useContactUs((state) => state.data);
+  const [workingHours, setWorkingHours] = useState<null | {
+    saturday: string;
+    sunday: string;
+    monday: string;
+    tuesday: string;
+    wednesday: string;
+    thursday: string;
+    friday: string;
+  }>(null);
 
   const menuItems: IMenu[] = [
     {
@@ -53,24 +64,18 @@ export default function MainFooter() {
       link: "/about-us",
     },
   ];
+
+  useEffect(() => {
+    const getWorkingHours = async () => {
+      const res = await client.get("/site/working-hours/");
+      setWorkingHours(res.data);
+    };
+    getWorkingHours();
+  }, []);
   return (
     <div className="bg-gray-50">
       <div className="flex flex-col  gap-y-4 pb-8 relative">
-        <div className="w-full md:flex md:items-center md:gap-x-24 bg-green-700 text-center py-8 px-4 space-y-4 order-2 lg:order-1 md:px-20  xl:px-40">
-          <h5 className="text-white text-xl xl:text-3xl font-bold">
-            جستجو در سایت
-          </h5>
-          <div className="flex flex-1 xl:max-w-xs lg:max-w-xs 2xl:max-w-lg">
-            <input
-              type="text"
-              placeholder="نام برند یا محصول مورد نظر..."
-              className="bg-white text-gray-700 px-4 py-2 rounded-r-full flex-1"
-            />
-            <button className="bg-primary px-4 py-2 rounded-l-full">
-              جستجو
-            </button>
-          </div>
-        </div>
+        <div className="w-full md:flex md:items-center md:gap-x-24 bg-green-700 text-center py-8 px-4 space-y-4 order-2 lg:order-1 md:px-20  xl:px-40"></div>
 
         <div className="px-8  w-fit order-1 lg:order-2  mx-auto lg:absolute lg:left-4 xl:left-16 z-20">
           <div className="w-full bg-[#fef9c3] border-4 p-8 xl:p-12 border-primary flex-center flex-col lg:mb-4 gap-4 ">
@@ -82,49 +87,49 @@ export default function MainFooter() {
                 <span>شنبه</span>
                 <span className="self-start text-left flex-1">
                   {" "}
-                  7 صبح الی 19 بعدازظهر
+                  {workingHours?.saturday}
                 </span>
               </div>
               <div className="flex items-center gap-x-8">
                 <span>یکشنبه</span>
                 <span className="self-start text-left flex-1">
                   {" "}
-                  7 صبح الی 19 بعدازظهر
+                  {workingHours?.sunday}
                 </span>
               </div>
               <div className="flex items-center gap-x-8">
                 <span>دوشنبه</span>
                 <span className="self-start text-left flex-1">
                   {" "}
-                  7 صبح الی 19 بعدازظهر
+                  {workingHours?.monday}
                 </span>
               </div>
               <div className="flex items-center gap-x-8">
                 <span>سه شنبه</span>
                 <span className="self-start text-left flex-1">
                   {" "}
-                  7 صبح الی 19 بعدازظهر
+                  {workingHours?.tuesday}
                 </span>
               </div>
               <div className="flex items-center gap-x-8">
                 <span>چهارشنبه</span>
                 <span className="self-start text-left flex-1">
                   {" "}
-                  7 صبح الی 19 بعدازظهر
+                  {workingHours?.wednesday}
                 </span>
               </div>
               <div className="flex items-center gap-x-8">
                 <span>پنجشنبه</span>
                 <span className="self-start text-left flex-1">
                   {" "}
-                  7 صبح الی 19 بعدازظهر
+                  {workingHours?.thursday}
                 </span>
               </div>
               <div className="flex items-center gap-x-8">
                 <span>جمعه</span>
                 <span className="self-start text-left flex-1">
                   {" "}
-                  7 صبح الی 19 بعدازظهر
+                  {workingHours?.friday}
                 </span>
               </div>
             </div>

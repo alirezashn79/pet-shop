@@ -24,6 +24,7 @@ import Foods from "../pages/products/cat-products";
 import Services from "../pages/services";
 import Private from "./private";
 import Protected from "./protected";
+import CartPage from "../pages/cart";
 
 export default function PageRoutes() {
   return (
@@ -44,7 +45,9 @@ export default function PageRoutes() {
             <Route path="product/:id" element={<SingleAccessoryPage />} />
           </Route>
 
-          {/* <Route path="cart" element={<CartPage />} /> */}
+          <Route element={<Private />}>
+            <Route path="cart" element={<CartPage />} />
+          </Route>
         </Route>
 
         <Route path="/services" element={<Services />} />

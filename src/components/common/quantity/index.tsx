@@ -1,29 +1,61 @@
 import { Minus, Plus, Trash2Icon } from "lucide-react";
 import { useState } from "react";
-import { useCart } from "../../../hooks/useCart";
+import useCart from "../../../hooks/useCart";
+import { useNavigate } from "react-router-dom";
+// import { useCart } from "../../../hooks/useCart";
 
 export default function Quantity({
   id,
   quantity,
+  price,
+  type,
+  title,
+  image,
+  unit,
 }: {
-  id: string;
+  id: number;
   quantity: number;
+  type: "food" | "product";
+  price: number;
+  title: string;
+  image: string;
+  unit: number;
 }) {
-  const updateData = useCart((state) => state.updateData);
-  const removeFromCart = useCart((state) => state.removeFromCart);
-  const [quantityState, setQuantityState] = useState(quantity);
+  const increment = useCart((state) => state.increment);
+  const decrement = useCart((state) => state.decrement);
   const [showAnimation, setShowAnimation] = useState(false);
+  const navigate = useNavigate();
 
-  const incrementQuantity = async () => {
+  const incrementQuantity = () => {
     setShowAnimation((prev) => !prev);
-    await updateData(id, "increment");
-    setQuantityState((prev) => prev + 1);
+    increment(
+      type,
+      {
+        id,
+        price,
+        quantity: quantity + 1,
+        image,
+        title,
+        unit,
+      },
+      navigate
+    );
   };
 
-  const decrementQuantity = async () => {
+  const decrementQuantity = () => {
     setShowAnimation((prev) => !prev);
-    await updateData(id, "decrement");
-    setQuantityState((prev) => prev - 1);
+    decrement(
+      type,
+      {
+        id,
+        price,
+        quantity: quantity - 1,
+        title,
+        image,
+        unit,
+      },
+      navigate
+    );
   };
 
   return (
@@ -37,11 +69,11 @@ export default function Quantity({
       <div
         className={`w-12 text-center text-lg ${showAnimation ? "quantity_animation_up" : "quantity_animation_down"}`}
       >
-        {quantityState}
+        {quantity}
       </div>
-      {quantityState === 1 ? (
+      {quantity === 1 ? (
         <button
-          onClick={removeFromCart.bind(null, id)}
+          onClick={decrementQuantity}
           className="h-10 w-10 bg-rose-500 flex-center font-bold text-lg rounded focus:scale-110 transition-all"
         >
           <Trash2Icon className="h-6 w-6 text-white" />

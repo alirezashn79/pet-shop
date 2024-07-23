@@ -12,7 +12,6 @@ import {
 import { useEffect, useState } from "react";
 import { useJwt } from "react-jwt";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useCart } from "../../hooks/useCart";
 import useOverlay from "../../hooks/useOverlay";
 
 import useCategory from "../../hooks/useCategory";
@@ -22,9 +21,10 @@ import Dropdown from "../common/dropdown";
 import DropdownMobile from "../common/dropdown-mobile";
 import Overlay from "../common/overlay";
 import { useContactUs } from "../../hooks/useContactUs";
+import useCart from "../../hooks/useCart";
 
 export default function MainHeader() {
-  const cartData = useCart((state) => state.data);
+  // const cartData = useCart((state) => state.data);
   const showOverlay = useOverlay((state) => state.showOverlay);
   const toggleOverlay = useOverlay((state) => state.toggleOverlay);
   const { isExpired } = useJwt(String(Cookies.get("JWT_Token_Access")));
@@ -32,6 +32,10 @@ export default function MainHeader() {
   const [toggleAuthBtn, setToggleAuthBtn] = useState(false);
   const categories = useCategory((state) => state.data);
   const contactUsData = useContactUs((state) => state.data);
+  const productsCart = useCart((state) => state.product);
+  const foodsCart = useCart((state) => state.food);
+
+  const cartLength = productsCart.length + foodsCart.length;
 
   const menuItems: IMenu[] = [
     {
@@ -128,14 +132,12 @@ export default function MainHeader() {
 
                       <span
                         style={{
-                          scale:
-                            cartData && cartData?.length > 0 ? "100%" : "0",
-                          opacity:
-                            cartData && cartData?.length > 0 ? "100%" : "0",
+                          scale: cartLength ? "100%" : "0",
+                          opacity: cartLength ? "100%" : "0",
                         }}
                         className="absolute transition-all bg-primary h-4 w-4 flex-center rounded-full -top-1 -right-1 text-xs text-black"
                       >
-                        {cartData?.length}
+                        {cartLength}
                       </span>
                     </div>
 
@@ -222,7 +224,9 @@ export default function MainHeader() {
                         className="hover:text-primary"
                         href={`tel:${contactUsData?.phone_number}`}
                       >
-                        <span className="text-slate-600">شماره تماس:</span>{" "}
+                        <span className="text-slate-600">
+                          شماره تماس برای پپگیری سفارشات:
+                        </span>{" "}
                         {contactUsData?.phone_number}
                       </a>
                     </div>

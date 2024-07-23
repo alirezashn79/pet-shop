@@ -9,10 +9,12 @@ export default function Lig() {
 
   useEffect(() => {
     const getData = async () => {
-      const res = await client.get("/lig");
-      const sortedData = res.data.sort(
-        (a: { score: number }, b: { score: number }) => a.score < b.score
-      );
+      const res = await client.get("/home/user-score/");
+      const sortedData = res.data
+        .filter((item) => !!item.full_name && item.score)
+        .sort(
+          (a: { score: number }, b: { score: number }) => a.score < b.score
+        );
 
       setData(sortedData);
     };
@@ -107,9 +109,7 @@ export default function Lig() {
                   <th scope="col" className="px-6 py-3">
                     رتبه
                   </th>
-                  <th scope="col" className="px-6 py-3">
-                    لقب
-                  </th>
+
                   <th scope="col" className="px-6 py-3">
                     نام
                   </th>
@@ -126,10 +126,8 @@ export default function Lig() {
                     <th scope="row" className="px-6 py-4   whitespace-nowrap ">
                       {idx + 1}#
                     </th>
-                    <th scope="row" className="px-6 py-4   ">
-                      امپراطور رزپت
-                    </th>
-                    <td className="px-6 py-4">{item.name}</td>
+
+                    <td className="px-6 py-4">{item.full_name}</td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-4  ">
                         <Coins className="h-6 w-6 text-primary" />

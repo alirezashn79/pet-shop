@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { IBlog } from "../types";
 import client from "../app/client";
 
 interface IBlog {
@@ -12,6 +11,19 @@ interface IBlog {
     title: string;
   }[];
   title: string;
+}
+
+interface IProduct {
+  category: number;
+  color: string;
+  created: string;
+  description: string;
+  id: number;
+  is_available: boolean;
+  made_by_country: string;
+  price: number;
+  title: string;
+  unit: string;
 }
 
 interface IUseBlog {
@@ -33,6 +45,7 @@ interface IUseBlog {
     description: string;
     image: string;
     id: number;
+    product: IProduct[] | null;
   };
   getData: ({ current }: { current: number }) => Promise<void>;
   loading: boolean;

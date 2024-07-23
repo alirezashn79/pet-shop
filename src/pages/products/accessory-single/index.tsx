@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Breadcrumb from "../../../components/breadcrumb";
 import Gallery from "../../../components/common/gallery";
 import Loading from "../../../components/loading";
@@ -7,6 +7,9 @@ import ProductsSlider from "../../../components/common/product-slider";
 import TitleBar from "../../../components/common/titlebar";
 import useProduct from "../../../hooks/useProduct";
 import { cn } from "cn-func";
+import useCart from "../../../hooks/useCart";
+import Quantity from "../../../components/common/quantity";
+import { baseUrl } from "../../../app/baseUrl";
 
 export default function SingleAccessoryPage() {
   const [currentBtn, setCurrentBtn] = useState<"details" | "description">(
@@ -17,6 +20,13 @@ export default function SingleAccessoryPage() {
   const loading = useProduct((state) => state.loading);
   const allAccessories = useProduct((state) => state.accessories);
   const singleAccessory = useProduct((state) => state.singleAccessory);
+  const navigate = useNavigate();
+
+  const productCart = useCart((state) => state.product);
+  const incrementProductCart = useCart((state) => state.increment);
+  const product = productCart?.find(
+    (item) => item.product_id === Number(params.id)
+  );
 
   useEffect(() => {
     getSingleAccessory({ id: String(params.id) });
@@ -54,7 +64,8 @@ export default function SingleAccessoryPage() {
                 <p
                   className={"text-green-500 text-sm md:text-base xl:text-2xl"}
                 >
-                  {singleAccessory.discount_amount.discount_price} تومان
+                  {singleAccessory.discount_amount.discount_price.toLocaleString()}{" "}
+                  تومان
                 </p>
               )}
               <ul className="space-y-2 text-xs md:text-sm xl:text-base">
@@ -62,9 +73,49 @@ export default function SingleAccessoryPage() {
               </ul>
 
               <div className="flex-center lg:block">
-                <button className="px-8 py-2 bg-primary rounded-sm mx-auto">
-                  اضافه به سبد خرید
-                </button>
+                {product ? (
+                  <div className="mb-4">
+                    <Quantity
+                      image={baseUrl + singleAccessory?.images[0].image}
+                      title={singleAccessory?.title as string}
+                      unit={singleAccessory?.price as number}
+                      type="product"
+                      price={
+                        (singleAccessory?.discount_amount.discount_price ===
+                        null
+                          ? singleAccessory?.price
+                          : singleAccessory?.discount_amount
+                              .discount_price) as number
+                      }
+                      id={Number(params.id)}
+                      quantity={product?.quantity || 1}
+                    />
+                  </div>
+                ) : (
+                  <button
+                    onClick={() =>
+                      incrementProductCart(
+                        "product",
+                        {
+                          id: Number(params.id),
+                          price: (singleAccessory?.discount_amount
+                            .discount_price === null
+                            ? singleAccessory?.price
+                            : singleAccessory?.discount_amount
+                                .discount_price) as number,
+                          quantity: 1,
+                          image: baseUrl + singleAccessory?.images[0].image,
+                          title: singleAccessory?.title as string,
+                          unit: singleAccessory?.price as number,
+                        },
+                        navigate
+                      )
+                    }
+                    className="px-4 py-2 bg-primary text-base mb-4 font-semibold rounded shadow-sm hover:scale-95 transition-all"
+                  >
+                    افزودن به سبد خرید
+                  </button>
+                )}
               </div>
             </div>
           </div>

@@ -14,9 +14,7 @@ export default function HomePage() {
   return (
     <>
       <Slider />
-      <div className="mb-[800px] md:mb-72">
-        <Services />
-      </div>
+
       <Benefits />
 
       {discountData && discountData?.length > 0 && (

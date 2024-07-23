@@ -1,116 +1,91 @@
-import DataTable, { TableColumn } from "react-data-table-component";
-import Quantity from "../../components/common/quantity";
-import TitleBar from "../../components/common/titlebar";
-import { useCart } from "../../hooks/useCart";
-import { TCartProduct } from "../../types";
 import { Link } from "react-router-dom";
-import Loading from "../../components/loading";
+import CartItem from "../../components/common/cart-item";
+import TitleBar from "../../components/common/titlebar";
+import useCart from "../../hooks/useCart";
 
 export default function CartPage() {
-  const data = useCart((state) => state.data);
-  const loading = useCart((state) => state.loading);
-  const removeFromCart = useCart((state) => state.removeFromCart);
-
-  const columns: TableColumn<TCartProduct>[] = [
-    {
-      name: "#",
-      cell: (row, idx) => idx + 1,
-      width: "40px",
-    },
-    {
-      name: "کالا",
-      selector: (row) => row.title,
-      cell: (row) => (
-        <div className="flex-center gap-x-4 p-2 w-[56rem] md:w-auto">
-          <img
-            className="lg:w-24 lg:h-24 h-16 w-16"
-            src={row.thumbnail}
-            alt={row.title}
-          />
-          <span className="lg:text-base block w-full text-sm">{row.title}</span>
-        </div>
-      ),
-    },
-    {
-      name: "تعداد",
-      selector: (row) => row.quantity,
-      cell: (row) => (
-        <div>
-          <Quantity id={row.id} quantity={row.quantity} />
-        </div>
-      ),
-    },
-    {
-      name: "قیمت واحد",
-      selector: (row) => row.price,
-      cell: (row) => (
-        <p className="text-base text-gray-600">
-          {row.price.toLocaleString()}
-          <span className="mr-1">تومان</span>
-        </p>
-      ),
-    },
-
-    {
-      name: "قیمت کل",
-      selector: (row) => row.quantity * row.price,
-      cell: (row) => (
-        <p className="text-base text-gray-600">
-          {(row.quantity * row.price).toLocaleString()}
-          <span className="mr-1">تومان</span>
-        </p>
-      ),
-    },
-
-    {
-      name: "عملیات",
-      cell: (row) => (
-        <button
-          onClick={removeFromCart.bind(null, row.id)}
-          className="bg-rose-800 text-white px-2 py-1 rounded-sm"
-        >
-          حذف
-        </button>
-      ),
-    },
-  ];
-
-  if (loading) return <Loading />;
+  const foodData = useCart((state) => state.food);
+  const productData = useCart((state) => state.product);
 
   return (
     <div className="page">
-      <TitleBar title="سبد خرید" />
+      <TitleBar
+        title="سبد خرید"
+        subTitle="محصولات تا 1 ساعت در سبد خرید شما باقی می مانند"
+      />
 
-      <div data-aos="zoom-in">
-        <DataTable
-          responsive={true}
-          noDataComponent={
-            <p className="text-lg font-semibold p-4">سبد خرید شما خالی است</p>
-          }
-          columns={columns}
-          data={data || []}
-        />
+      <div
+        data-aos="fade-up"
+        className="relative overflow-x-auto shadow-md sm:rounded-lg"
+      >
+        {((foodData && foodData?.length > 0) ||
+          (productData && productData.length > 0)) && (
+          <table className="w-full text-sm border  text-gray-500">
+            <thead className="text-xs  text-gray-700 uppercase dark:text-gray-400 text-center border">
+              <tr>
+                <th scope="col" className="px-6 py-3">
+                  محصول
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  تعداد
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  قیمت واحد
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  قیمت کل محصول
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {foodData?.map((item, idx) => (
+                <CartItem
+                  type="food"
+                  key={idx}
+                  item={{ ...item, id: item.food_id }}
+                />
+              ))}
+              {productData?.map((item, idx) => (
+                <CartItem
+                  type="product"
+                  key={idx * 11}
+                  item={{ ...item, id: item.product_id }}
+                />
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
 
-      {data && data?.length > 0 ? (
+      {(foodData && foodData?.length > 0) ||
+      (productData && productData.length > 0) ? (
         <>
           <div className=" bg-white  lg:w-1/3 md:w-1/2 w-full  mx-auto mt-4 p-4">
             <div className="flex items-center justify-between py-2 mx-auto">
-              <span>تعداد کل کالا ها</span>
+              <span>تعداد کل اقلام </span>
               <span className="text-base lg:text-xl font-semibold">
-                {data.reduce((prev, current) => prev + current.quantity, 0)} #
+                {foodData.reduce(
+                  (prev, current) => prev + current.quantity,
+                  0
+                ) +
+                  productData.reduce(
+                    (prev, current) => prev + current.quantity,
+                    0
+                  )}{" "}
+                عدد
               </span>
             </div>
             <div className="flex items-center justify-between py-2 mx-auto font-semibold">
               <span>مبلغ قابل پرداخت:</span>
               <p className="text-green-600 text-base md:text-xl">
                 {" "}
-                {data
-                  ?.reduce(
-                    (prev, current) => prev + current.quantity * current.price,
+                {(
+                  foodData?.reduce((prev, current) => prev + current.price, 0) +
+                  productData?.reduce(
+                    (prev, current) => prev + current.unit * current.quantity,
                     0
                   )
-                  .toLocaleString()}
+                ).toLocaleString()}
                 <span className="ms-1">تومان</span>
               </p>
             </div>

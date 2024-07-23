@@ -4,10 +4,13 @@ import { baseUrl } from "../../../app/baseUrl";
 import Loading from "../../../components/loading";
 import useBlog from "../../../hooks/useBlog";
 import Iframe from "../../../utils/ifream";
+import ProductsSlider from "../../../components/common/product-slider";
+import TitleBar from "../../../components/common/titlebar";
 
 export default function BlogPage() {
-  const data = useBlog((state) => state.singleData);
   const getData = useBlog((state) => state.getSingleData);
+  const data = useBlog((state) => state.singleData);
+  console.log(data?.product);
   const loading = useBlog((state) => state.loading);
 
   const params = useParams();
@@ -49,21 +52,30 @@ export default function BlogPage() {
         </div>
       )}
 
-      <div className="mt-8 flex items-center gap-4">
-        <h1 className="text-sm lg:text-base text-slate-600 font-semibold">
-          تگ ها:
-        </h1>
-        <div className="flex items-center gap-2">
-          {data?.tags.map((item) => (
-            <div
-              key={item.id}
-              className="px-4 py-1 text-xs bg-green-700 text-white rounded"
-            >
-              {item.title}
-            </div>
-          ))}
+      {data?.tags && data?.tags.length > 0 && (
+        <div className="mt-8 flex items-center gap-4">
+          <h1 className="text-sm lg:text-base text-slate-600 font-semibold">
+            تگ ها:
+          </h1>
+          <div className="flex items-center gap-2">
+            {data?.tags.map((item) => (
+              <div
+                key={item.id}
+                className="px-4 py-1 text-xs bg-green-700 text-white rounded"
+              >
+                {item.title}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
+
+      {data?.product && data?.product?.length > 0 && (
+        <div className="mt-16">
+          <TitleBar title="محصولات مرتبط" />
+          <ProductsSlider type="ACCESSORY" data={data?.product} />
+        </div>
+      )}
     </div>
   );
 }
