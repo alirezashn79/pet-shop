@@ -13,19 +13,6 @@ interface IBlog {
   title: string;
 }
 
-interface IProduct {
-  category: number;
-  color: string;
-  created: string;
-  description: string;
-  id: number;
-  is_available: boolean;
-  made_by_country: string;
-  price: number;
-  title: string;
-  unit: string;
-}
-
 interface IUseBlog {
   data: null | {
     count: number;
@@ -45,7 +32,7 @@ interface IUseBlog {
     description: string;
     image: string;
     id: number;
-    product: IProduct[] | null;
+    product: any;
   };
   getData: ({ current }: { current: number }) => Promise<void>;
   loading: boolean;

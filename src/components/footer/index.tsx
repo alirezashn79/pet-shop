@@ -1,12 +1,11 @@
-import { MessageCircle } from "lucide-react";
-import { Link } from "react-router-dom";
-import { IMenu } from "../../types";
-import { useAboutUs } from "../../hooks/useAboutUs";
-import { useContactUs } from "../../hooks/useContactUs";
+import { useEffect, useState } from "react";
 import { FaTelegram, FaWhatsapp } from "react-icons/fa";
 import { FiInstagram } from "react-icons/fi";
-import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import client from "../../app/client";
+import { useAboutUs } from "../../hooks/useAboutUs";
+import { useContactUs } from "../../hooks/useContactUs";
+import { IMenu } from "../../types";
 
 export default function MainFooter() {
   const aboutUsData = useAboutUs((state) => state.data);

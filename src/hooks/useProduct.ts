@@ -8,6 +8,7 @@ interface IProduct {
     discount_price: number;
   };
   images: string;
+  image?: string;
   made_by_country: string;
   unit: string;
   price: number;
@@ -57,8 +58,6 @@ interface IUseProduct {
   };
   getSingleAccessory: ({ id }: { id: string }) => Promise<void>;
 
-  getData: () => Promise<void>;
-
   //
   getDiscountData: () => Promise<void>;
   discountData: null | IProduct[];
@@ -77,17 +76,6 @@ const useProduct = create<IUseProduct>((set) => ({
   mostVisitData: null,
 
   loading: false,
-  getData: async () => {
-    set({ loading: true });
-
-    const res = await client.get("/products");
-
-    if (res.status === 200) {
-      set({ data: res.data });
-    }
-
-    set({ loading: false });
-  },
 
   getAllAccessories: async ({ current }) => {
     set({ loading: true });
@@ -121,7 +109,7 @@ const useProduct = create<IUseProduct>((set) => ({
     const res = await client.get("/product/discount/");
 
     if (res.status === 200) {
-      const srotedData = res.data.map((item) => {
+      const srotedData = res.data?.map((item: any) => {
         return {
           ...item.product,
           images: item.images,

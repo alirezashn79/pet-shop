@@ -4,7 +4,13 @@ import client from "../../app/client";
 import CoinImg from "../../assets/image/coin.png";
 
 export default function Lig() {
-  const [data, setData] = useState();
+  const [data, setData] = useState<
+    | null
+    | {
+        first_name: string;
+        score: number;
+      }[]
+  >();
   const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
@@ -12,8 +18,8 @@ export default function Lig() {
 
     const getData = async () => {
       const res = await client.get("/home/user-score/");
-      const sortedData = res.data
-        .filter((item) => !!item.full_name && item.score)
+      const sortedData = res?.data
+        .filter((item: any) => !!item.full_name && item.score)
         .sort(
           (a: { score: number }, b: { score: number }) => a.score < b.score
         );
@@ -95,7 +101,7 @@ export default function Lig() {
                 </tr>
               </thead>
               <tbody className="[&>*:nth-child(2)]:bg-gray-100 [&>*:nth-child(1)]:bg-[#FFEEA9] [&>*:nth-child(3)]:bg-red-100">
-                {data?.map((item, idx) => (
+                {data?.map((item: any, idx: number) => (
                   <tr
                     className={`border-b border-gray-200 text-gray-700 first:font-bold`}
                   >

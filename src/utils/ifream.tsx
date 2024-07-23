@@ -12,7 +12,6 @@ export default function Iframe({ src }: { src: string }) {
         <iframe
           src={`https://www.aparat.com/video/video/embed/videohash/${src?.split("/").pop()}/vt/frame`}
           allowFullScreen={true}
-          mozallowfullscreen={true}
         />
       </div>
     </div>

@@ -9,13 +9,49 @@ import "swiper/css/pagination";
 import { Navigation } from "swiper/modules";
 import FoodCard from "../../common/food-card";
 import Card from "../card";
+import { IProduct } from "../../../types";
 
 export default function ProductsSlider({
   data,
   id,
   type,
 }: {
-  data: any;
+  data:
+    | IProduct[]
+    | {
+        title: string;
+        description: string;
+        discount_amount: string;
+        images: string;
+        made_by_country: string;
+        unit: string;
+        price: number;
+        color: string;
+        id: number;
+      }[]
+    | null
+    | undefined
+    | {
+        title: string;
+        description: string;
+        unit: string;
+        price: number;
+        image: string;
+        id: number;
+      }[]
+    | {
+        title: string;
+        description: string;
+        discount_amount: {
+          discount_price: number;
+        };
+        images: string;
+        made_by_country: string;
+        unit: string;
+        price: number;
+        color: string;
+        id: number;
+      }[];
   id?: number;
   type: "ACCESSORY" | "FOOD";
 }) {

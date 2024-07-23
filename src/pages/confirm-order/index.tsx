@@ -20,7 +20,7 @@ interface DataRow {
 const columns: TableColumn<DataRow>[] = [
   {
     name: "#",
-    selector: (_, index) => index + 1,
+    selector: (_, index) => (index ? index + 1 : "#"),
   },
   {
     name: "محصول",
@@ -52,12 +52,12 @@ export default function ConfirmationOrder() {
   const orderHandler = async () => {
     try {
       setLoading(true);
-      const products = JSON.parse(productCookie || "[]").map((item) => ({
+      const products = JSON.parse(productCookie || "[]").map((item: any) => ({
         product_id: item.product_id,
         quantity: item.quantity,
         price: item.price,
       }));
-      const foods = JSON.parse(foodCookie || "[]").map((item) => ({
+      const foods = JSON.parse(foodCookie || "[]").map((item: any) => ({
         food_id: item.food_id,
         quantity: item.quantity,
         price: item.price,
@@ -67,7 +67,7 @@ export default function ConfirmationOrder() {
         food: foods,
         product: products,
       };
-      const res = await client.post("/order/create/", allOrders);
+      await client.post("/order/create/", allOrders);
       clear();
       setIsSuccess(true);
 

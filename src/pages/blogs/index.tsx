@@ -29,7 +29,20 @@ export default function Blogs() {
         {/* card */}
 
         {data?.results.map((item, idx) => (
-          <BlogCard link={`/blogs/${item.id}`} key={idx} data={item} />
+          <BlogCard
+            link={`/blogs/${item.id}`}
+            key={idx}
+            data={
+              item as {
+                id: number;
+                aparat_video_link: string;
+                description: string;
+                image: "/product/media/blog/3bvp0iil_XgFNNBg.jpg";
+                tags: { id: number; title: string }[];
+                title: string;
+              }
+            }
+          />
         ))}
       </div>
 
