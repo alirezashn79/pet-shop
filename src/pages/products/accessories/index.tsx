@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import useProduct from "../../../hooks/useProduct";
-import Loading from "../../../components/loading";
-import TitleBar from "../../../components/common/titlebar";
 import Card from "../../../components/common/card";
+import TitleBar from "../../../components/common/titlebar";
+import Loading from "../../../components/loading";
 import Pagination from "../../../components/pagination";
+import useProduct from "../../../hooks/useProduct";
 
 export default function AccessoriesPage() {
   const [currentPage, setCurrentPage] = useState(
@@ -14,6 +14,8 @@ export default function AccessoriesPage() {
   const data = useProduct((state) => state.accessories);
 
   useEffect(() => {
+    document.title = "پت شاپ رز | " + "لوازم جانبی پت";
+
     getData({ current: currentPage });
   }, [currentPage, getData]);
 
@@ -23,7 +25,7 @@ export default function AccessoriesPage() {
 
   return (
     <div className="page mb-4">
-      <TitleBar title="همه لوازم جانبی ها" />
+      <TitleBar title="همه لوازم جانبی های پت" />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
         {/* card */}
 

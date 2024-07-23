@@ -16,7 +16,7 @@ client.interceptors.request.use(
   (config) => {
     if (
       config.url === "/change-password/" ||
-      config.url?.includes("/order") ||
+      config.url === "/order/create/" ||
       config.url == "/edit-profile/" ||
       config.url == "/change-phone/" ||
       config.url == "/verify-phone/"
@@ -34,14 +34,20 @@ client.interceptors.response.use(
   async (error) => {
     const originalConfig = error.config;
 
-    if (originalConfig.url === "/change-password/" && error.response) {
+    if (
+      (originalConfig.url === "/change-password/" ||
+        originalConfig.url === "/order/create/" ||
+        originalConfig.url == "/edit-profile/" ||
+        originalConfig.url == "/change-phone/" ||
+        originalConfig.url == "/verify-phone/") &&
+      error.response
+    ) {
       if (error.response.status === 401 && !originalConfig._retry) {
         originalConfig._retry = true;
         try {
           const rs = await client.post("/accounts/api/refresh/", {
             refresh: Cookies.get("JWT_Token_Refresh"),
           });
-          toast.success(rs.data.access);
           Cookies.set("JWT_Token_Access", rs.data.access, {
             path: "/",
             secure: true,

@@ -12,6 +12,8 @@ import VerifyNumber from "../pages/auth/verify";
 import EditPhone from "../pages/auth/verify-phone";
 import Blogs from "../pages/blogs";
 import BlogPage from "../pages/blogs/single-blog";
+import CartPage from "../pages/cart";
+import ConfirmationOrder from "../pages/confirm-order";
 import ContactUs from "../pages/contact-us";
 import FoodPage from "../pages/food";
 import HomePage from "../pages/home";
@@ -20,11 +22,10 @@ import NotFound from "../pages/not-found";
 import AccessoriesPage from "../pages/products/accessories";
 import AccessoryPage from "../pages/products/accessory";
 import SingleAccessoryPage from "../pages/products/accessory-single";
-import Foods from "../pages/products/cat-products";
+import Foods from "../pages/products/foods";
 import Services from "../pages/services";
 import Private from "./private";
 import Protected from "./protected";
-import CartPage from "../pages/cart";
 
 export default function PageRoutes() {
   return (
@@ -33,12 +34,10 @@ export default function PageRoutes() {
         <Route path="/" element={<HomePage />} />
         <Route path="/lig" element={<Lig />} />
         <Route path="/shop">
-          {/* <Route path="all" element={<AllProducts />} /> */}
           <Route path="foods">
             <Route path="" element={<Foods />} />
             <Route path=":foodId" element={<FoodPage />} />
           </Route>
-          {/* <Route path="dog" element={<DogProducts />} /> */}
           <Route path="accessories">
             <Route path="" element={<AccessoriesPage />} />
             <Route path=":id" element={<AccessoryPage />} />
@@ -47,6 +46,7 @@ export default function PageRoutes() {
 
           <Route element={<Private />}>
             <Route path="cart" element={<CartPage />} />
+            <Route path="confirmation-order" element={<ConfirmationOrder />} />
           </Route>
         </Route>
 
@@ -66,9 +66,9 @@ export default function PageRoutes() {
         <Route element={<Protected />}>
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<SignIn />} />
+          <Route path="/verify" element={<VerifyNumber />} />
         </Route>
         <Route element={<Private />}>
-          <Route path="/verify" element={<VerifyNumber />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password/:id" element={<ResetPassword />} />
           <Route path="/change-password" element={<ChangePassword />} />

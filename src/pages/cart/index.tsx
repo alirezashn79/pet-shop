@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import CartItem from "../../components/common/cart-item";
 import TitleBar from "../../components/common/titlebar";
@@ -6,6 +7,10 @@ import useCart from "../../hooks/useCart";
 export default function CartPage() {
   const foodData = useCart((state) => state.food);
   const productData = useCart((state) => state.product);
+
+  useEffect(() => {
+    document.title = "پت شاپ رز | " + "سبد خرید";
+  }, []);
 
   return (
     <div className="page">
@@ -41,14 +46,14 @@ export default function CartPage() {
               {foodData?.map((item, idx) => (
                 <CartItem
                   type="food"
-                  key={idx}
+                  key={`${idx}-food`}
                   item={{ ...item, id: item.food_id }}
                 />
               ))}
               {productData?.map((item, idx) => (
                 <CartItem
                   type="product"
-                  key={idx * 11}
+                  key={`${idx}-product`}
                   item={{ ...item, id: item.product_id }}
                 />
               ))}
@@ -82,7 +87,7 @@ export default function CartPage() {
                 {(
                   foodData?.reduce((prev, current) => prev + current.price, 0) +
                   productData?.reduce(
-                    (prev, current) => prev + current.unit * current.quantity,
+                    (prev, current) => prev + current.quantity * current.unit,
                     0
                   )
                 ).toLocaleString()}
@@ -91,9 +96,12 @@ export default function CartPage() {
             </div>
           </div>
           <div className="flex-center mt-4">
-            <button className="bg-primary px-8 py-2.5 text-lg">
+            <Link
+              to="/shop/confirmation-order"
+              className="bg-primary px-8 py-2.5 text-lg"
+            >
               ثبت سفارش
-            </button>
+            </Link>
           </div>
         </>
       ) : (

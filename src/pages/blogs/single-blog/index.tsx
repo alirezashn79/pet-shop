@@ -1,16 +1,15 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { baseUrl } from "../../../app/baseUrl";
+import ProductsSlider from "../../../components/common/product-slider";
+import TitleBar from "../../../components/common/titlebar";
 import Loading from "../../../components/loading";
 import useBlog from "../../../hooks/useBlog";
 import Iframe from "../../../utils/ifream";
-import ProductsSlider from "../../../components/common/product-slider";
-import TitleBar from "../../../components/common/titlebar";
 
 export default function BlogPage() {
   const getData = useBlog((state) => state.getSingleData);
   const data = useBlog((state) => state.singleData);
-  console.log(data?.product);
   const loading = useBlog((state) => state.loading);
 
   const params = useParams();
@@ -20,6 +19,10 @@ export default function BlogPage() {
       getData({ id: params.id });
     }
   }, [params, getData]);
+
+  useEffect(() => {
+    document.title = "پت شاپ رز | " + `بلاگ ها - ${data?.title}`;
+  }, [data]);
 
   if (loading) {
     return <Loading />;

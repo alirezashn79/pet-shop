@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { baseUrl } from "../../app/baseUrl";
 import Breadcrumb from "../../components/breadcrumb";
 import Gallery from "../../components/common/gallery";
-import Loading from "../../components/loading";
-import useFood from "../../hooks/useFood";
 import ProductsSlider from "../../components/common/product-slider";
-import TitleBar from "../../components/common/titlebar";
-import useCart from "../../hooks/useCart";
 import Quantity from "../../components/common/quantity";
-import { baseUrl } from "../../app/baseUrl";
+import TitleBar from "../../components/common/titlebar";
+import Loading from "../../components/loading";
+import useCart from "../../hooks/useCart";
+import useFood from "../../hooks/useFood";
 
 export default function FoodPage() {
   const params = useParams();
@@ -24,11 +24,13 @@ export default function FoodPage() {
     (item) => item.food_id === Number(params.foodId)
   );
 
-  console.log("isfood", params);
-
   useEffect(() => {
     getSingleFood({ id: String(params.foodId) });
   }, [params, getSingleFood]);
+
+  useEffect(() => {
+    document.title = "پت شاپ رز | " + `غذا - ${singleFood?.title}`;
+  }, [singleFood]);
 
   if (loading) {
     return <Loading />;
@@ -96,10 +98,7 @@ export default function FoodPage() {
         <div className="px-4  lg:px-16">
           <ul className="flex flex-wrap text-xs lg:text-sm font-medium text-center text-slate-700 border-b overflow-hidden rounded-lg w-fit mx-auto border-gray-200">
             <li className="mr-2">
-              <button
-                // onClick={() => setCurrentBtn("description")}
-                className="inline-block p-4   rounded-t-lg bg-primary/40"
-              >
+              <button className="inline-block p-4   rounded-t-lg bg-primary/40">
                 توضیحات
               </button>
             </li>

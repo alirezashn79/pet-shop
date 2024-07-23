@@ -1,5 +1,5 @@
 import { Info, Phone } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import OTPInput from "react-otp-input";
 import { useNavigate } from "react-router-dom";
@@ -10,8 +10,7 @@ export default function EditPhone() {
   const [otp, setOtp] = useState("");
   const [phone, setPhone] = useState("");
   const [showOtp, setShowOtp] = useState(false);
-
-  const loading = useAuth((state) => state.loading);
+  const [loading, setLoading] = useState(false);
   const verifyEditPhone = useAuth((state) => state.verifyEditPhone);
 
   const navigate = useNavigate();
@@ -26,6 +25,7 @@ export default function EditPhone() {
     if (phone.length == 0) return;
 
     try {
+      setLoading(true);
       await client.post("/change-phone/", {
         new_phone_number: phone,
       });
@@ -34,22 +34,30 @@ export default function EditPhone() {
         setShowOtp(true);
         toast.success("کد برای شما ارسال شد");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
   const sendCode = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    verifyEditPhone({ code: otp, navigate });
+    setLoading(true);
+    await verifyEditPhone({ code: otp, navigate });
+    setLoading(false);
   };
+
+  useEffect(() => {
+    document.title = "پت شاپ رز | " + "ویرایش شماره تماس";
+  }, []);
 
   return (
     <div className="col-span-2" data-aos="zoom-in">
       <h1 className="text-center  text-xl font-bold text-[#240750]">
-        {showOtp ? "کد تایید" : "ویرایش شماره همراه"}
+        {showOtp ? "کد تایید" : "ویرایش شماره تماس"}
       </h1>
       <p className="text-center text-xs text-gray-700 py-4 flex items-center gap-x-2 justify-center">
         <Info className="w-3 h-3" />
-        لطفا {showOtp && "کد ارسال شده به"} تلفن همراه جدید خود را وارد نمایید
+        لطفا {showOtp && "کد ارسال شده به"} شماره تماس جدید خود را وارد نمایید
       </p>
       <form
         onSubmit={showOtp ? sendCode : sendPhoneNumber}

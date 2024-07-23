@@ -2,21 +2,19 @@ import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import MainFooter from "../../components/footer";
 import MainHeader from "../../components/header";
+import { useAboutUs } from "../../hooks/useAboutUs";
+import useBlog from "../../hooks/useBlog";
+import useCart from "../../hooks/useCart";
 import useCategory from "../../hooks/useCategory";
+import { useContactUs } from "../../hooks/useContactUs";
 import useFood from "../../hooks/useFood";
 import useOverlay from "../../hooks/useOverlay";
 import useProduct from "../../hooks/useProduct";
-import useBlog from "../../hooks/useBlog";
-import { useAboutUs } from "../../hooks/useAboutUs";
-import { useContactUs } from "../../hooks/useContactUs";
-import useCart from "../../hooks/useCart";
 
 export default function MainLayout() {
   const getCategories = useCategory((state) => state.getData);
   const getAllFoods = useFood((state) => state.getAllFoods);
   const showOverlay = useOverlay((state) => state.showOverlay);
-  // const getCartData = useCart((state) => state.getData);
-  // const cartData = useCart((state) => state.data);
   const getDiscountData = useProduct((state) => state.getDiscountData);
   const getMostVisitData = useProduct((state) => state.getMostVisitData);
   const getAllAccessories = useProduct((state) => state.getAllAccessories);
@@ -42,8 +40,6 @@ export default function MainLayout() {
   }, [showOverlay]);
 
   useEffect(() => {
-    // getProductData();
-    // getCartData();
     getCategories();
     getFoodCart();
     getProductCart();

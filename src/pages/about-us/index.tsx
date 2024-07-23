@@ -1,4 +1,5 @@
 import { MapPin } from "lucide-react";
+import { useEffect } from "react";
 import TitleBar from "../../components/common/titlebar";
 import Loading from "../../components/loading";
 import { useAboutUs } from "../../hooks/useAboutUs";
@@ -6,6 +7,10 @@ import { useAboutUs } from "../../hooks/useAboutUs";
 export default function AboutUs() {
   const data = useAboutUs((state) => state.data);
   const loading = useAboutUs((state) => state.loading);
+
+  useEffect(() => {
+    document.title = "پت شاپ رز | " + "درباره ما";
+  }, []);
 
   if (loading) return <Loading />;
   return (

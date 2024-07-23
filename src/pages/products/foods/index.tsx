@@ -14,6 +14,8 @@ export default function Foods() {
   const data = useFood((state) => state.allFoods);
 
   useEffect(() => {
+    document.title = "پت شاپ رز | " + "غذا ها";
+
     getData({ current: currentPage });
   }, [currentPage, getData]);
 

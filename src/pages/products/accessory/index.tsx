@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 import Card from "../../../components/common/card";
 import TitleBar from "../../../components/common/titlebar";
 import Loading from "../../../components/loading";
-import useProduct from "../../../hooks/useProduct";
 import useCategory from "../../../hooks/useCategory";
+import useProduct from "../../../hooks/useProduct";
 
 export default function AccessoryPage() {
   const loading = useProduct((state) => state.loading);
@@ -16,6 +16,12 @@ export default function AccessoryPage() {
   useEffect(() => {
     getData({ id: String(params.id) });
   }, [params, getData]);
+
+  useEffect(() => {
+    document.title =
+      "پت شاپ رز | " +
+      `لوازم جانبی ها - ${category?.filter((item) => item.id === Number(params.id))[0].title}`;
+  }, [data, params]);
 
   if (loading) {
     return <Loading />;

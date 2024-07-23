@@ -10,24 +10,21 @@ import {
   X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useJwt } from "react-jwt";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import useOverlay from "../../hooks/useOverlay";
 
+import useCart from "../../hooks/useCart";
 import useCategory from "../../hooks/useCategory";
+import { useContactUs } from "../../hooks/useContactUs";
 import { IMenu } from "../../types";
 import logout from "../../utils/logout";
 import Dropdown from "../common/dropdown";
 import DropdownMobile from "../common/dropdown-mobile";
 import Overlay from "../common/overlay";
-import { useContactUs } from "../../hooks/useContactUs";
-import useCart from "../../hooks/useCart";
 
 export default function MainHeader() {
-  // const cartData = useCart((state) => state.data);
   const showOverlay = useOverlay((state) => state.showOverlay);
   const toggleOverlay = useOverlay((state) => state.toggleOverlay);
-  const { isExpired } = useJwt(String(Cookies.get("JWT_Token_Access")));
   const [isAuth, setisAuth] = useState(false);
   const [toggleAuthBtn, setToggleAuthBtn] = useState(false);
   const categories = useCategory((state) => state.data);
@@ -95,7 +92,7 @@ export default function MainHeader() {
 
   useEffect(() => {
     const isAuthentication = () => {
-      if (Cookies.get("JWT_Token_Access") && !isExpired) {
+      if (Cookies.get("JWT_Token_Access")) {
         setisAuth(true);
       }
     };
@@ -113,7 +110,7 @@ export default function MainHeader() {
               className="bg-primary md:absolute h-20 w-20 md:w-28 md:h-28 lg:h-32 lg:w-36 flex-center flex-col rounded-b-full main-logo"
             >
               <Dog className="w-8 h-8 lg:h-14 lg:w-14" />
-              <h1 className="font-bold text-base lg:text-xl">رز پت شاپ</h1>
+              <h1 className="font-bold text-base lg:text-xl">پت شاپ رز</h1>
             </Link>
             {/* left */}
             <div className="flex-1">
@@ -290,7 +287,7 @@ export default function MainHeader() {
                 to="/"
               >
                 <Dog className="h-8 w-8" />
-                رز پت شاپ
+                پت شاپ رز
               </Link>
             </div>
             <div

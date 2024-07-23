@@ -1,6 +1,10 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function NotFound() {
+  useEffect(() => {
+    document.title = "پت شاپ رز | " + "404";
+  }, []);
   return (
     <section className="lg:mt-24">
       <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">

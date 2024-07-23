@@ -1,12 +1,13 @@
 import { ErrorMessage } from "@hookform/error-message";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
 import { InferType } from "yup";
 import Image from "../../assets/image/signin.webp";
 import Input from "../../components/input";
-import { UserSignInSchema } from "../../schemas/auth";
-import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/auth/useAuth";
+import { UserSignInSchema } from "../../schemas/auth";
 
 export default function Signup() {
   const loading = useAuth((state) => state.loading);
@@ -26,6 +27,10 @@ export default function Signup() {
   ) => {
     await login({ ...values, navigate });
   };
+
+  useEffect(() => {
+    document.title = "پت شاپ رز | " + "ورود";
+  }, []);
 
   return (
     <>

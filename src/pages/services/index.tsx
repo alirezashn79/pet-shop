@@ -11,6 +11,8 @@ export default function Services() {
   }>({ haircut: "", nail_trimming: "" });
 
   useEffect(() => {
+    document.title = "پت شاپ رز | " + "خدمات";
+
     const getData = async () => {
       try {
         setLoading(true);

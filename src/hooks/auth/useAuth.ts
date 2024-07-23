@@ -98,7 +98,7 @@ export const useAuth = create<IUseAuth>((set) => ({
       toast.dismiss(loadingToast);
     }
   },
-  login: async ({ phone, password, navigate }) => {
+  login: async ({ phone, password }) => {
     const toastLoading = toast.loading("صبر کنید...");
     try {
       set({ loading: true });
@@ -107,20 +107,19 @@ export const useAuth = create<IUseAuth>((set) => ({
         password,
       });
 
-      toast.success("ورود موفقیت آمیز");
+      toast.success("وارد شدید");
       Cookies.set("JWT_Token_Access", res.data.JWT_Token_Access, {
         path: "/",
         secure: true,
         expires: 1,
       });
+
       Cookies.set("JWT_Token_Refresh", res.data.JWT_Token_Refresh, {
         path: "/",
         secure: true,
         expires: 7,
       });
-      navigate("/", {
-        replace: true,
-      });
+      location.replace("/");
     } catch (error) {
       if (error.response) {
         toast.error(
@@ -141,7 +140,7 @@ export const useAuth = create<IUseAuth>((set) => ({
     const loadingToast = toast.loading("درحال تایید کد، منتظر بمانید");
     try {
       set({ loading: true });
-      const res = await client.post("/verify-phone/", {
+      await client.post("/verify-phone/", {
         code,
       });
 

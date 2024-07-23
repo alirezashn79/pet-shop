@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
+import BlogCard from "../../components/blog-card";
+import TitleBar from "../../components/common/titlebar";
 import Loading from "../../components/loading";
 import Pagination from "../../components/pagination";
 import useBlog from "../../hooks/useBlog";
-import TitleBar from "../../components/common/titlebar";
-import BlogCard from "../../components/blog-card";
 
 export default function Blogs() {
   const [currentPage, setCurrentPage] = useState(
@@ -14,6 +14,7 @@ export default function Blogs() {
   const data = useBlog((state) => state.data);
 
   useEffect(() => {
+    document.title = "پت شاپ رز | " + "بلاگ ها";
     getData({ current: currentPage });
   }, [currentPage, getData]);
 

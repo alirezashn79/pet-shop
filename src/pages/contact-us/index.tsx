@@ -1,19 +1,21 @@
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import client from "../../app/client";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import Email from "../../assets/image/site/email.svg";
+import Instagram from "../../assets/image/site/instagram.svg";
+import Phone from "../../assets/image/site/phone-telephone.svg";
+import Telegram from "../../assets/image/site/telegram.svg";
+import WhatsApp from "../../assets/image/site/whatsapp.svg";
 import TitleBar from "../../components/common/titlebar";
 import Loading from "../../components/loading";
-import WhatsApp from "../../assets/image/site/whatsapp.svg";
-import Instagram from "../../assets/image/site/instagram.svg";
-import Telegram from "../../assets/image/site/telegram.svg";
-import Phone from "../../assets/image/site/phone-telephone.svg";
-import Email from "../../assets/image/site/email.svg";
-import { Link } from "react-router-dom";
 import { useContactUs } from "../../hooks/useContactUs";
 
 export default function AboutUs() {
   const data = useContactUs((state) => state.data);
   const loading = useContactUs((state) => state.loading);
+
+  useEffect(() => {
+    document.title = "پت شاپ رز | " + "ارتباط باما";
+  }, []);
 
   if (loading) return <Loading />;
   return (

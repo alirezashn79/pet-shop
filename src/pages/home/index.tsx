@@ -1,7 +1,7 @@
+import { useEffect } from "react";
 import Benefits from "../../components/benefits";
 import ProductsSlider from "../../components/common/product-slider";
 import TitleBar from "../../components/common/titlebar";
-import Services from "../../components/services";
 import Slider from "../../components/slider";
 import useFood from "../../hooks/useFood";
 import useProduct from "../../hooks/useProduct";
@@ -11,6 +11,10 @@ export default function HomePage() {
   const mostVisitData = useProduct((state) => state.mostVisitData);
   const accessories = useProduct((state) => state.accessories);
   const allFoods = useFood((state) => state.allFoods);
+
+  useEffect(() => {
+    document.title = "پت شاپ رز | " + "خانه";
+  }, []);
   return (
     <>
       <Slider />

@@ -1,6 +1,8 @@
 import { ErrorMessage } from "@hookform/error-message";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Cookies from "js-cookie";
 import { Info } from "lucide-react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
@@ -8,8 +10,6 @@ import { InferType } from "yup";
 import client from "../../app/client";
 import Input from "../../components/input";
 import { resetPasswordSchema } from "../../schemas/auth";
-import Cookies from "js-cookie";
-import { useState } from "react";
 
 export default function ResetPassword() {
   const params = useParams();
@@ -31,7 +31,7 @@ export default function ResetPassword() {
     const toastLoading = toast.loading("در حال پردازش");
     try {
       setLoading(true);
-      const res = await client.post(`/account/reset-pass/${params.id}/`, {
+      await client.post(`/account/reset-pass/${params.id}/`, {
         password: values.password,
       });
     } catch (error) {
@@ -51,6 +51,10 @@ export default function ResetPassword() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    document.title = "پت شاپ رز | " + "بازنشانی رمزعبور";
+  }, []);
 
   return (
     <div className="col-span-2 lg:w-64" data-aos="zoom-in">

@@ -1,9 +1,8 @@
 import { ErrorMessage } from "@hookform/error-message";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
-import transition from "react-element-popper/animations/transition";
 import { SubmitHandler, useForm } from "react-hook-form";
 import type { Value } from "react-multi-date-picker";
 import DatePicker from "react-multi-date-picker";
@@ -36,7 +35,7 @@ export default function Signup() {
     signUp({
       values: {
         ...values,
-        date: new Date(String(date)) //String
+        date: new Date(date as string)
           .toLocaleDateString("en-GB")
           .split("/")
           .reverse()
@@ -45,6 +44,10 @@ export default function Signup() {
       navigate,
     });
   };
+
+  useEffect(() => {
+    document.title = "پت شاپ رز | " + "ثبت نام";
+  }, []);
 
   return (
     <>
@@ -108,13 +111,6 @@ export default function Signup() {
               arrowStyle={{
                 display: "none",
               }}
-              animations={[
-                transition({
-                  from: 35,
-                  transition:
-                    "all 400ms cubic-bezier(0.335, 0.010, 0.030, 1.360)",
-                }),
-              ]}
               calendar={persian}
               locale={persian_fa}
               containerStyle={{

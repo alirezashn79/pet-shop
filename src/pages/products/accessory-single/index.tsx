@@ -1,15 +1,15 @@
+import { cn } from "cn-func";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { baseUrl } from "../../../app/baseUrl";
 import Breadcrumb from "../../../components/breadcrumb";
 import Gallery from "../../../components/common/gallery";
-import Loading from "../../../components/loading";
 import ProductsSlider from "../../../components/common/product-slider";
-import TitleBar from "../../../components/common/titlebar";
-import useProduct from "../../../hooks/useProduct";
-import { cn } from "cn-func";
-import useCart from "../../../hooks/useCart";
 import Quantity from "../../../components/common/quantity";
-import { baseUrl } from "../../../app/baseUrl";
+import TitleBar from "../../../components/common/titlebar";
+import Loading from "../../../components/loading";
+import useCart from "../../../hooks/useCart";
+import useProduct from "../../../hooks/useProduct";
 
 export default function SingleAccessoryPage() {
   const [currentBtn, setCurrentBtn] = useState<"details" | "description">(
@@ -31,6 +31,10 @@ export default function SingleAccessoryPage() {
   useEffect(() => {
     getSingleAccessory({ id: String(params.id) });
   }, [params, getSingleAccessory]);
+
+  useEffect(() => {
+    document.title = "پت شاپ رز | " + `لوازم جانبی - ${singleAccessory?.title}`;
+  }, [singleAccessory]);
 
   if (loading) {
     return <Loading />;

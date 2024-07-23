@@ -1,15 +1,15 @@
 import { ErrorMessage } from "@hookform/error-message";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Info } from "lucide-react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { InferType } from "yup";
 import client from "../../app/client";
 import Input from "../../components/input";
 import { changePasswordSchema } from "../../schemas/auth";
 import logout from "../../utils/logout";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 export default function ChangePassword() {
   const [loading, setLoading] = useState(false);
@@ -57,10 +57,11 @@ export default function ChangePassword() {
         success: "رمز تغییر پیدا کرد، مجددا ورود کنید",
       }
     );
-    //   reset();
-
-    //   logout();
   };
+
+  useEffect(() => {
+    document.title = "پت شاپ رز | " + "تغییر رمزعبور";
+  }, []);
 
   return (
     <div className="col-span-2 lg:w-64" data-aos="zoom-in">

@@ -51,6 +51,7 @@ interface IUseCart {
     },
     navigate: NavigateFunction
   ) => void;
+  clear: () => void;
 }
 
 const useCart = create<IUseCart>((set, get) => ({
@@ -110,7 +111,6 @@ const useCart = create<IUseCart>((set, get) => ({
         expires: now,
         sameSite: "none",
       });
-      console.log("food cookie", Cookies.get("food_cart"));
     } else {
       const index = get().product.findIndex(
         (item) => item.product_id === data.id
@@ -132,7 +132,7 @@ const useCart = create<IUseCart>((set, get) => ({
       } else {
         const allProducts = get().product.slice();
         allProducts[index].quantity++;
-        allProducts[index].price = data.unit * data.quantity;
+        allProducts[index].price = data.price * data.quantity;
         set({ product: allProducts });
       }
       let now = new Date();
@@ -145,7 +145,6 @@ const useCart = create<IUseCart>((set, get) => ({
         expires: now,
         sameSite: "none",
       });
-      console.log("product cookie", Cookies.get("product_cart"));
     }
   },
   decrement: (type, data, navigate) => {
@@ -176,7 +175,6 @@ const useCart = create<IUseCart>((set, get) => ({
         expires: 3600,
         sameSite: "none",
       });
-      console.log("food cookie", Cookies.get("food_cart"));
     } else {
       const product = get().product.find((item) => item.product_id === data.id);
       if (!product) return;
@@ -192,7 +190,7 @@ const useCart = create<IUseCart>((set, get) => ({
 
         const allProducts = get().product.slice();
         allProducts[index].quantity--;
-        allProducts[index].price = data.unit * data.quantity;
+        allProducts[index].price = data.price * data.quantity;
         set({ product: allProducts });
       }
       Cookies.set("product_cart", JSON.stringify(get().product), {
@@ -201,8 +199,13 @@ const useCart = create<IUseCart>((set, get) => ({
         expires: 3600,
         sameSite: "none",
       });
-      console.log("product cookie", Cookies.get("product_cart"));
     }
+  },
+  clear: () => {
+    set({ food: [] });
+    set({ product: [] });
+    Cookies.remove("product_cart");
+    Cookies.remove("food_cart");
   },
 }));
 

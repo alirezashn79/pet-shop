@@ -8,8 +8,6 @@ export default function Breadcrumb() {
 
   locItems.pop();
 
-  console.log(locItems);
-
   return (
     <nav className="flex" aria-label="Breadcrumb">
       <ol className="inline-flex items-center space-x-1 md:space-x-2 mb-4 text-xs md:text-sm xl:text-base">

@@ -11,14 +11,13 @@ import Input from "../../components/input";
 import logout from "../../utils/logout";
 
 export default function EditProfile() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [date, setDate] = useState<Value | null>(null);
   const [full_name, setFull_name] = useState<string>("");
   const navigate = useNavigate();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
 
     toast.promise(
       client
@@ -56,6 +55,7 @@ export default function EditProfile() {
   };
 
   useEffect(() => {
+    document.title = "پت شاپ رز | " + "ویرایش اطلاعات";
     const getData = async () => {
       const res = await client.get("/edit-profile/");
       const formatedDate = new Date(res.data.date_birth).toLocaleDateString(
@@ -64,6 +64,7 @@ export default function EditProfile() {
 
       setDate(formatedDate);
       setFull_name(res.data.full_name);
+      setLoading(false);
     };
 
     getData();
