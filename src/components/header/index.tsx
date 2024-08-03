@@ -239,12 +239,14 @@ export default function MainHeader() {
                 <ul className="flex items-center text-sm md:gap-x-8 lg:gap-x-16">
                   {menuItems.map((item, idx) => {
                     return item.hasSub ? (
-                      <Dropdown key={item.id * 11} data={item} />
+                      <Dropdown key={`dropdown-${idx}`} data={item} />
                     ) : (
-                      <li key={idx * 23} className="relative">
+                      <li key={`nav-link-${idx}`} className="relative">
                         <NavLink
                           className={({ isActive }) =>
-                            isActive && item.link ? "active-link" : ""
+                            isActive && item.link
+                              ? "active-link"
+                              : "border-b-4 border-transparent"
                           }
                           to={item.link || "#"}
                           style={{

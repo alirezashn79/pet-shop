@@ -10,7 +10,7 @@ import { Navigation, Autoplay } from "swiper/modules";
 import { ChevronLeft } from "lucide-react";
 export default function Slider() {
   return (
-    <div className="h-52 lg:h-[720px] relative flex items-center">
+    <div className="h-56 lg:h-[720px] relative flex items-center">
       <Swiper
         loop={true}
         autoplay={{
@@ -37,10 +37,10 @@ export default function Slider() {
           />
         </SwiperSlide>
       </Swiper>
-      <div className="absolute left-0 z-10 swiper-button-next-custom">
+      <div className="absolute left-0 z-10 cursor-pointer swiper-button-next-custom">
         <ChevronLeft className="h-12 w-12 lg:h-14 lg:w-14 text-primary" />
       </div>
-      <div className="absolute right-0 z-10 swiper-button-prev-custom">
+      <div className="absolute right-0 z-10 cursor-pointer swiper-button-prev-custom">
         <ChevronLeft className="rotate-180 h-12 w-12 lg:h-14 lg:w-14 text-primary" />
       </div>
     </div>

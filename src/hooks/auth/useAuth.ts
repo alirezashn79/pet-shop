@@ -98,7 +98,7 @@ export const useAuth = create<IUseAuth>((set) => ({
       toast.dismiss(loadingToast);
     }
   },
-  login: async ({ phone, password }) => {
+  login: async ({ phone, password, navigate }) => {
     const toastLoading = toast.loading("صبر کنید...");
     try {
       set({ loading: true });
@@ -119,7 +119,9 @@ export const useAuth = create<IUseAuth>((set) => ({
         secure: true,
         expires: 7,
       });
-      location.replace("/");
+      navigate("/", {
+        replace: true,
+      });
     } catch (error) {
       if (error.response) {
         toast.error(
@@ -151,7 +153,13 @@ export const useAuth = create<IUseAuth>((set) => ({
         replace: true,
       });
     } catch (error) {
-      toast.error("کد اشتباه است");
+      if (error.response) {
+        if (error.response.status === 500) {
+          toast.error("این شماره قبلا ثبت شده است");
+        } else if (error.response.status === 409) {
+          toast.error("کد اشتباه است");
+        }
+      }
     } finally {
       set({ loading: false });
       toast.dismiss(loadingToast);

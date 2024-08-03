@@ -189,6 +189,13 @@
     font-weight: 1000;
   }
 
+  .product-slider .swiper-button-prev:after,
+  .product-slider .swiper-button-next:after {
+    font-size: 26px !important;
+    color: #070707 !important;
+    font-weight: 1000;
+  }
+
   .swiper-slide {
     text-align: center;
     font-size: 18px;

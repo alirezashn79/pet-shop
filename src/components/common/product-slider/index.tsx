@@ -77,7 +77,7 @@ export default function ProductsSlider({
           }}
           navigation={true}
           modules={[Navigation]}
-          className="swiper"
+          className="product-slider"
         >
           {type === "FOOD"
             ? id

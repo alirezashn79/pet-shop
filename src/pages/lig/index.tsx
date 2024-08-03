@@ -17,13 +17,13 @@ export default function Lig() {
     document.title = "پت شاپ رز | " + "باشگاه مشتریان";
 
     const getData = async () => {
-      const res = await client.get("/home/user-score/");
+      try {
+        const res = await client.get("/home/user-score/");
 
-      const sortedData = res?.data.sort(
-        (a: { score: number }, b: { score: number }) => a.score < b.score
-      );
-
-      setData(sortedData);
+        setData(res.data?.reverse());
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     getData();

@@ -23,7 +23,7 @@ export default function Dropdown({ data }: IDropdownProps) {
     >
       <Link
         to={data.link || "#"}
-        className={`flex-center gap-2 transition-all duration-300 ${showDropdownItems && "text-primary"}`}
+        className={`flex-center gap-2 transition-all border-b-4 border-transparent duration-300 ${showDropdownItems && "text-primary"}`}
       >
         {data.title}
 
