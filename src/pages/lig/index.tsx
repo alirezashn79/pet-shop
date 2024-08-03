@@ -18,11 +18,10 @@ export default function Lig() {
 
     const getData = async () => {
       const res = await client.get("/home/user-score/");
-      const sortedData = res?.data
-        .filter((item: any) => !!item.full_name && item.score)
-        .sort(
-          (a: { score: number }, b: { score: number }) => a.score < b.score
-        );
+
+      const sortedData = res?.data.sort(
+        (a: { score: number }, b: { score: number }) => a.score < b.score
+      );
 
       setData(sortedData);
     };

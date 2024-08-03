@@ -107,7 +107,7 @@ export default function MainHeader() {
             {/* logo */}
             <Link
               to="/"
-              className="bg-primary md:absolute h-20 w-20 md:w-28 md:h-28 lg:h-32 lg:w-36 flex-center flex-col rounded-b-full main-logo"
+              className="bg-primary md:absolute h-24 w-24 md:w-28 md:h-28 lg:h-32 lg:w-36 flex-center flex-col rounded-b-full main-logo "
             >
               <Dog className="w-8 h-8 lg:h-14 lg:w-14" />
               <h1 className="font-bold text-base lg:text-xl">پت شاپ رز</h1>
@@ -142,14 +142,12 @@ export default function MainHeader() {
                       <button
                         className="relative flex-center gap-x-px group text-xs"
                         type="button"
-                        onMouseOver={() => setToggleAuthBtn(true)}
-                        onMouseOut={() => setToggleAuthBtn(false)}
                         onClick={() => {
                           setToggleAuthBtn((prev) => !prev);
                         }}
                       >
                         <UserCircle className="h-6 w-6 lg:h-7 lg:w-7 text-gray-700" />
-                        <ChevronDown className="h-4 w-4 group-hover:rotate-180 transition-all" />
+                        <ChevronDown className="h-4 w-4 transition-all" />
 
                         {toggleAuthBtn && (
                           <div className="absolute top-full left-0 z-10 pt-2">

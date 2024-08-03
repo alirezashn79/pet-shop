@@ -20,7 +20,7 @@ interface DataRow {
 const columns: TableColumn<DataRow>[] = [
   {
     name: "#",
-    selector: (_, index) => (index ? index + 1 : "#"),
+    cell: (_, idx) => <p>{idx + 1}</p>,
   },
   {
     name: "محصول",

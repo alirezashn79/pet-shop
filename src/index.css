@@ -224,7 +224,6 @@
     opacity: 1;
   }
 }
-
 @layer utilities {
   .flex-center {
     @apply flex items-center justify-center;

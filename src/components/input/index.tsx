@@ -35,7 +35,7 @@ export default function Input({
               ? setTypeState("text")
               : setTypeState("password");
           }}
-          className="absolute left-0 top-0 bottom-0 flex-center text-sm -translate-y-px cursor-pointer"
+          className="absolute z-20 left-0 top-0 bottom-0 flex-center text-sm -translate-y-px cursor-pointer"
         >
           {typeState === "password" ? (
             <Eye className="h-5 w-5 text-indigo-700" />

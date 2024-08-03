@@ -23,7 +23,7 @@ export default function Signup() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, dirtyFields },
   } = useForm<InferType<typeof UserSchema>>({
     resolver: yupResolver(UserSchema),
   });
@@ -143,6 +143,7 @@ export default function Signup() {
 
           <div className="space-y-1">
             <Input
+              isDirty={dirtyFields.password}
               register={register("password")}
               name="password"
               type="password"
@@ -161,6 +162,7 @@ export default function Signup() {
 
           <div className="space-y-1">
             <Input
+              isDirty={dirtyFields.confirmPassword}
               register={register("confirmPassword")}
               name="confirm-password"
               type="password"

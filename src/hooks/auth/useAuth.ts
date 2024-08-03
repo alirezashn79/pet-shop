@@ -60,8 +60,8 @@ export const useAuth = create<IUseAuth>((set) => ({
         navigate("/verify", {
           replace: true,
         });
-      } else {
-        toast.error("خطای داخلی");
+      } else if (error.response && error.response.status === 400) {
+        toast.error("این شماره قبلا ثبت نام شده است");
       }
     } finally {
       set({ loading: false });
