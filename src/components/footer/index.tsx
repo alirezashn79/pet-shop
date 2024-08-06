@@ -74,7 +74,7 @@ export default function MainFooter() {
   return (
     <div className="bg-gray-50">
       <div className="flex flex-col  gap-y-4 pb-8 relative">
-        <div className="w-full md:flex md:items-center md:gap-x-24 bg-green-700 text-center py-8 px-4 space-y-4 order-2 lg:order-1 md:px-20  xl:px-40"></div>
+        <div className="w-full md:flex md:items-center md:gap-x-24 bg-primary text-center py-8 px-4 space-y-4 order-2 lg:order-1 md:px-20  xl:px-40"></div>
 
         <div className="px-8  w-fit order-1 lg:order-2  mx-auto lg:absolute lg:left-4 xl:left-16 z-20">
           <div className="w-full bg-[#fef9c3] border-4 p-8 xl:p-12 border-primary flex-center flex-col lg:mb-4 gap-4 ">
@@ -135,7 +135,7 @@ export default function MainFooter() {
           </div>
         </div>
 
-        <div className="flex items-start  justify-around lg:justify-start lg:gap-x-72 xl:gap-x-96 px-8 order-3 lg:mt-20 container">
+        <div className="flex justify-between lg:justify-start lg:gap-x-72 xl:gap-x-96 px-8 order-3 lg:mt-20 container">
           <div>
             <h6 className="text-base lg:text-lg font-semibold mb-4">لینک ها</h6>
             <ul className="text-sm lg:text-base text-gray-500 mr-2 space-y-1">
@@ -152,10 +152,10 @@ export default function MainFooter() {
               className="text-primary font-bold text-base lg:text-lg"
               to="/"
             >
-              پت شاپ
+              پت شاپ رز
             </Link>
 
-            <p className="text-sm lg:text-base max-w-xs">
+            <p className="text-sm lg:text-base max-w-36 lg:max-w-xs">
               آدرس: {aboutUsData?.address}
             </p>
 

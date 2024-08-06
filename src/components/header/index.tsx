@@ -165,12 +165,12 @@ export default function MainHeader() {
                                 >
                                   ویرایش اطلاعات
                                 </Link>
-                                <Link
+                                {/* <Link
                                   className="block py-2 hover:bg-primary/10"
                                   to="/forgot-password"
                                 >
                                   فراموشی رمز عبور
-                                </Link>
+                                </Link> */}
                                 <div
                                   onClick={handleLogout}
                                   className="block py-2 text-rose-500 hover:bg-rose-500 hover:text-white"

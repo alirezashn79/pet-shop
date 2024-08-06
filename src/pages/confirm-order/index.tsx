@@ -133,7 +133,8 @@ export default function ConfirmationOrder() {
                 (prev, current) => prev + current.quantity * current.unit,
                 0
               )
-              .toLocaleString()}
+              .toLocaleString()}{" "}
+            تومان
           </span>
         </p>
         <div className="pt-4">

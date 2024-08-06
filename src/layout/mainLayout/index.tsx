@@ -40,6 +40,7 @@ export default function MainLayout() {
   }, [showOverlay]);
 
   useEffect(() => {
+    getContactUs();
     getCategories();
     getFoodCart();
     getProductCart();
@@ -49,7 +50,6 @@ export default function MainLayout() {
     getAllFoods({ current: 1 });
     getBlogsData({ current: 1 });
     getAboutUs();
-    getContactUs();
   }, []);
 
   return (
