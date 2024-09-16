@@ -1,7 +1,5 @@
-import { create } from "zustand";
 import Cookies from "js-cookie";
-import toast from "react-hot-toast";
-import { NavigateFunction } from "react-router-dom";
+import { create } from "zustand";
 
 interface IUseCart {
   getFoods: () => void;
@@ -36,8 +34,7 @@ interface IUseCart {
       title: string;
       image: string;
       unit: number;
-    },
-    navigate: NavigateFunction
+    }
   ) => void;
   decrement: (
     type: "food" | "product",
@@ -48,8 +45,7 @@ interface IUseCart {
       title: string;
       image: string;
       unit: number;
-    },
-    navigate: NavigateFunction
+    }
   ) => void;
   clear: () => void;
 }
@@ -74,11 +70,11 @@ const useCart = create<IUseCart>((set, get) => ({
     }
   },
 
-  increment: (type, data, navigate) => {
-    if (!Cookies.get("JWT_Token_Access")) {
-      toast.error("ابتدا لاگین کنید");
-      return navigate("/signin");
-    }
+  increment: (type, data) => {
+    // if (!Cookies.get("JWT_Token_Access")) {
+    //   toast.error("ابتدا لاگین کنید");
+    //   return navigate("/signin");
+    // }
     if (type === "food") {
       const index = get().food.findIndex((item) => item.food_id === data.id);
       if (index === -1) {
@@ -101,15 +97,12 @@ const useCart = create<IUseCart>((set, get) => ({
         allFoods[index].price = data.unit * data.quantity;
         set({ food: allFoods });
       }
-      let now = new Date();
-      var time = now.getTime();
-      time += 3600 * 1000;
-      now.setTime(time);
+
       Cookies.set("food_cart", JSON.stringify(get().food.slice()), {
         path: "/",
         secure: true,
-        expires: now,
-        sameSite: "none",
+        expires: new Date(Date.now() + 60 * 60 * 1000),
+        sameSite: "Strict",
       });
     } else {
       const index = get().product.findIndex(
@@ -135,23 +128,20 @@ const useCart = create<IUseCart>((set, get) => ({
         allProducts[index].price = data.price * data.quantity;
         set({ product: allProducts });
       }
-      let now = new Date();
-      var time = now.getTime();
-      time += 3600 * 1000;
-      now.setTime(time);
+
       Cookies.set("product_cart", JSON.stringify(get().product.slice()), {
         path: "/",
         secure: true,
-        expires: now,
-        sameSite: "none",
+        expires: new Date(Date.now() + 60 * 60 * 1000),
+        sameSite: "Strict",
       });
     }
   },
-  decrement: (type, data, navigate) => {
-    if (!Cookies.get("JWT_Token_Access")) {
-      toast.error("ابتدا لاگین کنید");
-      return navigate("/signin");
-    }
+  decrement: (type, data) => {
+    // if (!Cookies.get("JWT_Token_Access")) {
+    //   toast.error("ابتدا لاگین کنید");
+    //   return navigate("/signin");
+    // }
 
     if (type === "food") {
       const food = get().food.find((item) => item.food_id === data.id);
@@ -169,11 +159,12 @@ const useCart = create<IUseCart>((set, get) => ({
         allFoods[index].price = data.unit * data.quantity;
         set({ food: allFoods });
       }
+
       Cookies.set("food_cart", JSON.stringify(get().food.slice()), {
         path: "/",
         secure: true,
-        expires: 3600,
-        sameSite: "none",
+        expires: new Date(Date.now() + 60 * 60 * 1000),
+        sameSite: "Strict",
       });
     } else {
       const product = get().product.find((item) => item.product_id === data.id);
@@ -196,8 +187,8 @@ const useCart = create<IUseCart>((set, get) => ({
       Cookies.set("product_cart", JSON.stringify(get().product), {
         path: "/",
         secure: true,
-        expires: 3600,
-        sameSite: "none",
+        expires: new Date(Date.now() + 60 * 60 * 1000),
+        sameSite: "Strict",
       });
     }
   },

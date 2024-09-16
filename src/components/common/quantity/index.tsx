@@ -1,7 +1,6 @@
 import { Minus, Plus, Trash2Icon } from "lucide-react";
 import { useState } from "react";
 import useCart from "../../../hooks/useCart";
-import { useNavigate } from "react-router-dom";
 // import { useCart } from "../../../hooks/useCart";
 
 export default function Quantity({
@@ -24,38 +23,29 @@ export default function Quantity({
   const increment = useCart((state) => state.increment);
   const decrement = useCart((state) => state.decrement);
   const [showAnimation, setShowAnimation] = useState(false);
-  const navigate = useNavigate();
 
   const incrementQuantity = () => {
     setShowAnimation((prev) => !prev);
-    increment(
-      type,
-      {
-        id,
-        price,
-        quantity: quantity + 1,
-        image,
-        title,
-        unit,
-      },
-      navigate
-    );
+    increment(type, {
+      id,
+      price,
+      quantity: quantity + 1,
+      image,
+      title,
+      unit,
+    });
   };
 
   const decrementQuantity = () => {
     setShowAnimation((prev) => !prev);
-    decrement(
-      type,
-      {
-        id,
-        price,
-        quantity: quantity - 1,
-        title,
-        image,
-        unit,
-      },
-      navigate
-    );
+    decrement(type, {
+      id,
+      price,
+      quantity: quantity - 1,
+      title,
+      image,
+      unit,
+    });
   };
 
   return (

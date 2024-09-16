@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import CartItem from "../../components/common/cart-item";
 import TitleBar from "../../components/common/titlebar";
 import useCart from "../../hooks/useCart";
+import Cookies from "js-cookie";
 
 export default function CartPage() {
   const foodData = useCart((state) => state.food);
@@ -97,7 +98,11 @@ export default function CartPage() {
           </div>
           <div className="flex-center mt-4">
             <Link
-              to="/shop/confirmation-order"
+              to={
+                Cookies.get("JWT_Token_Access")
+                  ? "/shop/confirmation-order"
+                  : "/signin"
+              }
               className="bg-primary px-8 py-2.5 text-lg"
             >
               ثبت سفارش

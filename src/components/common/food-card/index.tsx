@@ -1,11 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { baseUrl } from "../../../app/baseUrl";
 import useCart from "../../../hooks/useCart";
 import Quantity from "../quantity";
 
 export default function Card({ data }: { data: any }) {
-  const navigate = useNavigate();
-
   const foodCart = useCart((state) => state.food);
   const incrementCartItem = useCart((state) => state.increment);
   const food = foodCart?.find((item) => item.food_id === data?.id);
@@ -23,7 +21,7 @@ export default function Card({ data }: { data: any }) {
           // style={{
           //   display: isShowImage ? "block" : "none",
           // }}
-          className="w-full h-[282px] object-contain shrink-0 mx-auto"
+          className="!w-11/12 !h-64 mx-auto"
         />
 
         <div className="text-center text-base py-4 px-0.5 space-y-2.5">
@@ -51,18 +49,14 @@ export default function Card({ data }: { data: any }) {
       ) : (
         <button
           onClick={() =>
-            incrementCartItem(
-              "food",
-              {
-                id: data.id,
-                price: data.price,
-                quantity: 1,
-                image: baseUrl + data?.image[0].image,
-                title: data.title,
-                unit: data.price,
-              },
-              navigate
-            )
+            incrementCartItem("food", {
+              id: data.id,
+              price: data.price,
+              quantity: 1,
+              image: baseUrl + data?.image[0].image,
+              title: data.title,
+              unit: data.price,
+            })
           }
           className="px-4 py-2 bg-primary text-base mb-4 font-semibold rounded shadow-sm hover:scale-95 transition-all"
         >

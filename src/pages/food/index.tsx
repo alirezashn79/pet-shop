@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { baseUrl } from "../../app/baseUrl";
 import Breadcrumb from "../../components/breadcrumb";
 import Gallery from "../../components/common/gallery";
@@ -16,7 +16,6 @@ export default function FoodPage() {
   const loading = useFood((state) => state.loading);
   const allFoods = useFood((state) => state.allFoods);
   const singleFood = useFood((state) => state.singleFood);
-  const navigate = useNavigate();
 
   const foodCart = useCart((state) => state.food);
   const incrementCartItem = useCart((state) => state.increment);
@@ -73,18 +72,14 @@ export default function FoodPage() {
                 ) : (
                   <button
                     onClick={() =>
-                      incrementCartItem(
-                        "food",
-                        {
-                          id: Number(params.foodId),
-                          price: singleFood?.price as number,
-                          quantity: 1,
-                          image: baseUrl + singleFood?.image[0].image,
-                          title: singleFood?.title as string,
-                          unit: singleFood?.price as number,
-                        },
-                        navigate
-                      )
+                      incrementCartItem("food", {
+                        id: Number(params.foodId),
+                        price: singleFood?.price as number,
+                        quantity: 1,
+                        image: baseUrl + singleFood?.image[0].image,
+                        title: singleFood?.title as string,
+                        unit: singleFood?.price as number,
+                      })
                     }
                     className="px-4 py-2 bg-primary text-base mb-4 font-semibold rounded shadow-sm hover:scale-95 transition-all"
                   >

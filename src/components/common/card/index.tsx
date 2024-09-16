@@ -1,11 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { baseUrl } from "../../../app/baseUrl";
 import useCart from "../../../hooks/useCart";
 import Quantity from "../quantity";
 
 export default function Card({ data }: { data: any }) {
-  const navigate = useNavigate();
-
   const productCart = useCart((state) => state.product);
   const incrementProductCart = useCart((state) => state.increment);
   const product = productCart?.find((item) => item.product_id === data?.id);
@@ -21,7 +19,7 @@ export default function Card({ data }: { data: any }) {
             src={baseUrl + data?.images[0].image}
             alt={data?.title}
             loading="lazy"
-            className="w-full h-[282px] object-contain shrink-0 mx-auto"
+            className="!w-11/12 !h-64 mx-auto"
           />
         )}
 
@@ -72,21 +70,17 @@ export default function Card({ data }: { data: any }) {
       ) : (
         <button
           onClick={() =>
-            incrementProductCart(
-              "product",
-              {
-                id: data.id,
-                price:
-                  data.discount_amount.discount_price === null
-                    ? data.price
-                    : data.discount_amount.discount_price,
-                quantity: 1,
-                image: baseUrl + data?.images[0].image,
-                title: data.title,
-                unit: data.price,
-              },
-              navigate
-            )
+            incrementProductCart("product", {
+              id: data.id,
+              price:
+                data.discount_amount.discount_price === null
+                  ? data.price
+                  : data.discount_amount.discount_price,
+              quantity: 1,
+              image: baseUrl + data?.images[0].image,
+              title: data.title,
+              unit: data.price,
+            })
           }
           className="px-4 py-2 bg-primary text-base mb-4 font-semibold rounded shadow-sm hover:scale-95 transition-all"
         >

@@ -44,8 +44,8 @@ export default function PageRoutes() {
             <Route path="product/:id" element={<SingleAccessoryPage />} />
           </Route>
 
+          <Route path="cart" element={<CartPage />} />
           <Route element={<Private />}>
-            <Route path="cart" element={<CartPage />} />
             <Route path="confirmation-order" element={<ConfirmationOrder />} />
           </Route>
         </Route>

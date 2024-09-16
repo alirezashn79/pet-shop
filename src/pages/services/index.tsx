@@ -19,6 +19,7 @@ export default function Services() {
         const res = await client.get("/site/service-pet/");
         setData(res.data);
       } catch (error) {
+        console.log(error);
       } finally {
         setLoading(false);
       }
@@ -38,13 +39,13 @@ export default function Services() {
         <h1 className="text-xl/10 lg:text-2xl/10 text-slate-700">
           کوتاه کردن مو سگ و گربه
         </h1>
-        <p className="text-justify text-sm/7">{data?.haircut}</p>
+        <p className="text-justify text-sm/10">{data?.haircut}</p>
       </div>
       <div className="my-6">
         <h1 className="text-xl/10 lg:text-2xl/10 text-slate-700">
           کوتاه کردن ناخن سگ و گربه
         </h1>
-        <p>{data?.nail_trimming}</p>
+        <p className="text-justify text-sm/10">{data?.nail_trimming}</p>
       </div>
       {/* <p className="text-gray-600">{subtitle}</p> */}
     </div>

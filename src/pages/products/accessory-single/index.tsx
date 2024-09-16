@@ -1,6 +1,6 @@
 import { cn } from "cn-func";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { baseUrl } from "../../../app/baseUrl";
 import Breadcrumb from "../../../components/breadcrumb";
 import Gallery from "../../../components/common/gallery";
@@ -20,7 +20,6 @@ export default function SingleAccessoryPage() {
   const loading = useProduct((state) => state.loading);
   const allAccessories = useProduct((state) => state.accessories);
   const singleAccessory = useProduct((state) => state.singleAccessory);
-  const navigate = useNavigate();
 
   const productCart = useCart((state) => state.product);
   const incrementProductCart = useCart((state) => state.increment);
@@ -98,22 +97,18 @@ export default function SingleAccessoryPage() {
                 ) : (
                   <button
                     onClick={() =>
-                      incrementProductCart(
-                        "product",
-                        {
-                          id: Number(params.id),
-                          price: (singleAccessory?.discount_amount
-                            .discount_price === null
-                            ? singleAccessory?.price
-                            : singleAccessory?.discount_amount
-                                .discount_price) as number,
-                          quantity: 1,
-                          image: baseUrl + singleAccessory?.images[0].image,
-                          title: singleAccessory?.title as string,
-                          unit: singleAccessory?.price as number,
-                        },
-                        navigate
-                      )
+                      incrementProductCart("product", {
+                        id: Number(params.id),
+                        price: (singleAccessory?.discount_amount
+                          .discount_price === null
+                          ? singleAccessory?.price
+                          : singleAccessory?.discount_amount
+                              .discount_price) as number,
+                        quantity: 1,
+                        image: baseUrl + singleAccessory?.images[0].image,
+                        title: singleAccessory?.title as string,
+                        unit: singleAccessory?.price as number,
+                      })
                     }
                     className="px-4 py-2 bg-primary text-base mb-4 font-semibold rounded shadow-sm hover:scale-95 transition-all"
                   >

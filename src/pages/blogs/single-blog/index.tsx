@@ -32,8 +32,8 @@ export default function BlogPage() {
       <h1 className="text-xl md:text-2xl xl:text-3xl mb-8 font-bold text-gray-800">
         {data?.title}
       </h1>
-      <div className="flex flex-col lg:flex-row-reverse items-start">
-        <div className="lg:basis-1/3 bg-rose-500 mx-auto">
+      <div className="flex flex-col  items-start">
+        <div className="lg:basis-1/3 shadow-lg mx-auto">
           <img
             src={baseUrl + data?.image.split("/product")[1]}
             alt={data?.title}

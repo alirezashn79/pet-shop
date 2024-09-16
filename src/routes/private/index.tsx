@@ -7,7 +7,7 @@ export default function Private() {
   const [isAuth, setIsAuth] = useState(true);
 
   useEffect(() => {
-    let token = Cookies.get("JWT_Token_Access");
+    const token = Cookies.get("JWT_Token_Access");
     if (!token) {
       client
         .post("/accounts/api/refresh/", {
