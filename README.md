@@ -1,6 +1,6 @@
 # 🐾 Pet Shop
 
-A modern and responsive pet shop website built with **Vite**, **React**, and styled with **TailwindCSS**. This project provides an interactive shopping experience, offering pet products, services, and a user-friendly interface.
+A modern and responsive pet shop website built with **Vite**, **React**, and styled with **Tailwind**. This project provides an interactive shopping experience, offering pet products, services, and a user-friendly interface.
 
 ---
 
